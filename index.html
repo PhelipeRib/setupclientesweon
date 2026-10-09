@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurando a sua empresa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      /* Dark Mode (Tom Azulado Corporativo) */
+      --bg: #0b132b;
+      --cd: #1c2541;
+      --in: #0b132b;
+      --ac: #3a86ff;
+      --ac-hover: #2563eb;
+      --dg: #ff4a4a;
+      --tx: #f8fafc;
+      --mu: #94a3b8;
+      --bd: #ffffff1f;
+    }
+
+    [data-theme="light"] {
+      /* Light Mode Clean */
+      --bg: #f1f5f9;
+      --cd: #ffffff;
+      --in: #f8fafc;
+      --ac: #0284c7;
+      --ac-hover: #0369a1;
+      --dg: #dc2626;
+      --tx: #0f172a;
+      --mu: #64748b;
+      --bd: #0000001a;
+    }
+
+    * { box-sizing: border-box; margin: 0; font-family: 'Inter', sans-serif; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+    body { background: var(--bg); color: var(--tx); min-height: 100vh; }
+    .app { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+    
+    /* Header & Sidebar */
+    aside { background: var(--cd); border-right: 1px solid var(--bd); padding: 20px 16px; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
+    aside h1 { color: var(--ac); font-size: 1.15em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+    aside small { color: var(--mu); margin: 16px 0 6px; font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .nv { padding: 10px 12px; border-radius: 8px; color: var(--mu); font-size: 0.85em; font-weight: 600; display: flex; gap: 10px; align-items: center; justify-content: space-between; border: 0; background: 0; text-align: left; width: 100%; cursor: pointer; }
+    .nv:hover, .nv.on { background: color-mix(in srgb, var(--ac) 15%, transparent); color: var(--ac); }
+    .nv i { width: 18px; text-align: center; }
+    .badge { background: var(--in); color: var(--tx); border: 1px solid var(--bd); font-size: 0.75em; padding: 2px 7px; border-radius: 12px; font-weight: 600; }
+    .nv.on .badge { background: var(--ac); color: #ffffff; border-color: var(--ac); }
+
+    .theme-toggle { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--bd); }
+
+    main { padding: 28px; min-width: 0; max-width: 1100px; }
+    @media(max-width: 850px) { .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } }
+
+    /* Forms & Inputs */
+    .cd { background: var(--cd); border: 1px solid var(--bd); border-radius: 14px; padding: 22px; margin-bottom: 20px; }
+    h2 { font-size: 1.3em; margin-bottom: 4px; color: var(--tx); display: flex; align-items: center; gap: 10px; }
+    p.sub { color: var(--mu); font-size: 0.85em; margin-bottom: 20px; }
+    
+    label { display: block; font-size: 0.78em; color: var(--mu); margin-bottom: 6px; font-weight: 600; }
+    input, select, textarea { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 10px 12px; width: 100%; font-size: 0.88em; margin-bottom: 12px; outline: none; }
+    input:focus, select:focus, textarea:focus { border-color: var(--ac); box-shadow: 0 0 0 2px color-mix(in srgb, var(--ac) 25%, transparent); }
+    
+    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    @media(max-width: 700px) { .g2, .g3 { grid-template-columns: 1fr; } }
+
+    /* Buttons */
+    .btn { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 9px 16px; font-size: 0.85em; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn:hover { border-color: var(--ac); color: var(--ac); }
+    .btn.pr { background: var(--ac); color: #ffffff !important; border-color: var(--ac); font-weight: 800; }
+    .btn.pr:hover { background: var(--ac-hover); border-color: var(--ac-hover); }
+    .btn.dn:hover { border-color: var(--dg); color: var(--dg); }
+
+    /* Tables */
+    .tb-wrap { overflow-x: auto; margin-top: 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85em; text-align: left; }
+    th { background: var(--in); color: var(--ac); padding: 10px 12px; border-bottom: 1px solid var(--bd); font-weight: 700; font-size: 0.78em; text-transform: uppercase; }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--bd); color: var(--tx); word-break: break-word; }
+    tr:hover td { background: color-mix(in srgb, var(--in) 50%, transparent); }
+
+    /* Upload Box */
+    .up-box { border: 2px dashed var(--bd); background: var(--in); border-radius: 10px; padding: 24px; text-align: center; cursor: pointer; margin-bottom: 12px; }
+    .up-box:hover { border-color: var(--ac); }
+    .up-box i { font-size: 2em; color: var(--ac); margin-bottom: 8px; }
+
+    .f { display: none; }
+  </style>
+</head>
+<body>
+
+<div class="app">
+  <aside>
+    <h1><i class="fas fa-building"></i> Configurando a sua empresa</h1>
+    <small>Etapas de Configuração</small>
+    
+    <button class="nv on" onclick="switchTab('numeros')" id="btn-numeros">
+      <span><i class="fa-solid fa-phone"></i> 1. Números / WhatsApp</span>
+      <span class="badge" id="count-numeros">0</span>
+    </button>
+    <button class="nv" onclick="switchTab('grupos')" id="btn-grupos">
+      <span><i class="fa-solid fa-layer-group"></i> 2. Lista de Grupos</span>
+      <span class="badge" id="count-grupos">0</span>
+    </button>
+    <button class="nv" onclick="switchTab('supervisores')" id="btn-supervisores">
+      <span><i class="fa-solid fa-user-tie"></i> 3. Supervisores</span>
+      <span class="badge" id="count-supervisores">0</span>
+    </button>
+    <button class="nv" onclick="switchTab('agentes')" id="btn-agentes">
+      <span><i class="fa-solid fa-headset"></i> 4. Agentes</span>
+      <span class="badge" id="count-agentes">0</span>
+    </button>
+    <button class="nv" onclick="switchTab('grupos_agentes')" id="btn-grupos_agentes">
+      <span><i class="fa-solid fa-sitemap"></i> 5. Grupos X Agentes</span>
+      <span class="badge" id="count-grupos_agentes">0</span>
+    </button>
+    <button class="nv" onclick="switchTab('qualificacoes')" id="btn-qualificacoes">
+      <span><i class="fa-solid fa-tags"></i> 6. Qualificações</span>
+      <span class="badge" id="count-qualificacoes">0</span>
+    </button>
+    <button class="nv" onclick="switchTab('calendario')" id="btn-calendario">
+      <span><i class="fa-solid fa-calendar-days"></i> 7. Calendário</span>
+      <span class="badge" id="count-calendario">0</span>
+    </button>
+    <button class="nv" onclick="switchTab('fluxos')" id="btn-fluxos">
+      <span><i class="fa-solid fa-diagram-project"></i> 8. Fluxos & Anexos</span>
+      <span class="badge" id="count-fluxos">0</span>
+    </button>
+    <button class="nv" onclick="switchTab('templates')" id="btn-templates">
+      <span><i class="fa-brands fa-whatsapp"></i> 9. Templates Meta</span>
+      <span class="badge" id="count-templates">0</span>
+    </button>
+
+    <small>Finalização</small>
+    <button class="nv" onclick="switchTab('revisao')" id="btn-revisao" style="color: var(--ac);">
+      <span><i class="fa-solid fa-paper-plane"></i> Revisar & Enviar</span>
+      <i class="fa-solid fa-chevron-right" style="font-size: 0.75em;"></i>
+    </button>
+
+    <div class="theme-toggle">
+      <button class="nv" onclick="toggleTheme()" id="btn-theme">
+        <span><i class="fa-solid fa-circle-half-stroke"></i> Tema: Escuro</span>
+      </button>
+    </div>
+  </aside>
+
+  <main>
+    <!-- 1. NÚMEROS (SEM CAMPO CANAL) -->
+    <div id="section-numeros" class="tab-content">
+      <div class="cd">
+        <h2><i class="fa-solid fa-phone"></i> 1. Números de Atendimento</h2>
+        <p class="sub">Cadastre os números de telefone e WhatsApp que serão configurados no sistema.</p>
+        <form onsubmit="addData('numeros', event)">
+          <div class="g2">
+            <div>
+              <label>Identificação do Número *</label>
+              <input type="text" id="num-nome" placeholder="Ex: Suporte SP, Vendas Geral" required>
+            </div>
+            <div>
+              <label>Número com DDD *</label>
+              <input type="text" id="num-telefone" placeholder="Ex: (11) 99999-8888" required>
+            </div>
+          </div>
+          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Número</button></div>
+        </form>
+      </div>
+      <div class="cd"><div class="tb-wrap" id="table-numeros"></div></div>
+    </div>
+
+    <!-- 2. GRUPOS -->
+    <div id="section-grupos" class="tab-content f">
+      <div class="cd">
+        <h2><i class="fa-solid fa-layer-group"></i> 2. Lista de Grupos de Atendimento</h2>
+        <p class="sub">Setores ou equipes que vão receber os chamados no sistema.</p>
+        <form onsubmit="addData('grupos', event)">
+          <div class="g2">
+            <div>
+              <label>Nome do Grupo *</label>
+              <input type="text" id="grupo-nome" placeholder="Ex: Financeiro, Vendas, N1" required>
+            </div>
+            <div>
+              <label>Descrição / Finalidade</label>
+              <input type="text" id="grupo-desc" placeholder="Ex: Atendimento de faturas e pagamentos">
+            </div>
+          </div>
+          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Grupo</button></div>
+        </form>
+      </div>
+      <div class="cd"><div class="tb-wrap" id="table-grupos"></div></div>
+    </div>
+
+    <!-- 3. SUPERVISORES (SEM LOGIN E SEM SENHA) -->
+    <div id="section-supervisores" class="tab-content f">
+      <div class="cd">
+        <h2><i class="fa-solid fa-user-tie"></i> 3. Cadastro de Supervisores</h2>
+        <p class="sub">Supervisores responsáveis pelo acompanhamento e relatórios da equipe.</p>
+        <form onsubmit="addData('supervisores', event)">
+          <div class="g2">
+            <div>
+              <label>Nome Completo *</label>
+              <input type="text" id="sup-nome" placeholder="Ex: Pedro Henrique" required>
+            </div>
+            <div>
+              <label>E-mail Corporativo *</label>
+              <input type="email" id="sup-email" placeholder="pedro@empresa.com" required>
+            </div>
+          </div>
+          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Supervisor</button></div>
+        </form>
+      </div>
+      <div class="cd"><div class="tb-wrap" id="table-supervisores"></div></div>
+    </div>
+
+    <!-- 4. AGENTES (SEM RAMAL) -->
+    <div id="section-agentes" class="tab-content f">
+      <div class="cd">
+        <h2><i class="fa-solid fa-headset"></i> 4. Cadastro de Agentes</h2>
+        <p class="sub">Usuários/Atendentes do dia a dia e seus respectivos canais de permissão.</p>
+        <form onsubmit="addData('agentes', event)">
+          <div class="g2">
+            <div>
+              <label>Nome Completo *</label>
+              <input type="text" id="agente-nome" placeholder="Ex: Alan Santos" required>
+            </div>
+            <div>
+              <label>E-mail *</label>
+              <input type="email" id="agente-email" placeholder="alan@empresa.com" required>
+            </div>
+          </div>
+          <div class="g2">
+            <div>
+              <label>Atende WhatsApp? *</label>
+              <select id="agente-whats">
+                <option value="SIM">SIM</option>
+                <option value="NÃO">NÃO</option>
+              </select>
+            </div>
+            <div>
+              <label>Atende Telefone? *</label>
+              <select id="agente-fone">
+                <option value="SIM">SIM</option>
+                <option value="NÃO">NÃO</option>
+              </select>
+            </div>
+          </div>
+          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Agente</button></div>
+        </form>
+      </div>
+      <div class="cd"><div class="tb-wrap" id="table-agentes"></div></div>
+    </div>
+
+    <!-- 5. GRUPOS X AGENTES -->
+    <div id="section-grupos_agentes" class="tab-content f">
+      <div class="cd">
+        <h2><i class="fa-solid fa-sitemap"></i> 5. Grupos X Agentes</h2>
+        <p class="sub">Associação de cada agente aos seus respectivos grupos.</p>
+        <form onsubmit="addData('grupos_agentes', event)">
+          <div class="g2">
+            <div>
+              <label>Nome do Agente *</label>
+              <input type="text" id="ga-agente" placeholder="Ex: Alan Santos" required>
+            </div>
+            <div>
+              <label>Grupo *</label>
+              <input type="text" id="ga-grupo" placeholder="Ex: Suporte N1" required>
+            </div>
+          </div>
+          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Vincular Agente ao Grupo</button></div>
+        </form>
+      </div>
+      <div class="cd"><div class="tb-wrap" id="table-grupos_agentes"></div></div>
+    </div>
+
+    <!-- 6. QUALIFICAÇÕES (AJUSTADO PARA WHATSAPP) -->
+    <div id="section-qualificacoes" class="tab-content f">
+      <div class="cd">
+        <h2><i class="fa-solid fa-tags"></i> 6. Qualificações de Atendimento</h2>
+        <p class="sub">Tabulações e motivos de encerramento de atendimentos de whatsapp.</p>
+        <form onsubmit="addData('qualificacoes', event)">
+          <div class="g2">
+            <div>
+              <label>Nome da Qualificação *</label>
+              <input type="text" id="qual-nome" placeholder="Ex: Dúvida Sanada, Venda Concluída" required>
+            </div>
+            <div>
+              <label>Categoria</label>
+              <input type="text" id="qual-cat" placeholder="Ex: Suporte, Vendas">
+            </div>
+          </div>
+          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Qualificação</button></div>
+        </form>
+      </div>
+      <div class="cd"><div class="tb-wrap" id="table-qualificacoes"></div></div>
+    </div>
+
+    <!-- 7. CALENDÁRIO -->
+    <div id="section-calendario" class="tab-content f">
+      <div class="cd">
+        <h2><i class="fa-solid fa-calendar-days"></i> 7. Calendário de Atendimento</h2>
+        <p class="sub">Horários e dias de expediente da sua empresa.</p>
+        <form onsubmit="addData('calendario', event)">
+          <div class="g3">
+            <div>
+              <label>Dias de Funcionamento *</label>
+              <input type="text" id="cal-dias" placeholder="Ex: Segunda a Sexta" required>
+            </div>
+            <div>
+              <label>Horário de Início *</label>
+              <input type="time" id="cal-inicio" required>
+            </div>
+            <div>
+              <label>Horário de Fim *</label>
+              <input type="time" id="cal-fim" required>
+            </div>
+          </div>
+          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Horário</button></div>
+        </form>
+      </div>
+      <div class="cd"><div class="tb-wrap" id="table-calendario"></div></div>
+    </div>
+
+    <!-- 8. FLUXOS (APENAS ANEXO E DESCRIÇÃO) -->
+    <div id="section-fluxos" class="tab-content f">
+      <div class="cd">
+        <h2><i class="fa-solid fa-diagram-project"></i> 8. Fluxos de Atendimento & Anexos</h2>
+        <p class="sub">Envie a imagem/diagrama do bot e descreva a lógica do fluxo de atendimento.</p>
+        <form onsubmit="addData('fluxos', event)">
+          <label>Imagem / Diagrama do Fluxo (PNG, JPG, PDF)</label>
+          <div class="up-box" onclick="document.getElementById('fluxo-file').click()">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <p style="font-size: 0.85em;">Clique para anexar o arquivo do fluxo do WhatsApp</p>
+            <span id="file-name" style="font-size: 0.78em; color: var(--ac); display: block; margin-top: 6px;">Nenhum arquivo selecionado</span>
+          </div>
+          <input type="file" id="fluxo-file" accept="image/*,.pdf" hidden onchange="handleFileSelect(event)">
+
+          <label>Descrição do Fluxo *</label>
+          <textarea id="fluxo-obs" rows="4" placeholder="Descreva a lógica do bot, saudações ou regras de direcionamento..." required></textarea>
+
+          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Salvar Fluxo / Anexo</button></div>
+        </form>
+      </div>
+      <div class="cd"><div class="tb-wrap" id="table-fluxos"></div></div>
+    </div>
+
+    <!-- 9. TEMPLATES META -->
+    <div id="section-templates" class="tab-content f">
+      <div class="cd">
+        <h2><i class="fa-brands fa-whatsapp"></i> 9. Templates da Meta (WhatsApp)</h2>
+        <p class="sub">Modelos de mensagem para disparo de notificações ativas.</p>
+        <form onsubmit="addData('templates', event)">
+          <div class="g2">
+            <div>
+              <label>Nome do Template *</label>
+              <input type="text" id="tpl-nome" placeholder="Ex: aviso_fatura_vencimento" required>
+            </div>
+            <div>
+              <label>Idioma *</label>
+              <select id="tpl-idioma">
+                <option value="pt_BR">Português (pt_BR)</option>
+                <option value="en_US">Inglês (en_US)</option>
+                <option value="es_ES">Espanhol (es_ES)</option>
+              </select>
+            </div>
+          </div>
+          <label>Texto da Mensagem *</label>
+          <textarea id="tpl-texto" rows="3" placeholder="Olá {{1}}, informamos que sua fatura vence em {{2}}..." required></textarea>
+          
+          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Template</button></div>
+        </form>
+      </div>
+      <div class="cd"><div class="tb-wrap" id="table-templates"></div></div>
+    </div>
+
+    <!-- REVISÃO & ENVIO -->
+    <div id="section-revisao" class="tab-content f">
+      <div class="cd">
+        <h2><i class="fa-solid fa-paper-plane"></i> Revisão & Envio Final</h2>
+        <p class="sub">Confira o resumo de todos os itens antes de gravar na planilha do Google Sheets.</p>
+        
+        <div id="reumo-container" style="display: grid; gap: 12px;" class="g2"></div>
+      </div>
+
+      <div class="cd" style="border-color: var(--ac); text-align: center;">
+        <h3 style="color: var(--ac); margin-bottom: 8px;">Concluir Configuração</h3>
+        <p style="color: var(--mu); font-size: 0.85em; margin-bottom: 18px;">Ao clicar no botão abaixo, todas as abas serão geradas automaticamente na planilha.</p>
+        <button onclick="enviarDadosGoogleSheets()" id="btn-enviar-final" class="btn pr" style="padding: 12px 32px; font-size: 1em;">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Concluir & Enviar Setup Completo
+        </button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  // SCRIPT GOOGLE SHEETS
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxhZrl9ojHZvyadgL2_AHTKnhGtauRzq3KJCpF0Q4XwesSwu62e7g_-uJOF9bwae7skpA/exec";
+
+  let currentBase64File = "";
+
+  const setupData = {
+    "Números de Atendimento": [],
+    "Lista de Grupos": [],
+    "Supervisores": [],
+    "Agentes": [],
+    "Grupos X Agentes": [],
+    "Qualificações de Atendimento": [],
+    "Calendário de Atendimento": [],
+    "Fluxos x Atendimento": [],
+    "Templates da Meta": []
+  };
+
+  const tabMap = {
+    'numeros': 'Números de Atendimento',
+    'grupos': 'Lista de Grupos',
+    'supervisores': 'Supervisores',
+    'agentes': 'Agentes',
+    'grupos_agentes': 'Grupos X Agentes',
+    'qualificacoes': 'Qualificações de Atendimento',
+    'calendario': 'Calendário de Atendimento',
+    'fluxos': 'Fluxos x Atendimento',
+    'templates': 'Templates da Meta'
+  };
+
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    document.getElementById('btn-theme').innerHTML = `<span><i class="fa-solid fa-circle-half-stroke"></i> Tema: ${newTheme === 'dark' ? 'Escuro' : 'Claro'}</span>`;
+  }
+
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('f'));
+    document.querySelectorAll('aside .nv').forEach(el => el.classList.remove('on'));
+
+    document.getElementById(`section-${tabId}`).classList.remove('f');
+    const activeBtn = document.getElementById(`btn-${tabId}`);
+    if(activeBtn) activeBtn.classList.add('on');
+
+    if(tabId === 'revisao') renderRevisao();
+  }
+
+  function handleFileSelect(e) {
+    const file = e.target.files[0];
+    if(!file) return;
+
+    document.getElementById('file-name').innerText = file.name;
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      currentBase64File = evt.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function addData(key, event) {
+    event.preventDefault();
+    let newItem = {};
+
+    if(key === 'numeros') {
+      newItem = { "Nome da Linha": document.getElementById('num-nome').value, "Telefone": document.getElementById('num-telefone').value };
+    } else if(key === 'grupos') {
+      newItem = { "Nome do Grupo": document.getElementById('grupo-nome').value, "Descrição": document.getElementById('grupo-desc').value };
+    } else if(key === 'supervisores') {
+      newItem = { "Nome Completo": document.getElementById('sup-nome').value, "Email": document.getElementById('sup-email').value };
+    } else if(key === 'agentes') {
+      newItem = { 
+        "Nome do Agente": document.getElementById('agente-nome').value, 
+        "Email": document.getElementById('agente-email').value, 
+        "Atende Whats": document.getElementById('agente-whats').value,
+        "Atende Telefone": document.getElementById('agente-fone').value
+      };
+    } else if(key === 'grupos_agentes') {
+      newItem = { "Agente": document.getElementById('ga-agente').value, "Grupo": document.getElementById('ga-grupo').value };
+    } else if(key === 'qualificacoes') {
+      newItem = { "Qualificação": document.getElementById('qual-nome').value, "Categoria": document.getElementById('qual-cat').value };
+    } else if(key === 'calendario') {
+      newItem = { "Dias": document.getElementById('cal-dias').value, "Início": document.getElementById('cal-inicio').value, "Fim": document.getElementById('cal-fim').value };
+    } else if(key === 'fluxos') {
+      newItem = { 
+        "Descrição/Lógica": document.getElementById('fluxo-obs').value,
+        "Anexo/Imagem": currentBase64File ? "Arquivo Anexado" : "Sem Anexo"
+      };
+      currentBase64File = "";
+      document.getElementById('file-name').innerText = "Nenhum arquivo selecionado";
+    } else if(key === 'templates') {
+      newItem = { "Nome": document.getElementById('tpl-nome').value, "Idioma": document.getElementById('tpl-idioma').value, "Texto": document.getElementById('tpl-texto').value };
+    }
+
+    const sheetName = tabMap[key];
+    setupData[sheetName].push(newItem);
+    document.querySelector(`#section-${key} form`).reset();
+    
+    updateBadge(key);
+    renderTable(key);
+  }
+
+  function removeData(key, index) {
+    const sheetName = tabMap[key];
+    setupData[sheetName].splice(index, 1);
+    updateBadge(key);
+    renderTable(key);
+  }
+
+  function updateBadge(key) {
+    const sheetName = tabMap[key];
+    document.getElementById(`count-${key}`).innerText = setupData[sheetName].length;
+  }
+
+  function renderTable(key) {
+    const sheetName = tabMap[key];
+    const items = setupData[sheetName];
+    const container = document.getElementById(`table-${key}`);
+
+    if (items.length === 0) {
+      container.innerHTML = '<p style="color: var(--mu); font-size: 0.8em; font-style: italic;">Nenhum item cadastrado nesta aba.</p>';
+      return;
+    }
+
+    const headers = Object.keys(items[0]);
+    let html = '<table><thead><tr>';
+    headers.forEach(h => html += `<th>${h}</th>`);
+    html += '<th style="text-align: center;">Remover</th></tr></thead><tbody>';
+
+    items.forEach((item, idx) => {
+      html += '<tr>';
+      headers.forEach(h => html += `<td>${item[h] || ''}</td>`);
+      html += `<td style="text-align: center;"><button onclick="removeData('${key}', ${idx})" class="btn dn" style="padding: 2px 8px;"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+    });
+
+    html += '</tbody></table>';
+    container.innerHTML = html;
+  }
+
+  function renderRevisao() {
+    const container = document.getElementById('reumo-container');
+    let html = '';
+
+    for (const [sheet, items] of Object.entries(setupData)) {
+      html += `<div style="background: var(--in); padding: 14px; border-radius: 8px; border: 1px solid var(--bd);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <strong style="color: var(--ac); font-size: 0.9em;">${sheet}</strong>
+          <span class="badge" style="background: var(--ac); color: #ffffff;">${items.length}</span>
+        </div>`;
+      if(items.length > 0) {
+        html += '<ul style="font-size: 0.8em; color: var(--mu); padding-left: 18px;">';
+        items.forEach(item => {
+          const val1 = Object.values(item)[0] || '';
+          const val2 = Object.values(item)[1] || '';
+          html += `<li><strong style="color: var(--tx);">${val1}</strong> ${val2 ? ' - ' + val2 : ''}</li>`;
+        });
+        html += '</ul>';
+      } else {
+        html += '<p style="font-size: 0.78em; color: var(--mu); font-style: italic;">Pendente de preenchimento</p>';
+      }
+      html += '</div>';
+    }
+
+    container.innerHTML = html;
+  }
+
+  async function enviarDadosGoogleSheets() {
+    const btn = document.getElementById('btn-enviar-final');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando para o Google Sheets...';
+
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(setupData)
+      });
+
+      alert("✨ Sucesso! Todas as abas foram criadas e salvas na planilha do Google Sheets!");
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Enviado com Sucesso!';
+      btn.style.background = '#16a34a';
+    } catch (error) {
+      console.error("Erro ao enviar:", error);
+      alert("Ops! Ocorreu um erro ao enviar para o Google Sheets. Tente novamente.");
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Tentar Enviar Novamente';
+    }
+  }
+</script>
+
+</body>
+</html>

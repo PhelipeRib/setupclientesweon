@@ -383,7 +383,7 @@
 
       <div class="cd" style="border-color: var(--ac); text-align: center;">
         <h3 style="color: var(--ac); margin-bottom: 8px;">Concluir Configuração</h3>
-        <p style="color: var(--mu); font-size: 0.85em; margin-bottom: 18px;">Ao clicar no botão abaixo, todas as abas serão geradas automaticamente na planilha.</p>
+        <p style="color: var(--mu); font-size: 0.85em; margin-bottom: 18px;">Ao clicar no botão abaixo, todas as abas serão geradas automaticamente na planilha e salvas no Drive.</p>
         <button onclick="enviarDadosGoogleSheets()" id="btn-enviar-final" class="btn pr" style="padding: 12px 32px; font-size: 1em;">
           <i class="fa-solid fa-cloud-arrow-up"></i> Concluir & Enviar Setup Completo
         </button>
@@ -393,10 +393,10 @@
 </div>
 
 <script>
-  // SCRIPT GOOGLE SHEETS
+  // SCRIPT GOOGLE SHEETS - NOVA IMPLANTAÇÃO (VERSÃO 13)
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyuWjtlSMOC-AORhO1Yb_jiX-wniwpVSFOGaakMS010IGd3cmTujNOazVFTPTs-vsO7kA/exec";
 
-  let selectedFileName = "";
+  let currentBase64File = "";
 
   const setupData = {
     "Números de Atendimento": [],
@@ -443,8 +443,14 @@
   function handleFileSelect(e) {
     const file = e.target.files[0];
     if(!file) return;
-    selectedFileName = file.name;
+    
     document.getElementById('file-name').innerText = file.name;
+
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      currentBase64File = evt.target.result;
+    };
+    reader.readAsDataURL(file);
   }
 
   function addData(key, event) {
@@ -473,9 +479,9 @@
     } else if(key === 'fluxos') {
       newItem = { 
         "Descrição/Lógica": document.getElementById('fluxo-obs').value,
-        "Anexo/Imagem": selectedFileName ? `Arquivo Anexado (${selectedFileName})` : "Sem Anexo"
+        "Anexo/Imagem": currentBase64File || "Sem Anexo"
       };
-      selectedFileName = "";
+      currentBase64File = "";
       document.getElementById('file-name').innerText = "Nenhum arquivo selecionado";
     } else if(key === 'templates') {
       newItem = { "Nome": document.getElementById('tpl-nome').value, "Idioma": document.getElementById('tpl-idioma').value, "Texto": document.getElementById('tpl-texto').value };
@@ -518,7 +524,13 @@
 
     items.forEach((item, idx) => {
       html += '<tr>';
-      headers.forEach(h => html += `<td>${item[h] || ''}</td>`);
+      headers.forEach(h => {
+        let val = item[h] || '';
+        if (typeof val === 'string' && val.indexOf('data:') === 0) {
+          val = '📁 [Arquivo Anexado / Carregado]';
+        }
+        html += `<td>${val}</td>`;
+      });
       html += `<td style="text-align: center;"><button onclick="removeData('${key}', ${idx})" class="btn dn" style="padding: 2px 8px;"><i class="fa-solid fa-trash"></i></button></td></tr>`;
     });
 
@@ -540,7 +552,10 @@
         html += '<ul style="font-size: 0.8em; color: var(--mu); padding-left: 18px;">';
         items.forEach(item => {
           const val1 = Object.values(item)[0] || '';
-          const val2 = Object.values(item)[1] || '';
+          let val2 = Object.values(item)[1] || '';
+          if (typeof val2 === 'string' && val2.indexOf('data:') === 0) {
+            val2 = '[Arquivo Anexado / Carregado]';
+          }
           html += `<li><strong style="color: var(--tx);">${val1}</strong> ${val2 ? ' - ' + val2 : ''}</li>`;
         });
         html += '</ul>';
@@ -556,7 +571,7 @@
   async function enviarDadosGoogleSheets() {
     const btn = document.getElementById('btn-enviar-final');
     btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando para o Google Sheets...';
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando para o Google Sheets & Drive...';
 
     try {
       await fetch(GOOGLE_SCRIPT_URL, {
@@ -566,7 +581,7 @@
         body: JSON.stringify(setupData)
       });
 
-      alert("✨ Sucesso! Todas as abas foram criadas e salvas na planilha do Google Sheets!");
+      alert("✨ Sucesso! Todas as abas foram salvas e os anexos foram enviados para o Google Drive!");
       btn.innerHTML = '<i class="fa-solid fa-check"></i> Enviado com Sucesso!';
       btn.style.background = '#16a34a';
     } catch (error) {

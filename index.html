@@ -146,7 +146,7 @@
   </aside>
 
   <main>
-    <!-- 1. NÚMEROS (SEM CAMPO CANAL) -->
+    <!-- 1. NÚMEROS -->
     <div id="section-numeros" class="tab-content">
       <div class="cd">
         <h2><i class="fa-solid fa-phone"></i> 1. Números de Atendimento</h2>
@@ -190,7 +190,7 @@
       <div class="cd"><div class="tb-wrap" id="table-grupos"></div></div>
     </div>
 
-    <!-- 3. SUPERVISORES (SEM LOGIN E SEM SENHA) -->
+    <!-- 3. SUPERVISORES -->
     <div id="section-supervisores" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-user-tie"></i> 3. Cadastro de Supervisores</h2>
@@ -212,7 +212,7 @@
       <div class="cd"><div class="tb-wrap" id="table-supervisores"></div></div>
     </div>
 
-    <!-- 4. AGENTES (SEM RAMAL) -->
+    <!-- 4. AGENTES -->
     <div id="section-agentes" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-headset"></i> 4. Cadastro de Agentes</h2>
@@ -272,7 +272,7 @@
       <div class="cd"><div class="tb-wrap" id="table-grupos_agentes"></div></div>
     </div>
 
-    <!-- 6. QUALIFICAÇÕES (AJUSTADO PARA WHATSAPP) -->
+    <!-- 6. QUALIFICAÇÕES -->
     <div id="section-qualificacoes" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-tags"></i> 6. Qualificações de Atendimento</h2>
@@ -320,7 +320,7 @@
       <div class="cd"><div class="tb-wrap" id="table-calendario"></div></div>
     </div>
 
-    <!-- 8. FLUXOS (APENAS ANEXO E DESCRIÇÃO) -->
+    <!-- 8. FLUXOS -->
     <div id="section-fluxos" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-diagram-project"></i> 8. Fluxos de Atendimento & Anexos</h2>
@@ -396,7 +396,7 @@
   // SCRIPT GOOGLE SHEETS
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxhZrl9ojHZvyadgL2_AHTKnhGtauRzq3KJCpF0Q4XwesSwu62e7g_-uJOF9bwae7skpA/exec";
 
-  let currentBase64File = "";
+  let selectedFileName = "";
 
   const setupData = {
     "Números de Atendimento": [],
@@ -443,13 +443,8 @@
   function handleFileSelect(e) {
     const file = e.target.files[0];
     if(!file) return;
-
+    selectedFileName = file.name;
     document.getElementById('file-name').innerText = file.name;
-    const reader = new FileReader();
-    reader.onload = function(evt) {
-      currentBase64File = evt.target.result;
-    };
-    reader.readAsDataURL(file);
   }
 
   function addData(key, event) {
@@ -478,9 +473,9 @@
     } else if(key === 'fluxos') {
       newItem = { 
         "Descrição/Lógica": document.getElementById('fluxo-obs').value,
-        "Anexo/Imagem": currentBase64File ? "Arquivo Anexado" : "Sem Anexo"
+        "Anexo/Imagem": selectedFileName ? `Arquivo Anexado (${selectedFileName})` : "Sem Anexo"
       };
-      currentBase64File = "";
+      selectedFileName = "";
       document.getElementById('file-name').innerText = "Nenhum arquivo selecionado";
     } else if(key === 'templates') {
       newItem = { "Nome": document.getElementById('tpl-nome').value, "Idioma": document.getElementById('tpl-idioma').value, "Texto": document.getElementById('tpl-texto').value };

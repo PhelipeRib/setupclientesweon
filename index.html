@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Configurando a sua empresa</title>
   
-  <!-- Favicon de Prancheta em SVG (Data URI) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><path fill='%233a86ff' d='M280 64h-40c-6.8 0-13.1-3.6-16.5-9.4L211.2 34c-4.5-7.7-12.8-12.4-21.7-12.4s-17.2 4.7-21.7 12.4L155.5 54.6C152.1 60.4 145.8 64 139 64H104C81.9 64 64 81.9 64 104V440c0 22.1 17.9 40 40 40H280c22.1 0 40-17.9 40-40V104c0-22.1-17.9-40-40-40zM192 128c-13.3 0-24-10.7-24-24s10.7-24 24-24 24 10.7 24 24-10.7 24-24 24z'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>?v=4">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=4">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     :root {
-      /* Dark Mode (Tom Azulado Corporativo) */
       --bg: #0b132b;
       --cd: #1c2541;
       --in: #0b132b;
@@ -22,10 +21,11 @@
       --tx: #f8fafc;
       --mu: #94a3b8;
       --bd: #ffffff1f;
+      --hint-bg: #1e293b;
+      --hint-border: #38bdf844;
     }
 
     [data-theme="light"] {
-      /* Light Mode Clean */
       --bg: #f1f5f9;
       --cd: #ffffff;
       --in: #f8fafc;
@@ -35,18 +35,19 @@
       --tx: #0f172a;
       --mu: #64748b;
       --bd: #0000001a;
+      --hint-bg: #f0f9ff;
+      --hint-border: #0284c733;
     }
 
     * { box-sizing: border-box; margin: 0; font-family: 'Inter', sans-serif; transition: background 0.2s, color 0.2s, border-color 0.2s; }
     body { background: var(--bg); color: var(--tx); min-height: 100vh; }
-    .app { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+    .app { display: grid; grid-template-columns: 300px 1fr; min-height: 100vh; }
     
-    /* Header & Sidebar */
     aside { background: var(--cd); border-right: 1px solid var(--bd); padding: 20px 16px; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
-    aside h1 { color: var(--ac); font-size: 1.15em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+    aside h1 { color: var(--ac); font-size: 1.1em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
     aside small { color: var(--mu); margin: 16px 0 6px; font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
     
-    .nv { padding: 10px 12px; border-radius: 8px; color: var(--mu); font-size: 0.85em; font-weight: 600; display: flex; gap: 10px; align-items: center; justify-content: space-between; border: 0; background: 0; text-align: left; width: 100%; cursor: pointer; }
+    .nv { padding: 9px 12px; border-radius: 8px; color: var(--mu); font-size: 0.82em; font-weight: 600; display: flex; gap: 10px; align-items: center; justify-content: space-between; border: 0; background: 0; text-align: left; width: 100%; cursor: pointer; }
     .nv:hover, .nv.on { background: color-mix(in srgb, var(--ac) 15%, transparent); color: var(--ac); }
     .nv i { width: 18px; text-align: center; }
     .badge { background: var(--in); color: var(--tx); border: 1px solid var(--bd); font-size: 0.75em; padding: 2px 7px; border-radius: 12px; font-weight: 600; }
@@ -54,13 +55,14 @@
 
     .theme-toggle { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--bd); }
 
-    main { padding: 28px; min-width: 0; max-width: 1100px; }
+    main { padding: 28px; min-width: 0; max-width: 1050px; }
     @media(max-width: 850px) { .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } }
 
-    /* Forms & Inputs */
     .cd { background: var(--cd); border: 1px solid var(--bd); border-radius: 14px; padding: 22px; margin-bottom: 20px; }
-    h2 { font-size: 1.3em; margin-bottom: 4px; color: var(--tx); display: flex; align-items: center; gap: 10px; }
-    p.sub { color: var(--mu); font-size: 0.85em; margin-bottom: 20px; }
+    h2 { font-size: 1.25em; margin-bottom: 6px; color: var(--tx); display: flex; align-items: center; gap: 10px; }
+    
+    .hint-box { background: var(--hint-bg); border-left: 3px solid var(--ac); border: 1px solid var(--hint-border); border-left-width: 4px; border-radius: 8px; padding: 12px 14px; margin-bottom: 18px; font-size: 0.84em; line-height: 1.5; color: var(--tx); }
+    .hint-box b { color: var(--ac); }
     
     label { display: block; font-size: 0.78em; color: var(--mu); margin-bottom: 6px; font-weight: 600; }
     input, select, textarea { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 10px 12px; width: 100%; font-size: 0.88em; margin-bottom: 12px; outline: none; }
@@ -70,22 +72,19 @@
     .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
     @media(max-width: 700px) { .g2, .g3 { grid-template-columns: 1fr; } }
 
-    /* Buttons */
     .btn { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 9px 16px; font-size: 0.85em; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
     .btn:hover { border-color: var(--ac); color: var(--ac); }
     .btn.pr { background: var(--ac); color: #ffffff !important; border-color: var(--ac); font-weight: 800; }
     .btn.pr:hover { background: var(--ac-hover); border-color: var(--ac-hover); }
     .btn.dn:hover { border-color: var(--dg); color: var(--dg); }
 
-    /* Tables */
     .tb-wrap { overflow-x: auto; margin-top: 10px; }
     table { width: 100%; border-collapse: collapse; font-size: 0.85em; text-align: left; }
     th { background: var(--in); color: var(--ac); padding: 10px 12px; border-bottom: 1px solid var(--bd); font-weight: 700; font-size: 0.78em; text-transform: uppercase; }
     td { padding: 10px 12px; border-bottom: 1px solid var(--bd); color: var(--tx); word-break: break-word; }
     tr:hover td { background: color-mix(in srgb, var(--in) 50%, transparent); }
 
-    /* Upload Box */
-    .up-box { border: 2px dashed var(--bd); background: var(--in); border-radius: 10px; padding: 24px; text-align: center; cursor: pointer; margin-bottom: 12px; }
+    .up-box { border: 2px dashed var(--bd); background: var(--in); border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; margin-bottom: 12px; }
     .up-box:hover { border-color: var(--ac); }
     .up-box i { font-size: 2em; color: var(--ac); margin-bottom: 8px; }
 
@@ -96,49 +95,49 @@
 
 <div class="app">
   <aside>
-    <h1><i class="fas fa-building"></i> Configurando a sua empresa</h1>
-    <small>Etapas de Configuração</small>
+    <h1><i class="fas fa-clipboard-check"></i> Setup WeON</h1>
+    <small>Etapas de Cadastro</small>
     
     <button class="nv on" onclick="switchTab('numeros')" id="btn-numeros">
-      <span><i class="fa-solid fa-phone"></i> 1. Números / WhatsApp</span>
+      <span><i class="fa-solid fa-phone"></i> 1. WhatsApp / Telefones</span>
       <span class="badge" id="count-numeros">0</span>
     </button>
     <button class="nv" onclick="switchTab('grupos')" id="btn-grupos">
-      <span><i class="fa-solid fa-layer-group"></i> 2. Lista de Grupos</span>
+      <span><i class="fa-solid fa-layer-group"></i> 2. Setores / Filas</span>
       <span class="badge" id="count-grupos">0</span>
     </button>
     <button class="nv" onclick="switchTab('supervisores')" id="btn-supervisores">
-      <span><i class="fa-solid fa-user-tie"></i> 3. Supervisores</span>
+      <span><i class="fa-solid fa-user-tie"></i> 3. Gestores / Supervisão</span>
       <span class="badge" id="count-supervisores">0</span>
     </button>
     <button class="nv" onclick="switchTab('agentes')" id="btn-agentes">
-      <span><i class="fa-solid fa-headset"></i> 4. Agentes</span>
+      <span><i class="fa-solid fa-headset"></i> 4. Atendentes (Equipe)</span>
       <span class="badge" id="count-agentes">0</span>
     </button>
     <button class="nv" onclick="switchTab('grupos_agentes')" id="btn-grupos_agentes">
-      <span><i class="fa-solid fa-sitemap"></i> 5. Grupos X Agentes</span>
+      <span><i class="fa-solid fa-sitemap"></i> 5. Atendente x Setor</span>
       <span class="badge" id="count-grupos_agentes">0</span>
     </button>
     <button class="nv" onclick="switchTab('qualificacoes')" id="btn-qualificacoes">
-      <span><i class="fa-solid fa-tags"></i> 6. Qualificações</span>
+      <span><i class="fa-solid fa-tags"></i> 6. Motivos de Finalização</span>
       <span class="badge" id="count-qualificacoes">0</span>
     </button>
     <button class="nv" onclick="switchTab('calendario')" id="btn-calendario">
-      <span><i class="fa-solid fa-calendar-days"></i> 7. Calendário</span>
+      <span><i class="fa-solid fa-clock"></i> 7. Horário de Atendimento</span>
       <span class="badge" id="count-calendario">0</span>
     </button>
     <button class="nv" onclick="switchTab('fluxos')" id="btn-fluxos">
-      <span><i class="fa-solid fa-diagram-project"></i> 8. Fluxos & Anexos</span>
+      <span><i class="fa-solid fa-diagram-project"></i> 8. Menu do Bot / Fluxo</span>
       <span class="badge" id="count-fluxos">0</span>
     </button>
     <button class="nv" onclick="switchTab('templates')" id="btn-templates">
-      <span><i class="fa-brands fa-whatsapp"></i> 9. Templates Meta</span>
+      <span><i class="fa-brands fa-whatsapp"></i> 9. Mensagens Prontas (Ativas)</span>
       <span class="badge" id="count-templates">0</span>
     </button>
 
     <small>Finalização</small>
     <button class="nv" onclick="switchTab('revisao')" id="btn-revisao" style="color: var(--ac);">
-      <span><i class="fa-solid fa-paper-plane"></i> Revisar & Enviar</span>
+      <span><i class="fa-solid fa-paper-plane"></i> Revisar & Concluir</span>
       <i class="fa-solid fa-chevron-right" style="font-size: 0.75em;"></i>
     </button>
 
@@ -153,17 +152,19 @@
     <!-- 1. NÚMEROS -->
     <div id="section-numeros" class="tab-content">
       <div class="cd">
-        <h2><i class="fa-solid fa-phone"></i> 1. Números de Atendimento</h2>
-        <p class="sub">Cadastre os números de telefone e WhatsApp que serão configurados no sistema.</p>
+        <h2><i class="fa-solid fa-phone"></i> 1. Números de WhatsApp e Telefone</h2>
+        <div class="hint-box">
+          Cadastre os números que sua empresa utilizará para falar com clientes. Pode ser um número geral de WhatsApp ou ramais de voz fixos.
+        </div>
         <form onsubmit="addData('numeros', event)">
           <div class="g2">
             <div>
-              <label>Identificação do Número *</label>
-              <input type="text" id="num-nome" placeholder="Ex: Suporte SP, Vendas Geral" required>
+              <label>Nome / Identificação da Linha *</label>
+              <input type="text" id="num-nome" placeholder="Ex: WhatsApp Oficial, Central SP, Vendas" required>
             </div>
             <div>
-              <label>Número com DDD *</label>
-              <input type="text" id="num-telefone" placeholder="Ex: (11) 99999-8888" required>
+              <label>Número completo com DDD *</label>
+              <input type="text" id="num-telefone" placeholder="Ex: (41) 99999-8888 ou 0800..." required>
             </div>
           </div>
           <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Número</button></div>
@@ -172,23 +173,26 @@
       <div class="cd"><div class="tb-wrap" id="table-numeros"></div></div>
     </div>
 
-    <!-- 2. GRUPOS -->
+    <!-- 2. GRUPOS / SETORES -->
     <div id="section-grupos" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-layer-group"></i> 2. Lista de Grupos de Atendimento</h2>
-        <p class="sub">Setores ou equipes que vão receber os chamados no sistema.</p>
+        <h2><i class="fa-solid fa-layer-group"></i> 2. Setores e Filas de Atendimento</h2>
+        <div class="hint-box">
+          <b>O que é isso?</b> São os departamentos da sua empresa para onde as conversas serão encaminhadas.<br>
+          <i>Exemplos comuns:</i> <b>Comercial</b>, <b>Financeiro/Faturas</b>, <b>Suporte Técnico</b>, <b>Precatórios</b>, <b>Inadimplentes</b>, <b>Agendamento</b>.
+        </div>
         <form onsubmit="addData('grupos', event)">
           <div class="g2">
             <div>
-              <label>Nome do Grupo *</label>
-              <input type="text" id="grupo-nome" placeholder="Ex: Financeiro, Vendas, N1" required>
+              <label>Nome do Setor / Departamento *</label>
+              <input type="text" id="grupo-nome" placeholder="Ex: Financeiro" required>
             </div>
             <div>
-              <label>Descrição / Finalidade</label>
-              <input type="text" id="grupo-desc" placeholder="Ex: Atendimento de faturas e pagamentos">
+              <label>Descrição do que este setor resolve</label>
+              <input type="text" id="grupo-desc" placeholder="Ex: Segunda via de boleto e dúvidas de pagamento">
             </div>
           </div>
-          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Grupo</button></div>
+          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Setor</button></div>
         </form>
       </div>
       <div class="cd"><div class="tb-wrap" id="table-grupos"></div></div>
@@ -197,17 +201,19 @@
     <!-- 3. SUPERVISORES -->
     <div id="section-supervisores" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-user-tie"></i> 3. Cadastro de Supervisores</h2>
-        <p class="sub">Supervisores responsáveis pelo acompanhamento e relatórios da equipe.</p>
+        <h2><i class="fa-solid fa-user-tie"></i> 3. Gestores e Supervisores</h2>
+        <div class="hint-box">
+          Cadastre as pessoas que terão acesso aos relatórios gerenciais, dashboards e monitoramento em tempo real da equipe.
+        </div>
         <form onsubmit="addData('supervisores', event)">
           <div class="g2">
             <div>
-              <label>Nome Completo *</label>
-              <input type="text" id="sup-nome" placeholder="Ex: Pedro Henrique" required>
+              <label>Nome Completo do Supervisor *</label>
+              <input type="text" id="sup-nome" placeholder="Ex: Alice Martins" required>
             </div>
             <div>
               <label>E-mail Corporativo *</label>
-              <input type="email" id="sup-email" placeholder="pedro@empresa.com" required>
+              <input type="email" id="sup-email" placeholder="alice@empresa.com.br" required>
             </div>
           </div>
           <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Supervisor</button></div>
@@ -219,58 +225,67 @@
     <!-- 4. AGENTES -->
     <div id="section-agentes" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-headset"></i> 4. Cadastro de Agentes</h2>
-        <p class="sub">Usuários/Atendentes do dia a dia e seus respectivos canais de permissão.</p>
+        <h2><i class="fa-solid fa-headset"></i> 4. Atendentes (Equipe Operacional)</h2>
+        <div class="hint-box">
+          Cadastre os colaboradores que atendem as conversas e ligações no dia a dia.
+        </div>
         <form onsubmit="addData('agentes', event)">
           <div class="g2">
             <div>
-              <label>Nome Completo *</label>
-              <input type="text" id="agente-nome" placeholder="Ex: Alan Santos" required>
+              <label>Nome Completo do Atendente *</label>
+              <input type="text" id="agente-nome" placeholder="Ex: Nayara Carvalho" required>
             </div>
             <div>
-              <label>E-mail *</label>
-              <input type="email" id="agente-email" placeholder="alan@empresa.com" required>
+              <label>E-mail de Login *</label>
+              <input type="email" id="agente-email" placeholder="nayara@empresa.com.br" required>
             </div>
           </div>
           <div class="g2">
             <div>
-              <label>Atende WhatsApp? *</label>
+              <label>Irá atender mensagens de WhatsApp? *</label>
               <select id="agente-whats">
-                <option value="SIM">SIM</option>
+                <option value="SIM">SIM (Atende mensagens)</option>
                 <option value="NÃO">NÃO</option>
               </select>
             </div>
             <div>
-              <label>Atende Telefone? *</label>
+              <label>Irá receber ligações telefônicas? *</label>
               <select id="agente-fone">
-                <option value="SIM">SIM</option>
+                <option value="SIM">SIM (Atende voz/telefone)</option>
                 <option value="NÃO">NÃO</option>
               </select>
             </div>
           </div>
-          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Agente</button></div>
+          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Atendente</button></div>
         </form>
       </div>
       <div class="cd"><div class="tb-wrap" id="table-agentes"></div></div>
     </div>
 
-    <!-- 5. GRUPOS X AGENTES -->
+    <!-- 5. GRUPOS X AGENTES (VÍNCULO INTELIGENTE) -->
     <div id="section-grupos_agentes" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-sitemap"></i> 5. Grupos X Agentes</h2>
-        <p class="sub">Associação de cada agente aos seus respectivos grupos.</p>
+        <h2><i class="fa-solid fa-sitemap"></i> 5. Quem atende qual setor?</h2>
+        <div class="hint-box">
+          <b>O que é isso?</b> Aqui você diz em qual fila cada atendente vai trabalhar. Um atendente pode pertencer a mais de um setor se necessário.<br>
+          <i>Exemplo:</i> Vincular "Nayara Carvalho" ao setor "Financeiro".
+        </div>
         <form onsubmit="addData('grupos_agentes', event)">
           <div class="g2">
             <div>
-              <label>Nome do Agente *</label>
-              <input type="text" id="ga-agente" placeholder="Ex: Alan Santos" required>
+              <label>Selecione o Atendente *</label>
+              <select id="ga-agente" required>
+                <option value="">-- Primeiro cadastre atendentes no passo 4 --</option>
+              </select>
             </div>
             <div>
-              <label>Grupo *</label>
-              <input type="text" id="ga-grupo" placeholder="Ex: Suporte N1" required>
+              <label>Selecione o Setor / Fila *</label>
+              <select id="ga-grupo" required>
+                <option value="">-- Primeiro cadastre setores no passo 2 --</option>
+              </select>
             </div>
           </div>
-          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Vincular Agente ao Grupo</button></div>
+          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Vincular Atendente ao Setor</button></div>
         </form>
       </div>
       <div class="cd"><div class="tb-wrap" id="table-grupos_agentes"></div></div>
@@ -279,20 +294,23 @@
     <!-- 6. QUALIFICAÇÕES -->
     <div id="section-qualificacoes" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-tags"></i> 6. Qualificações de Atendimento</h2>
-        <p class="sub">Tabulações e motivos de encerramento de atendimentos de whatsapp.</p>
+        <h2><i class="fa-solid fa-tags"></i> 6. Motivos de Finalização (Tabulações)</h2>
+        <div class="hint-box">
+          <b>O que é isso?</b> É o motivo que o atendente seleciona quando encerra uma conversa para gerar relatórios.<br>
+          <i>Exemplos:</i> <b>Venda Concluída</b>, <b>Dúvida Sanada</b>, <b>Cliente Inadimplente</b>, <b>Sem Resposta</b>, <b>Agendamento Realizado</b>.
+        </div>
         <form onsubmit="addData('qualificacoes', event)">
           <div class="g2">
             <div>
-              <label>Nome da Qualificação *</label>
-              <input type="text" id="qual-nome" placeholder="Ex: Dúvida Sanada, Venda Concluída" required>
+              <label>Nome do Motivo / Desfecho *</label>
+              <input type="text" id="qual-nome" placeholder="Ex: Entrevista Agendada, Venda Fechada" required>
             </div>
             <div>
-              <label>Categoria</label>
-              <input type="text" id="qual-cat" placeholder="Ex: Suporte, Vendas">
+              <label>Categoria do Motivo (Opcional)</label>
+              <input type="text" id="qual-cat" placeholder="Ex: Sucesso, Pendência, Desistência">
             </div>
           </div>
-          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Qualificação</button></div>
+          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Motivo</button></div>
         </form>
       </div>
       <div class="cd"><div class="tb-wrap" id="table-qualificacoes"></div></div>
@@ -301,21 +319,23 @@
     <!-- 7. CALENDÁRIO -->
     <div id="section-calendario" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-calendar-days"></i> 7. Calendário de Atendimento</h2>
-        <p class="sub">Horários e dias de expediente da sua empresa.</p>
+        <h2><i class="fa-solid fa-clock"></i> 7. Horários de Expediente da Empresa</h2>
+        <div class="hint-box">
+          <b>Para que serve?</b> O sistema precisa saber quando sua empresa está aberta. Fora desses horários, o WhatsApp pode enviar uma mensagem automática de "Estamos fechados no momento".
+        </div>
         <form onsubmit="addData('calendario', event)">
           <div class="g3">
             <div>
-              <label>Dias de Funcionamento *</label>
-              <input type="text" id="cal-dias" placeholder="Ex: Segunda a Sexta" required>
+              <label>Dias da Semana *</label>
+              <input type="text" id="cal-dias" placeholder="Ex: Segunda a Sexta, Sábados" required>
             </div>
             <div>
-              <label>Horário de Início *</label>
-              <input type="time" id="cal-inicio" required>
+              <label>Horário de Abertura *</label>
+              <input type="time" id="cal-inicio" value="08:00" required>
             </div>
             <div>
-              <label>Horário de Fim *</label>
-              <input type="time" id="cal-fim" required>
+              <label>Horário de Fechamento *</label>
+              <input type="time" id="cal-fim" value="18:00" required>
             </div>
           </div>
           <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Horário</button></div>
@@ -324,24 +344,28 @@
       <div class="cd"><div class="tb-wrap" id="table-calendario"></div></div>
     </div>
 
-    <!-- 8. FLUXOS -->
+    <!-- 8. FLUXOS & BOT -->
     <div id="section-fluxos" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-diagram-project"></i> 8. Fluxos de Atendimento & Anexos</h2>
-        <p class="sub">Envie a imagem/diagrama do bot e descreva a lógica do fluxo de atendimento.</p>
+        <h2><i class="fa-solid fa-diagram-project"></i> 8. Menu do Bot no WhatsApp (Opcional)</h2>
+        <div class="hint-box">
+          <b>Como você quer o menu inicial do WhatsApp?</b><br>
+          <i>Exemplo:</i> "Olá, bem-vindo à [Empresa]! Digite 1 para Comercial, 2 para Agendamento, 3 para Financeiro."<br>
+          Se você tiver uma imagem ou PDF do desenho desse fluxo, pode anexar abaixo.
+        </div>
         <form onsubmit="addData('fluxos', event)">
-          <label>Imagem / Diagrama do Fluxo (PNG, JPG, PDF)</label>
+          <label>Tem desenho/diagrama do bot? Anexe aqui (PNG, JPG, PDF - Máx 10MB)</label>
           <div class="up-box" onclick="document.getElementById('fluxo-file').click()">
             <i class="fa-solid fa-cloud-arrow-up"></i>
-            <p style="font-size: 0.85em;">Clique para anexar o arquivo do fluxo do WhatsApp</p>
+            <p style="font-size: 0.85em;">Clique para anexar arquivo (opcional)</p>
             <span id="file-name" style="font-size: 0.78em; color: var(--ac); display: block; margin-top: 6px;">Nenhum arquivo selecionado</span>
           </div>
           <input type="file" id="fluxo-file" accept="image/*,.pdf" hidden onchange="handleFileSelect(event)">
 
-          <label>Descrição do Fluxo *</label>
-          <textarea id="fluxo-obs" rows="4" placeholder="Descreva a lógica do bot, saudações ou regras de direcionamento..." required></textarea>
+          <label>Descreva em texto as opções do Bot e Mensagens de Saudação *</label>
+          <textarea id="fluxo-obs" rows="4" placeholder="Ex: Saudação: 'Olá! Bem-vindo.' Opção 1 manda pro Agendamento, Opção 2 manda pro Financeiro..." required></textarea>
 
-          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Salvar Fluxo / Anexo</button></div>
+          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Salvar Instruções do Bot</button></div>
         </form>
       </div>
       <div class="cd"><div class="tb-wrap" id="table-fluxos"></div></div>
@@ -350,27 +374,30 @@
     <!-- 9. TEMPLATES META -->
     <div id="section-templates" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-brands fa-whatsapp"></i> 9. Templates da Meta (WhatsApp)</h2>
-        <p class="sub">Modelos de mensagem para disparo de notificações ativas.</p>
+        <h2><i class="fa-brands fa-whatsapp"></i> 9. Modelos de Notificação Ativa (Templates)</h2>
+        <div class="hint-box">
+          <b>O que é isso?</b> São mensagens pré-aprovadas pela Meta para a sua empresa iniciar conversas com clientes (após 24h sem contato ou para avisos).<br>
+          <i>Exemplo:</i> "Olá {{1}}, confirmamos sua entrevista para o dia {{2}} às {{3}}."
+        </div>
         <form onsubmit="addData('templates', event)">
           <div class="g2">
             <div>
-              <label>Nome do Template *</label>
-              <input type="text" id="tpl-nome" placeholder="Ex: aviso_fatura_vencimento" required>
+              <label>Nome de Referência do Modelo *</label>
+              <input type="text" id="tpl-nome" placeholder="Ex: confirmacao_agendamento, aviso_fatura" required>
             </div>
             <div>
-              <label>Idioma *</label>
+              <label>Idioma da Mensagem *</label>
               <select id="tpl-idioma">
-                <option value="pt_BR">Português (pt_BR)</option>
-                <option value="en_US">Inglês (en_US)</option>
-                <option value="es_ES">Espanhol (es_ES)</option>
+                <option value="pt_BR">Português (Brasil)</option>
+                <option value="en_US">Inglês</option>
+                <option value="es_ES">Espanhol</option>
               </select>
             </div>
           </div>
           <label>Texto da Mensagem *</label>
-          <textarea id="tpl-texto" rows="3" placeholder="Olá {{1}}, informamos que sua fatura vence em {{2}}..." required></textarea>
+          <textarea id="tpl-texto" rows="3" placeholder="Ex: Olá {{1}}, lembramos que sua consulta está agendada para amanhã..." required></textarea>
           
-          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Template</button></div>
+          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Mensagem</button></div>
         </form>
       </div>
       <div class="cd"><div class="tb-wrap" id="table-templates"></div></div>
@@ -379,17 +406,18 @@
     <!-- REVISÃO & ENVIO -->
     <div id="section-revisao" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-paper-plane"></i> Revisão & Envio Final</h2>
-        <p class="sub">Confira o resumo de todos os itens antes de gravar na planilha do Google Sheets.</p>
-        
+        <h2><i class="fa-solid fa-paper-plane"></i> Revisão Final</h2>
+        <div class="hint-box">
+          Confira o resumo das informações preenchidas antes de enviar para a equipe de implantação da WeON.
+        </div>
         <div id="reumo-container" style="display: grid; gap: 12px;" class="g2"></div>
       </div>
 
       <div class="cd" style="border-color: var(--ac); text-align: center;">
-        <h3 style="color: var(--ac); margin-bottom: 8px;">Concluir Configuração</h3>
-        <p style="color: var(--mu); font-size: 0.85em; margin-bottom: 18px;">Ao clicar no botão abaixo, todas as abas serão geradas automaticamente na planilha e salvas no Drive.</p>
+        <h3 style="color: var(--ac); margin-bottom: 8px;">Tudo pronto para enviar?</h3>
+        <p style="color: var(--mu); font-size: 0.85em; margin-bottom: 18px;">Ao clicar no botão abaixo, a nossa equipe técnica receberá a notificação para iniciar a configuração do seu ambiente.</p>
         <button onclick="enviarDadosGoogleSheets()" id="btn-enviar-final" class="btn pr" style="padding: 12px 32px; font-size: 1em;">
-          <i class="fa-solid fa-cloud-arrow-up"></i> Concluir & Enviar Setup Completo
+          <i class="fa-solid fa-paper-plane"></i> Finalizar & Enviar Setup
         </button>
       </div>
     </div>
@@ -397,7 +425,6 @@
 </div>
 
 <script>
-  // SCRIPT GOOGLE SHEETS - NOVA IMPLANTAÇÃO (VERSÃO 13)
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyuWjtlSMOC-AORhO1Yb_jiX-wniwpVSFOGaakMS010IGd3cmTujNOazVFTPTs-vsO7kA/exec";
 
   let currentBase64File = "";
@@ -441,12 +468,50 @@
     const activeBtn = document.getElementById(`btn-${tabId}`);
     if(activeBtn) activeBtn.classList.add('on');
 
+    if(tabId === 'grupos_agentes') updateSelectsVinculo();
     if(tabId === 'revisao') renderRevisao();
+  }
+
+  function updateSelectsVinculo() {
+    const agenteSelect = document.getElementById('ga-agente');
+    const grupoSelect = document.getElementById('ga-grupo');
+
+    const listaAgentes = setupData["Agentes"];
+    const listaGrupos = setupData["Lista de Grupos"];
+
+    if (listaAgentes.length === 0) {
+      agenteSelect.innerHTML = '<option value="">-- Nenhum atendente cadastrado no Passo 4 --</option>';
+    } else {
+      let opt = '<option value="">-- Selecione o Atendente --</option>';
+      listaAgentes.forEach(a => {
+        opt += `<option value="${a['Nome do Agente']}">${a['Nome do Agente']} (${a['Email']})</option>`;
+      });
+      agenteSelect.innerHTML = opt;
+    }
+
+    if (listaGrupos.length === 0) {
+      grupoSelect.innerHTML = '<option value="">-- Nenhum setor cadastrado no Passo 2 --</option>';
+    } else {
+      let opt = '<option value="">-- Selecione o Setor --</option>';
+      listaGrupos.forEach(g => {
+        opt += `<option value="${g['Nome do Grupo']}">${g['Nome do Grupo']}</option>`;
+      });
+      grupoSelect.innerHTML = opt;
+    }
   }
 
   function handleFileSelect(e) {
     const file = e.target.files[0];
     if(!file) return;
+
+    const maxSizeInBytes = 10 * 1024 * 1024; 
+    if (file.size > maxSizeInBytes) {
+      alert("⚠️ O arquivo selecionado é muito grande! Por favor, escolha um documento ou imagem de até 10MB.");
+      e.target.value = "";
+      document.getElementById('file-name').innerText = "Nenhum arquivo selecionado";
+      currentBase64File = "";
+      return;
+    }
     
     document.getElementById('file-name').innerText = file.name;
 
@@ -475,9 +540,15 @@
         "Atende Telefone": document.getElementById('agente-fone').value
       };
     } else if(key === 'grupos_agentes') {
-      newItem = { "Agente": document.getElementById('ga-agente').value, "Grupo": document.getElementById('ga-grupo').value };
+      const agente = document.getElementById('ga-agente').value;
+      const grupo = document.getElementById('ga-grupo').value;
+      if (!agente || !grupo) {
+        alert("Por favor, selecione tanto o atendente quanto o setor.");
+        return;
+      }
+      newItem = { "Agente": agente, "Grupo": grupo };
     } else if(key === 'qualificacoes') {
-      newItem = { "Qualificação": document.getElementById('qual-nome').value, "Categoria": document.getElementById('qual-cat').value };
+      newItem = { "Qualificação": document.getElementById('qual-nome').value, "Categoria": document.getElementById('qual-cat').value || "Geral" };
     } else if(key === 'calendario') {
       newItem = { "Dias": document.getElementById('cal-dias').value, "Início": document.getElementById('cal-inicio').value, "Fim": document.getElementById('cal-fim').value };
     } else if(key === 'fluxos') {
@@ -517,7 +588,7 @@
     const container = document.getElementById(`table-${key}`);
 
     if (items.length === 0) {
-      container.innerHTML = '<p style="color: var(--mu); font-size: 0.8em; font-style: italic;">Nenhum item cadastrado nesta aba.</p>';
+      container.innerHTML = '<p style="color: var(--mu); font-size: 0.8em; font-style: italic;">Nenhum item cadastrado nesta etapa.</p>';
       return;
     }
 
@@ -531,7 +602,7 @@
       headers.forEach(h => {
         let val = item[h] || '';
         if (typeof val === 'string' && val.indexOf('data:') === 0) {
-          val = '📁 [Arquivo Anexado / Carregado]';
+          val = '📎 [Arquivo Anexado Pronto para Envio]';
         }
         html += `<td>${val}</td>`;
       });
@@ -558,13 +629,13 @@
           const val1 = Object.values(item)[0] || '';
           let val2 = Object.values(item)[1] || '';
           if (typeof val2 === 'string' && val2.indexOf('data:') === 0) {
-            val2 = '[Arquivo Anexado / Carregado]';
+            val2 = '[Arquivo Carregado]';
           }
           html += `<li><strong style="color: var(--tx);">${val1}</strong> ${val2 ? ' - ' + val2 : ''}</li>`;
         });
         html += '</ul>';
       } else {
-        html += '<p style="font-size: 0.78em; color: var(--mu); font-style: italic;">Pendente de preenchimento</p>';
+        html += '<p style="font-size: 0.78em; color: var(--mu); font-style: italic;">Nenhum item preenchido</p>';
       }
       html += '</div>';
     }
@@ -575,7 +646,7 @@
   async function enviarDadosGoogleSheets() {
     const btn = document.getElementById('btn-enviar-final');
     btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando para o Google Sheets & Drive...';
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando dados para a WeON...';
 
     try {
       await fetch(GOOGLE_SCRIPT_URL, {
@@ -585,14 +656,14 @@
         body: JSON.stringify(setupData)
       });
 
-      alert("✨ Sucesso! Todas as abas foram salvas e os anexos foram enviados para o Google Drive!");
+      alert("✨ Parabéns! Suas configurações foram enviadas com sucesso para a equipe de implantação!");
       btn.innerHTML = '<i class="fa-solid fa-check"></i> Enviado com Sucesso!';
       btn.style.background = '#16a34a';
     } catch (error) {
       console.error("Erro ao enviar:", error);
-      alert("Ops! Ocorreu um erro ao enviar para o Google Sheets. Tente novamente.");
+      alert("Houve uma oscilação na rede ao enviar os dados. Por favor, tente novamente.");
       btn.disabled = false;
-      btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Tentar Enviar Novamente';
+      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Tentar Enviar Novamente';
     }
   }
 </script>

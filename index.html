@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Configurando a sua empresa</title>
   
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>?v=5">
-  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=5">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>?v=6">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=6">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -23,8 +23,9 @@
       --bd: #ffffff1f;
       --hint-bg: #1e293b;
       --hint-border: #38bdf844;
-      --node-bg: #162038;
+      --node-bg: #151e36;
       --node-border: #3a86ff;
+      --node-root: #10b981;
     }
 
     [data-theme="light"] {
@@ -41,11 +42,12 @@
       --hint-border: #0284c733;
       --node-bg: #ffffff;
       --node-border: #0284c7;
+      --node-root: #059669;
     }
 
     * { box-sizing: border-box; margin: 0; font-family: 'Inter', sans-serif; transition: background 0.2s, color 0.2s, border-color 0.2s; }
     body { background: var(--bg); color: var(--tx); min-height: 100vh; }
-    .app { display: grid; grid-template-columns: 300px 1fr; min-height: 100vh; }
+    .app { display: grid; grid-template-columns: 290px 1fr; min-height: 100vh; }
     
     aside { background: var(--cd); border-right: 1px solid var(--bd); padding: 20px 16px; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
     aside h1 { color: var(--ac); font-size: 1.1em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
@@ -59,7 +61,7 @@
 
     .theme-toggle { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--bd); }
 
-    main { padding: 28px; min-width: 0; max-width: 1100px; }
+    main { padding: 28px; min-width: 0; max-width: 1150px; }
     @media(max-width: 850px) { .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } }
 
     .cd { background: var(--cd); border: 1px solid var(--bd); border-radius: 14px; padding: 22px; margin-bottom: 20px; }
@@ -76,7 +78,7 @@
     .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
     @media(max-width: 700px) { .g2, .g3 { grid-template-columns: 1fr; } }
 
-    .btn { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 9px 16px; font-size: 0.85em; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 8px 14px; font-size: 0.82em; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
     .btn:hover { border-color: var(--ac); color: var(--ac); }
     .btn.pr { background: var(--ac); color: #ffffff !important; border-color: var(--ac); font-weight: 800; }
     .btn.pr:hover { background: var(--ac-hover); border-color: var(--ac-hover); }
@@ -91,16 +93,98 @@
     .up-box { border: 2px dashed var(--bd); background: var(--in); border-radius: 10px; padding: 16px; text-align: center; cursor: pointer; margin-bottom: 12px; }
     .up-box:hover { border-color: var(--ac); }
 
-    /* MIRO CANVAS CONTAINER */
-    .miro-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
-    .miro-container { position: relative; width: 100%; height: 420px; background: radial-gradient(color-mix(in srgb, var(--tx) 10%, transparent) 1px, transparent 1px); background-size: 18px 18px; background-color: var(--in); border: 1px solid var(--bd); border-radius: 10px; overflow: hidden; user-select: none; }
-    .miro-node { position: absolute; min-width: 150px; max-width: 200px; padding: 10px 12px; background: var(--node-bg); border: 2px solid var(--node-border); border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.25); cursor: grab; font-size: 0.82em; color: var(--tx); text-align: center; }
-    .miro-node.root { border-color: #10b981; }
-    .miro-node:active { cursor: grabbing; }
-    .miro-node-title { font-weight: 700; margin-bottom: 4px; color: var(--ac); font-size: 0.9em; pointer-events: none; }
-    .miro-node.root .miro-node-title { color: #10b981; }
-    .miro-node-desc { font-size: 0.9em; word-break: break-word; outline: none; }
-    .miro-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+    /* ========================================================
+       BPMN / MIRO FLOW ENGINE
+    ======================================================== */
+    .bpmn-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+    .bpmn-canvas { 
+      position: relative; 
+      width: 100%; 
+      height: 480px; 
+      background: radial-gradient(color-mix(in srgb, var(--tx) 10%, transparent) 1px, transparent 1px); 
+      background-size: 20px 20px; 
+      background-color: var(--in); 
+      border: 1px solid var(--bd); 
+      border-radius: 12px; 
+      overflow: auto; 
+      user-select: none; 
+    }
+    .bpmn-svg { position: absolute; top: 0; left: 0; width: 1800px; height: 1200px; pointer-events: none; z-index: 1; }
+
+    .bpmn-node {
+      position: absolute;
+      width: 210px;
+      background: var(--node-bg);
+      border: 2px solid var(--node-border);
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      padding: 10px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .bpmn-node.root { border-color: var(--node-root); }
+    .bpmn-node.sim { border-color: #10b981; }
+    .bpmn-node.nao { border-color: #ef4444; }
+
+    .bpmn-node-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: grab;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--bd);
+    }
+    .bpmn-node-header:active { cursor: grabbing; }
+    .bpmn-node-header input {
+      background: transparent;
+      border: 0;
+      color: var(--ac);
+      font-weight: 700;
+      font-size: 0.85em;
+      padding: 0;
+      margin: 0;
+      outline: none;
+      width: 80%;
+    }
+    .bpmn-node.root .bpmn-node-header input { color: var(--node-root); }
+    .bpmn-node.sim .bpmn-node-header input { color: #10b981; }
+    .bpmn-node.nao .bpmn-node-header input { color: #ef4444; }
+
+    .bpmn-node-body textarea {
+      background: color-mix(in srgb, var(--in) 60%, transparent);
+      border: 1px solid var(--bd);
+      border-radius: 6px;
+      font-size: 0.8em;
+      padding: 6px 8px;
+      color: var(--tx);
+      resize: vertical;
+      min-height: 48px;
+      margin: 0;
+    }
+
+    .bpmn-actions {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 2px;
+    }
+    .bpmn-btn-mini {
+      background: var(--in);
+      border: 1px solid var(--bd);
+      color: var(--tx);
+      border-radius: 6px;
+      font-size: 0.72em;
+      padding: 3px 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .bpmn-btn-mini:hover { border-color: var(--ac); color: var(--ac); }
+    .bpmn-btn-mini.del:hover { border-color: var(--dg); color: var(--dg); }
 
     .f { display: none; }
   </style>
@@ -340,32 +424,33 @@
       <div class="cd"><div class="tb-wrap" id="table-calendario"></div></div>
     </div>
 
-    <!-- 8. FLUXOS & MINI-MIRO BUILDER -->
+    <!-- 8. FLUXOS & BPMN INTERACTIVE BUILDER -->
     <div id="section-fluxos" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-diagram-project"></i> 8. Construtor Visual do Bot (Estilo Miro)</h2>
+        <h2><i class="fa-solid fa-diagram-project"></i> 8. Construtor Visual do Bot (Estilo BPMN)</h2>
         <div class="hint-box">
-          <b>Como montar o seu bot?</b> Escolha um modelo do seu segmento abaixo ou monte seu próprio fluxo arrastando os balões! Dê dois cliques em qualquer balão para alterar o texto. Quando terminar, clique no botão verde para gerar a imagem automaticamente!
+          <b>Como montar o fluxo?</b> Escolha um segmento abaixo para carregar um modelo pronto ou ramifique clicando no botão <b>+ Ramo</b> ou <b>+ Sim/Não</b> ao lado de qualquer balão! Arraste pela barra superior para organizar.
         </div>
 
         <!-- TOOLBAR DE TEMPLATES -->
-        <div class="miro-toolbar">
-          <label style="margin:0; font-weight:700; color:var(--tx); font-size:0.85em;"><i class="fa-solid fa-wand-magic-sparkles"></i> Modelos Prontos:</label>
-          <button type="button" class="btn" onclick="loadMiroTemplate('sac')"><i class="fa-solid fa-headset"></i> SAC / Geral</button>
-          <button type="button" class="btn" onclick="loadMiroTemplate('vendas')"><i class="fa-solid fa-cart-shopping"></i> Vendas</button>
-          <button type="button" class="btn" onclick="loadMiroTemplate('cobranca')"><i class="fa-solid fa-barcode"></i> Cobrança</button>
-          <button type="button" class="btn" onclick="loadMiroTemplate('clinica')"><i class="fa-solid fa-hospital-user"></i> Clínicas</button>
-          <button type="button" class="btn" onclick="loadMiroTemplate('juridico')"><i class="fa-solid fa-scale-balanced"></i> Jurídico / Precatórios</button>
+        <div class="bpmn-toolbar">
+          <label style="margin:0; font-weight:700; color:var(--tx); font-size:0.82em;"><i class="fa-solid fa-wand-magic-sparkles"></i> Modelos Prontos:</label>
+          <button type="button" class="btn" onclick="loadBpmnTemplate('sac')"><i class="fa-solid fa-headset"></i> SAC / Geral</button>
+          <button type="button" class="btn" onclick="loadBpmnTemplate('vendas')"><i class="fa-solid fa-cart-shopping"></i> Vendas</button>
+          <button type="button" class="btn" onclick="loadBpmnTemplate('cobranca')"><i class="fa-solid fa-barcode"></i> Cobrança</button>
+          <button type="button" class="btn" onclick="loadBpmnTemplate('clinica')"><i class="fa-solid fa-hospital-user"></i> Clínicas</button>
+          <button type="button" class="btn" onclick="loadBpmnTemplate('juridico')"><i class="fa-solid fa-scale-balanced"></i> Jurídico</button>
           
           <div style="margin-left: auto; display: flex; gap: 8px;">
-            <button type="button" class="btn" onclick="addCustomNode()"><i class="fa-solid fa-plus"></i> Novo Balão</button>
-            <button type="button" class="btn pr" onclick="exportMiroToAttachment()" style="background:#16a34a; border-color:#16a34a;"><i class="fa-solid fa-camera"></i> 📸 Gerar Imagem do Fluxo e Anexar</button>
+            <button type="button" class="btn pr" onclick="exportBpmnToAttachment()" style="background:#16a34a; border-color:#16a34a;">
+              <i class="fa-solid fa-camera"></i> 📸 Gerar Imagem do Fluxo e Anexar
+            </button>
           </div>
         </div>
 
-        <!-- CANVAS DO MIRO -->
-        <div class="miro-container" id="miroCanvas">
-          <svg class="miro-svg" id="miroSvg"></svg>
+        <!-- CANVAS DO FLUXOGRAMA -->
+        <div class="bpmn-canvas" id="bpmnCanvas">
+          <svg class="bpmn-svg" id="bpmnSvg"></svg>
           <!-- Balões gerados dinamicamente via JS -->
         </div>
 
@@ -380,8 +465,8 @@
               <input type="file" id="fluxo-file" accept="image/*,.pdf" hidden onchange="handleFileSelect(event)">
             </div>
             <div>
-              <label>Resumo / Descrição das Opções do Bot *</label>
-              <textarea id="fluxo-obs" rows="3" placeholder="O texto do fluxo gerado ou suas observações..." required></textarea>
+              <label>Instruções / Resumo em Texto do Bot *</label>
+              <textarea id="fluxo-obs" rows="4" placeholder="O texto do fluxo estruturado aparecerá aqui automaticamente..." required></textarea>
             </div>
           </div>
           <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Salvar Instruções do Bot</button></div>
@@ -471,7 +556,7 @@
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', newTheme);
     document.getElementById('btn-theme').innerHTML = `<span><i class="fa-solid fa-circle-half-stroke"></i> Tema: ${newTheme === 'dark' ? 'Escuro' : 'Claro'}</span>`;
-    renderMiroLines();
+    renderBpmnLines();
   }
 
   function switchTab(tabId) {
@@ -483,7 +568,7 @@
     if(activeBtn) activeBtn.classList.add('on');
 
     if(tabId === 'grupos_agentes') updateSelectsVinculo();
-    if(tabId === 'fluxos') renderMiroLines();
+    if(tabId === 'fluxos') renderBpmnLines();
     if(tabId === 'revisao') renderRevisao();
   }
 
@@ -511,85 +596,159 @@
   }
 
   /* ==========================================================
-     MOTOR VISUAL DO MINI-MIRO DE FLUXOS
+     MOTOR BPMN INTERATIVO DE FLUXOGRAMAS (BALÕES COM RAMIFICAÇÃO)
   ========================================================== */
-  let miroNodes = [];
+  let bpmnNodes = [];
 
-  const miroTemplates = {
+  const bpmnTemplates = {
     sac: [
-      { id: "root", title: "👋 Saudação Inicial", text: "Olá! Bem-vindo ao suporte. Como podemos te ajudar hoje?", x: 30, y: 140, isRoot: true },
-      { id: "opt1", title: "Opção 1", text: "1. Dúvidas Frequentes", x: 260, y: 40, parent: "root" },
-      { id: "opt2", title: "Opção 2", text: "2. Suporte Técnico", x: 260, y: 140, parent: "root" },
-      { id: "opt3", title: "Opção 3", text: "3. Falar com Atendente", x: 260, y: 240, parent: "root" }
+      { id: "root", title: "Início / Boas-Vindas", text: "Olá! Bem-vindo ao atendimento. Escolha uma opção:", x: 30, y: 140, isRoot: true },
+      { id: "node_1", title: "Opção 1", text: "1. Dúvidas Frequentes", x: 310, y: 40, parent: "root" },
+      { id: "node_2", title: "Opção 2", text: "2. Suporte Técnico", x: 310, y: 160, parent: "root" },
+      { id: "node_3", title: "Opção 3", text: "3. Falar com Atendente", x: 310, y: 280, parent: "root" }
     ],
     vendas: [
-      { id: "root", title: "👋 Boas-Vindas Comercial", text: "Olá! Que bom ter você aqui. Escolha uma opção:", x: 30, y: 140, isRoot: true },
-      { id: "opt1", title: "Opção 1", text: "1. Conhecer Produtos e Planos", x: 260, y: 40, parent: "root" },
-      { id: "opt2", title: "Opção 2", text: "2. Solicitar Orçamento", x: 260, y: 140, parent: "root" },
-      { id: "opt3", title: "Opção 3", text: "3. Falar com Consultor de Vendas", x: 260, y: 240, parent: "root" }
+      { id: "root", title: "Boas-Vindas Vendas", text: "Olá! Queremos te ajudar a encontrar a melhor solução:", x: 30, y: 140, isRoot: true },
+      { id: "node_1", title: "Opção 1", text: "1. Conhecer Produtos e Planos", x: 310, y: 40, parent: "root" },
+      { id: "node_2", title: "Opção 2", text: "2. Solicitar Proposta Comercial", x: 310, y: 160, parent: "root" },
+      { id: "node_3", title: "Opção 3", text: "3. Falar com Vendedor", x: 310, y: 280, parent: "root" }
     ],
     cobranca: [
-      { id: "root", title: "🏦 Atendimento Financeiro", text: "Olá! Você está no setor financeiro. O que deseja?", x: 30, y: 140, isRoot: true },
-      { id: "opt1", title: "Opção 1", text: "1. 2ª Via de Boleto / Código PIX", x: 260, y: 40, parent: "root" },
-      { id: "opt2", title: "Opção 2", text: "2. Renegociação de Acordo", x: 260, y: 140, parent: "root" },
-      { id: "opt3", title: "Opção 3", text: "3. Enviar Comprovante de Pagamento", x: 260, y: 240, parent: "root" }
+      { id: "root", title: "Menu Financeiro", text: "Olá! Você está no setor financeiro. O que deseja?", x: 30, y: 140, isRoot: true },
+      { id: "node_1", title: "Opção 1", text: "1. 2ª Via de Boleto / Código PIX", x: 310, y: 40, parent: "root" },
+      { id: "node_2", title: "Opção 2", text: "2. Negociar Acordo", x: 310, y: 160, parent: "root" },
+      { id: "node_3", title: "Opção 3", text: "3. Enviar Comprovante de Pagamento", x: 310, y: 280, parent: "root" }
     ],
     clinica: [
-      { id: "root", title: "🏥 Recepção da Clínica", text: "Olá! Bem-vindo à Clínica. Por favor selecione o serviço:", x: 30, y: 140, isRoot: true },
-      { id: "opt1", title: "Opção 1", text: "1. Agendar ou Remarcar Consulta", x: 260, y: 40, parent: "root" },
-      { id: "opt2", title: "Opção 2", text: "2. Resultados de Exames", x: 260, y: 140, parent: "root" },
-      { id: "opt3", title: "Opção 3", text: "3. Convênios Atendidos e Valores", x: 260, y: 240, parent: "root" },
-      { id: "opt4", title: "Opção 4", text: "4. Falar com a Recepção", x: 480, y: 140, parent: "opt1" }
+      { id: "root", title: "Recepção Médica", text: "Olá! Bem-vindo à Clínica. Escolha o serviço desejado:", x: 30, y: 140, isRoot: true },
+      { id: "node_1", title: "Opção 1", text: "1. Agendamento de Consulta", x: 310, y: 40, parent: "root" },
+      { id: "node_2", title: "Opção 2", text: "2. Resultados de Exames", x: 310, y: 160, parent: "root" },
+      { id: "node_3", title: "Opção 3", text: "3. Falar com Atendente da Recepção", x: 310, y: 280, parent: "root" }
     ],
     juridico: [
-      { id: "root", title: "⚖️ Escritório de Advocacia", text: "Olá! Bem-vindo ao escritório. Como podemos auxiliá-lo?", x: 30, y: 140, isRoot: true },
-      { id: "opt1", title: "Opção 1", text: "1. Consultar Andamento de Precatório", x: 260, y: 40, parent: "root" },
-      { id: "opt2", title: "Opção 2", text: "2. Envio de Documentos Pendentes", x: 260, y: 140, parent: "root" },
-      { id: "opt3", title: "Opção 3", text: "3. Falar com a Equipe Jurídica", x: 260, y: 240, parent: "root" }
+      { id: "root", title: "Escritório Jurídico", text: "Olá! Bem-vindo. Como nossa equipe jurídica pode te auxiliar?", x: 30, y: 140, isRoot: true },
+      { id: "node_1", title: "Opção 1", text: "1. Consultar Andamento de Processo/Precatório", x: 310, y: 40, parent: "root" },
+      { id: "node_2", title: "Opção 2", text: "2. Enviar Documentos Solicitados", x: 310, y: 160, parent: "root" },
+      { id: "node_3", title: "Opção 3", text: "3. Falar com o Advogado Responsável", x: 310, y: 280, parent: "root" }
     ]
   };
 
-  function loadMiroTemplate(key) {
-    miroNodes = JSON.parse(JSON.stringify(miroTemplates[key]));
-    renderMiroDOM();
+  function loadBpmnTemplate(key) {
+    bpmnNodes = JSON.parse(JSON.stringify(bpmnTemplates[key]));
+    renderBpmnDOM();
     updateObsTextFromNodes();
   }
 
-  function addCustomNode() {
+  // Cria um ramo filho direto a partir de um balão específico
+  function addBranch(parentId) {
+    const parent = bpmnNodes.find(n => n.id === parentId);
+    if (!parent) return;
+
+    // Calcula quantidade de irmãos para posicionar sem sobrepor
+    const siblings = bpmnNodes.filter(n => n.parent === parentId);
+    const offsetY = siblings.length * 110;
+
     const newId = "node_" + Date.now();
-    miroNodes.push({
+    bpmnNodes.push({
       id: newId,
-      title: "Nova Opção",
-      text: "Clique 2x para editar este balão",
-      x: 260,
-      y: 180,
-      parent: "root"
+      title: `Ramo ${siblings.length + 1}`,
+      text: "Digite a mensagem ou ação deste passo...",
+      x: parent.x + 280,
+      y: Math.min(800, parent.y + offsetY),
+      parent: parentId
     });
-    renderMiroDOM();
+
+    renderBpmnDOM();
     updateObsTextFromNodes();
   }
 
-  function renderMiroDOM() {
-    const container = document.getElementById("miroCanvas");
-    const svg = document.getElementById("miroSvg");
-    container.querySelectorAll('.miro-node').forEach(el => el.remove());
+  // Cria uma bifurcação Sim/Não
+  function addYesNoBranch(parentId) {
+    const parent = bpmnNodes.find(n => n.id === parentId);
+    if (!parent) return;
 
-    miroNodes.forEach(node => {
+    const idSim = "node_sim_" + Date.now();
+    const idNao = "node_nao_" + (Date.now() + 1);
+
+    bpmnNodes.push({
+      id: idSim,
+      type: "sim",
+      title: "✅ Se SIM",
+      text: "Direciona para atendimento / confirmação",
+      x: parent.x + 280,
+      y: parent.y - 60,
+      parent: parentId
+    });
+
+    bpmnNodes.push({
+      id: idNao,
+      type: "nao",
+      title: "❌ Se NÃO",
+      text: "Encerra ou volta ao menu principal",
+      x: parent.x + 280,
+      y: parent.y + 70,
+      parent: parentId
+    });
+
+    renderBpmnDOM();
+    updateObsTextFromNodes();
+  }
+
+  // Remove nó e seus filhos recursivamente
+  function deleteBpmnNode(nodeId) {
+    if (nodeId === 'root') {
+      alert("O balão inicial não pode ser excluído.");
+      return;
+    }
+    const toDelete = new Set([nodeId]);
+    let added = true;
+    while (added) {
+      added = false;
+      bpmnNodes.forEach(n => {
+        if (n.parent && toDelete.has(n.parent) && !toDelete.has(n.id)) {
+          toDelete.add(n.id);
+          added = true;
+        }
+      });
+    }
+
+    bpmnNodes = bpmnNodes.filter(n => !toDelete.has(n.id));
+    renderBpmnDOM();
+    updateObsTextFromNodes();
+  }
+
+  function renderBpmnDOM() {
+    const container = document.getElementById("bpmnCanvas");
+    container.querySelectorAll('.bpmn-node').forEach(el => el.remove());
+
+    bpmnNodes.forEach(node => {
       const el = document.createElement("div");
-      el.className = `miro-node ${node.isRoot ? 'root' : ''}`;
+      el.className = `bpmn-node ${node.isRoot ? 'root' : ''} ${node.type ? node.type : ''}`;
       el.id = node.id;
       el.style.left = node.x + "px";
       el.style.top = node.y + "px";
 
       el.innerHTML = `
-        <div class="miro-node-title">${node.title}</div>
-        <div class="miro-node-desc" contenteditable="true" onblur="updateNodeText('${node.id}', this.innerText)">${node.text}</div>
+        <div class="bpmn-node-header">
+          <input type="text" value="${node.title}" oninput="updateNodeTitle('${node.id}', this.value)" placeholder="Título do Passo">
+          <i class="fa-solid fa-arrows-up-down-left-right" style="font-size:0.75em; color:var(--mu);"></i>
+        </div>
+        <div class="bpmn-node-body">
+          <textarea oninput="updateNodeText('${node.id}', this.value)" placeholder="Texto da mensagem">${node.text}</textarea>
+        </div>
+        <div class="bpmn-actions">
+          <button type="button" class="bpmn-btn-mini" onclick="addBranch('${node.id}')" title="Criar próximo passo">+ Ramo</button>
+          <button type="button" class="bpmn-btn-mini" onclick="addYesNoBranch('${node.id}')" title="Criar ramificação Sim/Não">± Sim/Não</button>
+          ${!node.isRoot ? `<button type="button" class="bpmn-btn-mini del" onclick="deleteBpmnNode('${node.id}')" title="Excluir"><i class="fa-solid fa-trash"></i></button>` : ''}
+        </div>
       `;
 
-      // Draggable logic
+      // Arrastar elemento suavemente
+      const header = el.querySelector('.bpmn-node-header');
       let isDragging = false, startX, startY, origX, origY;
-      el.addEventListener('mousedown', (e) => {
-        if (e.target.isContentEditable) return;
+
+      header.addEventListener('mousedown', (e) => {
+        if (e.target.tagName === 'INPUT') return;
         isDragging = true;
         startX = e.clientX;
         startY = e.clientY;
@@ -601,11 +760,11 @@
 
       function onMouseMove(e) {
         if (!isDragging) return;
-        node.x = Math.max(10, Math.min(850, origX + (e.clientX - startX)));
-        node.y = Math.max(10, Math.min(320, origY + (e.clientY - startY)));
+        node.x = Math.max(10, Math.min(1500, origX + (e.clientX - startX)));
+        node.y = Math.max(10, Math.min(1000, origY + (e.clientY - startY)));
         el.style.left = node.x + "px";
         el.style.top = node.y + "px";
-        renderMiroLines();
+        renderBpmnLines();
       }
 
       function onMouseUp() {
@@ -617,40 +776,56 @@
       container.appendChild(el);
     });
 
-    renderMiroLines();
+    renderBpmnLines();
   }
 
-  function updateNodeText(id, newText) {
-    const node = miroNodes.find(n => n.id === id);
-    if(node) node.text = newText;
+  function updateNodeTitle(id, val) {
+    const node = bpmnNodes.find(n => n.id === id);
+    if (node) node.title = val;
+    updateObsTextFromNodes();
+  }
+
+  function updateNodeText(id, val) {
+    const node = bpmnNodes.find(n => n.id === id);
+    if (node) node.text = val;
     updateObsTextFromNodes();
   }
 
   function updateObsTextFromNodes() {
-    let summary = "FLUXO DO BOT:\n";
-    miroNodes.forEach(n => {
-      summary += `- [${n.title}]: ${n.text}\n`;
+    let summary = "FLUXOGRAMA ESTRUTURADO DO BOT:\n\n";
+    bpmnNodes.forEach(n => {
+      const parentName = n.parent ? (bpmnNodes.find(p => p.id === n.parent)?.title || "Nó Pai") : "Início";
+      summary += `▶ [${n.title}] (Origem: ${parentName}):\n   "${n.text.replace(/\n/g, ' ')}"\n\n`;
     });
-    document.getElementById("fluxo-obs").value = summary;
+    document.getElementById("fluxo-obs").value = summary.trim();
   }
 
-  function renderMiroLines() {
-    const svg = document.getElementById("miroSvg");
-    if(!svg) return;
+  function renderBpmnLines() {
+    const svg = document.getElementById("bpmnSvg");
+    if (!svg) return;
     svg.innerHTML = "";
 
     const lineColor = document.documentElement.getAttribute('data-theme') === 'light' ? '#0284c7' : '#3a86ff';
 
-    miroNodes.forEach(node => {
-      if (node.parent) {
-        const parentNode = miroNodes.find(n => n.id === node.parent);
-        if (parentNode) {
-          const x1 = parentNode.x + 160;
-          const y1 = parentNode.y + 35;
-          const x2 = node.x;
-          const y2 = node.y + 35;
+    // Definição de marcador de seta
+    const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+    defs.innerHTML = `
+      <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="${lineColor}"/>
+      </marker>
+    `;
+    svg.appendChild(defs);
 
-          const dx = (x2 - x1) / 2;
+    bpmnNodes.forEach(node => {
+      if (node.parent) {
+        const parentNode = bpmnNodes.find(n => n.id === node.parent);
+        if (parentNode) {
+          const x1 = parentNode.x + 210;
+          const y1 = parentNode.y + 45;
+          const x2 = node.x;
+          const y2 = node.y + 45;
+
+          const dx = Math.max(40, (x2 - x1) / 2);
           const d = `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
 
           const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -658,80 +833,126 @@
           path.setAttribute("fill", "none");
           path.setAttribute("stroke", lineColor);
           path.setAttribute("stroke-width", "2.5");
-          path.setAttribute("stroke-dasharray", "4,3");
+          path.setAttribute("marker-end", "url(#arrow)");
           svg.appendChild(path);
         }
       }
     });
   }
 
-  /* GERAÇÃO DA IMAGEM AUTOMÁTICA EM BASE64 DO CANVAS */
-  function exportMiroToAttachment() {
+  // Gera o print visual de alta resolução em PNG do diagrama montado
+  function exportBpmnToAttachment() {
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    bpmnNodes.forEach(n => {
+      minX = Math.min(minX, n.x);
+      minY = Math.min(minY, n.y);
+      maxX = Math.max(maxX, n.x + 230);
+      maxY = Math.max(maxY, n.y + 130);
+    });
+
+    const pad = 40;
+    const width = Math.max(800, (maxX - minX) + pad * 2);
+    const height = Math.max(450, (maxY - minY) + pad * 2);
+
     const canvas = document.createElement("canvas");
-    canvas.width = 900;
-    canvas.height = 420;
+    canvas.width = width;
+    canvas.height = height;
     const ctx = canvas.getContext("2d");
 
     const isLight = document.documentElement.getAttribute('data-theme') === 'light';
     ctx.fillStyle = isLight ? "#f8fafc" : "#0b132b";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Linhas
+    const offX = pad - minX;
+    const offY = pad - minY;
+
+    // Desenha as conexões
     ctx.strokeStyle = isLight ? "#0284c7" : "#3a86ff";
-    ctx.lineWidth = 2;
-    miroNodes.forEach(node => {
-      if(node.parent) {
-        const parentNode = miroNodes.find(n => n.id === node.parent);
-        if(parentNode) {
+    ctx.lineWidth = 2.5;
+
+    bpmnNodes.forEach(node => {
+      if (node.parent) {
+        const parentNode = bpmnNodes.find(n => n.id === node.parent);
+        if (parentNode) {
+          const x1 = parentNode.x + 210 + offX;
+          const y1 = parentNode.y + 45 + offY;
+          const x2 = node.x + offX;
+          const y2 = node.y + 45 + offY;
+          const dx = Math.max(30, (x2 - x1) / 2);
+
           ctx.beginPath();
-          ctx.moveTo(parentNode.x + 160, parentNode.y + 35);
-          ctx.bezierCurveTo(parentNode.x + 200, parentNode.y + 35, node.x - 40, node.y + 35, node.x, node.y + 35);
+          ctx.moveTo(x1, y1);
+          ctx.bezierCurveTo(x1 + dx, y1, x2 - dx, y2, x2, y2);
           ctx.stroke();
+
+          // Seta na ponta
+          ctx.fillStyle = ctx.strokeStyle;
+          ctx.beginPath();
+          ctx.moveTo(x2, y2);
+          ctx.lineTo(x2 - 8, y2 - 4);
+          ctx.lineTo(x2 - 8, y2 + 4);
+          ctx.fill();
         }
       }
     });
 
-    // Balões
-    miroNodes.forEach(node => {
-      ctx.fillStyle = isLight ? "#ffffff" : "#162038";
-      ctx.strokeStyle = node.isRoot ? "#10b981" : (isLight ? "#0284c7" : "#3a86ff");
+    // Desenha os nós
+    bpmnNodes.forEach(node => {
+      const nx = node.x + offX;
+      const ny = node.y + offY;
+
+      ctx.fillStyle = isLight ? "#ffffff" : "#151e36";
+      let borderCol = isLight ? "#0284c7" : "#3a86ff";
+      if (node.isRoot) borderCol = "#10b981";
+      if (node.type === 'sim') borderCol = "#10b981";
+      if (node.type === 'nao') borderCol = "#ef4444";
+
+      ctx.strokeStyle = borderCol;
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.roundRect(node.x, node.y, 160, 70, 8);
+      ctx.roundRect(nx, ny, 210, 85, 8);
       ctx.fill();
       ctx.stroke();
 
-      // Texto do título
-      ctx.fillStyle = node.isRoot ? "#10b981" : (isLight ? "#0284c7" : "#3a86ff");
-      ctx.font = "bold 11px Inter, sans-serif";
-      ctx.fillText(node.title, node.x + 10, node.y + 20);
+      // Linha divisória
+      ctx.strokeStyle = isLight ? "#00000015" : "#ffffff15";
+      ctx.beginPath();
+      ctx.moveTo(nx, ny + 24);
+      ctx.lineTo(nx + 210, ny + 24);
+      ctx.stroke();
 
-      // Texto da descrição
+      // Título
+      ctx.fillStyle = borderCol;
+      ctx.font = "bold 11px Inter, sans-serif";
+      ctx.fillText(node.title.substring(0, 26), nx + 10, ny + 16);
+
+      // Texto
       ctx.fillStyle = isLight ? "#0f172a" : "#f8fafc";
       ctx.font = "10px Inter, sans-serif";
-      const words = node.text.split(" ");
-      let line = "", lineY = node.y + 36;
-      for(let w of words) {
+      const words = (node.text || "").split(" ");
+      let line = "", lineY = ny + 40;
+      for (let w of words) {
         const testLine = line + w + " ";
-        if(ctx.measureText(testLine).width > 140) {
-          ctx.fillText(line, node.x + 10, lineY);
+        if (ctx.measureText(testLine).width > 190) {
+          ctx.fillText(line, nx + 10, lineY);
           line = w + " ";
-          lineY += 13;
+          lineY += 14;
+          if (lineY > ny + 78) break;
         } else {
           line = testLine;
         }
       }
-      ctx.fillText(line, node.x + 10, lineY);
+      if (lineY <= ny + 78) ctx.fillText(line, nx + 10, lineY);
     });
 
     currentBase64File = canvas.toDataURL("image/png");
-    document.getElementById("file-name").innerText = "📸 Diagrama gerado pelo Construtor Visual!";
-    alert("✨ Diagrama gerado com sucesso e anexado ao fluxo!");
+    document.getElementById("file-name").innerText = "📸 Fluxo BPMN capturado e anexado com sucesso!";
+    alert("✨ Diagrama do bot exportado com sucesso! Já está vinculado ao seu setup.");
   }
 
-  // Carrega template inicial de SAC por padrão
+  // Carrega template de SAC por padrão ao abrir
   window.addEventListener('DOMContentLoaded', () => {
-    loadMiroTemplate('sac');
+    loadBpmnTemplate('sac');
   });
 
   /* ==========================================================
@@ -745,7 +966,7 @@
     if (file.size > maxSizeInBytes) {
       alert("⚠️ Arquivo muito grande! Por favor envie até 10MB.");
       e.target.value = "";
-      document.getElementById('file-name').innerText = "Nenhum arquivo selecionado";
+      document.getElementById('file-name').innerText = "Nenhum arquivo anexado";
       currentBase64File = "";
       return;
     }

@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Configurando a sua empresa</title>
   
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>?v=4">
-  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=4">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>?v=5">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=5">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -23,6 +23,8 @@
       --bd: #ffffff1f;
       --hint-bg: #1e293b;
       --hint-border: #38bdf844;
+      --node-bg: #162038;
+      --node-border: #3a86ff;
     }
 
     [data-theme="light"] {
@@ -37,6 +39,8 @@
       --bd: #0000001a;
       --hint-bg: #f0f9ff;
       --hint-border: #0284c733;
+      --node-bg: #ffffff;
+      --node-border: #0284c7;
     }
 
     * { box-sizing: border-box; margin: 0; font-family: 'Inter', sans-serif; transition: background 0.2s, color 0.2s, border-color 0.2s; }
@@ -55,13 +59,13 @@
 
     .theme-toggle { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--bd); }
 
-    main { padding: 28px; min-width: 0; max-width: 1050px; }
+    main { padding: 28px; min-width: 0; max-width: 1100px; }
     @media(max-width: 850px) { .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } }
 
     .cd { background: var(--cd); border: 1px solid var(--bd); border-radius: 14px; padding: 22px; margin-bottom: 20px; }
     h2 { font-size: 1.25em; margin-bottom: 6px; color: var(--tx); display: flex; align-items: center; gap: 10px; }
     
-    .hint-box { background: var(--hint-bg); border-left: 3px solid var(--ac); border: 1px solid var(--hint-border); border-left-width: 4px; border-radius: 8px; padding: 12px 14px; margin-bottom: 18px; font-size: 0.84em; line-height: 1.5; color: var(--tx); }
+    .hint-box { background: var(--hint-bg); border: 1px solid var(--hint-border); border-left: 4px solid var(--ac); border-radius: 8px; padding: 12px 14px; margin-bottom: 18px; font-size: 0.84em; line-height: 1.5; color: var(--tx); }
     .hint-box b { color: var(--ac); }
     
     label { display: block; font-size: 0.78em; color: var(--mu); margin-bottom: 6px; font-weight: 600; }
@@ -84,9 +88,19 @@
     td { padding: 10px 12px; border-bottom: 1px solid var(--bd); color: var(--tx); word-break: break-word; }
     tr:hover td { background: color-mix(in srgb, var(--in) 50%, transparent); }
 
-    .up-box { border: 2px dashed var(--bd); background: var(--in); border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; margin-bottom: 12px; }
+    .up-box { border: 2px dashed var(--bd); background: var(--in); border-radius: 10px; padding: 16px; text-align: center; cursor: pointer; margin-bottom: 12px; }
     .up-box:hover { border-color: var(--ac); }
-    .up-box i { font-size: 2em; color: var(--ac); margin-bottom: 8px; }
+
+    /* MIRO CANVAS CONTAINER */
+    .miro-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+    .miro-container { position: relative; width: 100%; height: 420px; background: radial-gradient(color-mix(in srgb, var(--tx) 10%, transparent) 1px, transparent 1px); background-size: 18px 18px; background-color: var(--in); border: 1px solid var(--bd); border-radius: 10px; overflow: hidden; user-select: none; }
+    .miro-node { position: absolute; min-width: 150px; max-width: 200px; padding: 10px 12px; background: var(--node-bg); border: 2px solid var(--node-border); border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.25); cursor: grab; font-size: 0.82em; color: var(--tx); text-align: center; }
+    .miro-node.root { border-color: #10b981; }
+    .miro-node:active { cursor: grabbing; }
+    .miro-node-title { font-weight: 700; margin-bottom: 4px; color: var(--ac); font-size: 0.9em; pointer-events: none; }
+    .miro-node.root .miro-node-title { color: #10b981; }
+    .miro-node-desc { font-size: 0.9em; word-break: break-word; outline: none; }
+    .miro-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
 
     .f { display: none; }
   </style>
@@ -153,18 +167,16 @@
     <div id="section-numeros" class="tab-content">
       <div class="cd">
         <h2><i class="fa-solid fa-phone"></i> 1. Números de WhatsApp e Telefone</h2>
-        <div class="hint-box">
-          Cadastre os números que sua empresa utilizará para falar com clientes. Pode ser um número geral de WhatsApp ou ramais de voz fixos.
-        </div>
+        <div class="hint-box">Cadastre os números de contato da sua empresa (WhatsApp geral, suporte ou números receptivos).</div>
         <form onsubmit="addData('numeros', event)">
           <div class="g2">
             <div>
               <label>Nome / Identificação da Linha *</label>
-              <input type="text" id="num-nome" placeholder="Ex: WhatsApp Oficial, Central SP, Vendas" required>
+              <input type="text" id="num-nome" placeholder="Ex: WhatsApp Oficial, Central Geral" required>
             </div>
             <div>
               <label>Número completo com DDD *</label>
-              <input type="text" id="num-telefone" placeholder="Ex: (41) 99999-8888 ou 0800..." required>
+              <input type="text" id="num-telefone" placeholder="Ex: (41) 99999-8888" required>
             </div>
           </div>
           <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Número</button></div>
@@ -178,8 +190,8 @@
       <div class="cd">
         <h2><i class="fa-solid fa-layer-group"></i> 2. Setores e Filas de Atendimento</h2>
         <div class="hint-box">
-          <b>O que é isso?</b> São os departamentos da sua empresa para onde as conversas serão encaminhadas.<br>
-          <i>Exemplos comuns:</i> <b>Comercial</b>, <b>Financeiro/Faturas</b>, <b>Suporte Técnico</b>, <b>Precatórios</b>, <b>Inadimplentes</b>, <b>Agendamento</b>.
+          <b>O que é isso?</b> Departamentos para onde os chamados são direcionados.<br>
+          <i>Exemplos:</i> <b>Comercial</b>, <b>Financeiro/Cobrança</b>, <b>Suporte Técnico</b>, <b>Agendamento</b>.
         </div>
         <form onsubmit="addData('grupos', event)">
           <div class="g2">
@@ -189,7 +201,7 @@
             </div>
             <div>
               <label>Descrição do que este setor resolve</label>
-              <input type="text" id="grupo-desc" placeholder="Ex: Segunda via de boleto e dúvidas de pagamento">
+              <input type="text" id="grupo-desc" placeholder="Ex: 2ª via de boleto e dúvidas de pagamento">
             </div>
           </div>
           <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Setor</button></div>
@@ -202,9 +214,7 @@
     <div id="section-supervisores" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-user-tie"></i> 3. Gestores e Supervisores</h2>
-        <div class="hint-box">
-          Cadastre as pessoas que terão acesso aos relatórios gerenciais, dashboards e monitoramento em tempo real da equipe.
-        </div>
+        <div class="hint-box">Usuários que terão acesso aos relatórios gerenciais e monitoramento em tempo real.</div>
         <form onsubmit="addData('supervisores', event)">
           <div class="g2">
             <div>
@@ -226,9 +236,7 @@
     <div id="section-agentes" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-headset"></i> 4. Atendentes (Equipe Operacional)</h2>
-        <div class="hint-box">
-          Cadastre os colaboradores que atendem as conversas e ligações no dia a dia.
-        </div>
+        <div class="hint-box">Colaboradores que atendem os chamados e conversas no dia a dia.</div>
         <form onsubmit="addData('agentes', event)">
           <div class="g2">
             <div>
@@ -251,7 +259,7 @@
             <div>
               <label>Irá receber ligações telefônicas? *</label>
               <select id="agente-fone">
-                <option value="SIM">SIM (Atende voz/telefone)</option>
+                <option value="SIM">SIM (Atende voz)</option>
                 <option value="NÃO">NÃO</option>
               </select>
             </div>
@@ -262,27 +270,20 @@
       <div class="cd"><div class="tb-wrap" id="table-agentes"></div></div>
     </div>
 
-    <!-- 5. GRUPOS X AGENTES (VÍNCULO INTELIGENTE) -->
+    <!-- 5. GRUPOS X AGENTES -->
     <div id="section-grupos_agentes" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-sitemap"></i> 5. Quem atende qual setor?</h2>
-        <div class="hint-box">
-          <b>O que é isso?</b> Aqui você diz em qual fila cada atendente vai trabalhar. Um atendente pode pertencer a mais de um setor se necessário.<br>
-          <i>Exemplo:</i> Vincular "Nayara Carvalho" ao setor "Financeiro".
-        </div>
+        <div class="hint-box">Vincule cada atendente aos setores em que ele irá atuar.</div>
         <form onsubmit="addData('grupos_agentes', event)">
           <div class="g2">
             <div>
               <label>Selecione o Atendente *</label>
-              <select id="ga-agente" required>
-                <option value="">-- Primeiro cadastre atendentes no passo 4 --</option>
-              </select>
+              <select id="ga-agente" required><option value="">-- Cadastre atendentes no passo 4 --</option></select>
             </div>
             <div>
               <label>Selecione o Setor / Fila *</label>
-              <select id="ga-grupo" required>
-                <option value="">-- Primeiro cadastre setores no passo 2 --</option>
-              </select>
+              <select id="ga-grupo" required><option value="">-- Cadastre setores no passo 2 --</option></select>
             </div>
           </div>
           <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Vincular Atendente ao Setor</button></div>
@@ -295,10 +296,7 @@
     <div id="section-qualificacoes" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-tags"></i> 6. Motivos de Finalização (Tabulações)</h2>
-        <div class="hint-box">
-          <b>O que é isso?</b> É o motivo que o atendente seleciona quando encerra uma conversa para gerar relatórios.<br>
-          <i>Exemplos:</i> <b>Venda Concluída</b>, <b>Dúvida Sanada</b>, <b>Cliente Inadimplente</b>, <b>Sem Resposta</b>, <b>Agendamento Realizado</b>.
-        </div>
+        <div class="hint-box">Motivos que os atendentes escolhem ao encerrar uma conversa (ex: <i>Venda Concluída, Dúvida Sanada, Inadimplente, Sem Resposta</i>).</div>
         <form onsubmit="addData('qualificacoes', event)">
           <div class="g2">
             <div>
@@ -307,7 +305,7 @@
             </div>
             <div>
               <label>Categoria do Motivo (Opcional)</label>
-              <input type="text" id="qual-cat" placeholder="Ex: Sucesso, Pendência, Desistência">
+              <input type="text" id="qual-cat" placeholder="Ex: Sucesso, Pendência, Retorno">
             </div>
           </div>
           <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Motivo</button></div>
@@ -320,14 +318,12 @@
     <div id="section-calendario" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-clock"></i> 7. Horários de Expediente da Empresa</h2>
-        <div class="hint-box">
-          <b>Para que serve?</b> O sistema precisa saber quando sua empresa está aberta. Fora desses horários, o WhatsApp pode enviar uma mensagem automática de "Estamos fechados no momento".
-        </div>
+        <div class="hint-box">Define os dias e horários de funcionamento para que o bot saiba quando responder fora de expediente.</div>
         <form onsubmit="addData('calendario', event)">
           <div class="g3">
             <div>
               <label>Dias da Semana *</label>
-              <input type="text" id="cal-dias" placeholder="Ex: Segunda a Sexta, Sábados" required>
+              <input type="text" id="cal-dias" placeholder="Ex: Segunda a Sexta" required>
             </div>
             <div>
               <label>Horário de Abertura *</label>
@@ -344,27 +340,50 @@
       <div class="cd"><div class="tb-wrap" id="table-calendario"></div></div>
     </div>
 
-    <!-- 8. FLUXOS & BOT -->
+    <!-- 8. FLUXOS & MINI-MIRO BUILDER -->
     <div id="section-fluxos" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-diagram-project"></i> 8. Menu do Bot no WhatsApp (Opcional)</h2>
+        <h2><i class="fa-solid fa-diagram-project"></i> 8. Construtor Visual do Bot (Estilo Miro)</h2>
         <div class="hint-box">
-          <b>Como você quer o menu inicial do WhatsApp?</b><br>
-          <i>Exemplo:</i> "Olá, bem-vindo à [Empresa]! Digite 1 para Comercial, 2 para Agendamento, 3 para Financeiro."<br>
-          Se você tiver uma imagem ou PDF do desenho desse fluxo, pode anexar abaixo.
+          <b>Como montar o seu bot?</b> Escolha um modelo do seu segmento abaixo ou monte seu próprio fluxo arrastando os balões! Dê dois cliques em qualquer balão para alterar o texto. Quando terminar, clique no botão verde para gerar a imagem automaticamente!
         </div>
-        <form onsubmit="addData('fluxos', event)">
-          <label>Tem desenho/diagrama do bot? Anexe aqui (PNG, JPG, PDF - Máx 10MB)</label>
-          <div class="up-box" onclick="document.getElementById('fluxo-file').click()">
-            <i class="fa-solid fa-cloud-arrow-up"></i>
-            <p style="font-size: 0.85em;">Clique para anexar arquivo (opcional)</p>
-            <span id="file-name" style="font-size: 0.78em; color: var(--ac); display: block; margin-top: 6px;">Nenhum arquivo selecionado</span>
+
+        <!-- TOOLBAR DE TEMPLATES -->
+        <div class="miro-toolbar">
+          <label style="margin:0; font-weight:700; color:var(--tx); font-size:0.85em;"><i class="fa-solid fa-wand-magic-sparkles"></i> Modelos Prontos:</label>
+          <button type="button" class="btn" onclick="loadMiroTemplate('sac')"><i class="fa-solid fa-headset"></i> SAC / Geral</button>
+          <button type="button" class="btn" onclick="loadMiroTemplate('vendas')"><i class="fa-solid fa-cart-shopping"></i> Vendas</button>
+          <button type="button" class="btn" onclick="loadMiroTemplate('cobranca')"><i class="fa-solid fa-barcode"></i> Cobrança</button>
+          <button type="button" class="btn" onclick="loadMiroTemplate('clinica')"><i class="fa-solid fa-hospital-user"></i> Clínicas</button>
+          <button type="button" class="btn" onclick="loadMiroTemplate('juridico')"><i class="fa-solid fa-scale-balanced"></i> Jurídico / Precatórios</button>
+          
+          <div style="margin-left: auto; display: flex; gap: 8px;">
+            <button type="button" class="btn" onclick="addCustomNode()"><i class="fa-solid fa-plus"></i> Novo Balão</button>
+            <button type="button" class="btn pr" onclick="exportMiroToAttachment()" style="background:#16a34a; border-color:#16a34a;"><i class="fa-solid fa-camera"></i> 📸 Gerar Imagem do Fluxo e Anexar</button>
           </div>
-          <input type="file" id="fluxo-file" accept="image/*,.pdf" hidden onchange="handleFileSelect(event)">
+        </div>
 
-          <label>Descreva em texto as opções do Bot e Mensagens de Saudação *</label>
-          <textarea id="fluxo-obs" rows="4" placeholder="Ex: Saudação: 'Olá! Bem-vindo.' Opção 1 manda pro Agendamento, Opção 2 manda pro Financeiro..." required></textarea>
+        <!-- CANVAS DO MIRO -->
+        <div class="miro-container" id="miroCanvas">
+          <svg class="miro-svg" id="miroSvg"></svg>
+          <!-- Balões gerados dinamicamente via JS -->
+        </div>
 
+        <form onsubmit="addData('fluxos', event)" style="margin-top: 18px;">
+          <div class="g2">
+            <div>
+              <label>Ou faça o upload manual (opcional, máx 10MB):</label>
+              <div class="up-box" onclick="document.getElementById('fluxo-file').click()">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span id="file-name" style="font-size: 0.8em; color: var(--ac); display: block; margin-top: 4px;">Nenhum arquivo anexado</span>
+              </div>
+              <input type="file" id="fluxo-file" accept="image/*,.pdf" hidden onchange="handleFileSelect(event)">
+            </div>
+            <div>
+              <label>Resumo / Descrição das Opções do Bot *</label>
+              <textarea id="fluxo-obs" rows="3" placeholder="O texto do fluxo gerado ou suas observações..." required></textarea>
+            </div>
+          </div>
           <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Salvar Instruções do Bot</button></div>
         </form>
       </div>
@@ -375,18 +394,15 @@
     <div id="section-templates" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-brands fa-whatsapp"></i> 9. Modelos de Notificação Ativa (Templates)</h2>
-        <div class="hint-box">
-          <b>O que é isso?</b> São mensagens pré-aprovadas pela Meta para a sua empresa iniciar conversas com clientes (após 24h sem contato ou para avisos).<br>
-          <i>Exemplo:</i> "Olá {{1}}, confirmamos sua entrevista para o dia {{2}} às {{3}}."
-        </div>
+        <div class="hint-box">Mensagens que sua empresa dispara primeiro para os clientes (ex: lembretes de fatura ou confirmações).</div>
         <form onsubmit="addData('templates', event)">
           <div class="g2">
             <div>
-              <label>Nome de Referência do Modelo *</label>
-              <input type="text" id="tpl-nome" placeholder="Ex: confirmacao_agendamento, aviso_fatura" required>
+              <label>Nome do Modelo *</label>
+              <input type="text" id="tpl-nome" placeholder="Ex: confirmacao_agendamento" required>
             </div>
             <div>
-              <label>Idioma da Mensagem *</label>
+              <label>Idioma *</label>
               <select id="tpl-idioma">
                 <option value="pt_BR">Português (Brasil)</option>
                 <option value="en_US">Inglês</option>
@@ -395,8 +411,7 @@
             </div>
           </div>
           <label>Texto da Mensagem *</label>
-          <textarea id="tpl-texto" rows="3" placeholder="Ex: Olá {{1}}, lembramos que sua consulta está agendada para amanhã..." required></textarea>
-          
+          <textarea id="tpl-texto" rows="3" placeholder="Olá {{1}}, confirmamos o seu agendamento..." required></textarea>
           <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Mensagem</button></div>
         </form>
       </div>
@@ -407,15 +422,13 @@
     <div id="section-revisao" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-paper-plane"></i> Revisão Final</h2>
-        <div class="hint-box">
-          Confira o resumo das informações preenchidas antes de enviar para a equipe de implantação da WeON.
-        </div>
+        <div class="hint-box">Confira o resumo de todos os itens antes de enviar para a equipe de implantação da WeON.</div>
         <div id="reumo-container" style="display: grid; gap: 12px;" class="g2"></div>
       </div>
 
       <div class="cd" style="border-color: var(--ac); text-align: center;">
-        <h3 style="color: var(--ac); margin-bottom: 8px;">Tudo pronto para enviar?</h3>
-        <p style="color: var(--mu); font-size: 0.85em; margin-bottom: 18px;">Ao clicar no botão abaixo, a nossa equipe técnica receberá a notificação para iniciar a configuração do seu ambiente.</p>
+        <h3 style="color: var(--ac); margin-bottom: 8px;">Concluir Configuração</h3>
+        <p style="color: var(--mu); font-size: 0.85em; margin-bottom: 18px;">Ao clicar no botão abaixo, os dados serão salvos na planilha e a notificação será enviada com os links e anexos.</p>
         <button onclick="enviarDadosGoogleSheets()" id="btn-enviar-final" class="btn pr" style="padding: 12px 32px; font-size: 1em;">
           <i class="fa-solid fa-paper-plane"></i> Finalizar & Enviar Setup
         </button>
@@ -458,6 +471,7 @@
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', newTheme);
     document.getElementById('btn-theme').innerHTML = `<span><i class="fa-solid fa-circle-half-stroke"></i> Tema: ${newTheme === 'dark' ? 'Escuro' : 'Claro'}</span>`;
+    renderMiroLines();
   }
 
   function switchTab(tabId) {
@@ -469,13 +483,13 @@
     if(activeBtn) activeBtn.classList.add('on');
 
     if(tabId === 'grupos_agentes') updateSelectsVinculo();
+    if(tabId === 'fluxos') renderMiroLines();
     if(tabId === 'revisao') renderRevisao();
   }
 
   function updateSelectsVinculo() {
     const agenteSelect = document.getElementById('ga-agente');
     const grupoSelect = document.getElementById('ga-grupo');
-
     const listaAgentes = setupData["Agentes"];
     const listaGrupos = setupData["Lista de Grupos"];
 
@@ -483,9 +497,7 @@
       agenteSelect.innerHTML = '<option value="">-- Nenhum atendente cadastrado no Passo 4 --</option>';
     } else {
       let opt = '<option value="">-- Selecione o Atendente --</option>';
-      listaAgentes.forEach(a => {
-        opt += `<option value="${a['Nome do Agente']}">${a['Nome do Agente']} (${a['Email']})</option>`;
-      });
+      listaAgentes.forEach(a => { opt += `<option value="${a['Nome do Agente']}">${a['Nome do Agente']} (${a['Email']})</option>`; });
       agenteSelect.innerHTML = opt;
     }
 
@@ -493,20 +505,245 @@
       grupoSelect.innerHTML = '<option value="">-- Nenhum setor cadastrado no Passo 2 --</option>';
     } else {
       let opt = '<option value="">-- Selecione o Setor --</option>';
-      listaGrupos.forEach(g => {
-        opt += `<option value="${g['Nome do Grupo']}">${g['Nome do Grupo']}</option>`;
-      });
+      listaGrupos.forEach(g => { opt += `<option value="${g['Nome do Grupo']}">${g['Nome do Grupo']}</option>`; });
       grupoSelect.innerHTML = opt;
     }
   }
 
+  /* ==========================================================
+     MOTOR VISUAL DO MINI-MIRO DE FLUXOS
+  ========================================================== */
+  let miroNodes = [];
+
+  const miroTemplates = {
+    sac: [
+      { id: "root", title: "👋 Saudação Inicial", text: "Olá! Bem-vindo ao suporte. Como podemos te ajudar hoje?", x: 30, y: 140, isRoot: true },
+      { id: "opt1", title: "Opção 1", text: "1. Dúvidas Frequentes", x: 260, y: 40, parent: "root" },
+      { id: "opt2", title: "Opção 2", text: "2. Suporte Técnico", x: 260, y: 140, parent: "root" },
+      { id: "opt3", title: "Opção 3", text: "3. Falar com Atendente", x: 260, y: 240, parent: "root" }
+    ],
+    vendas: [
+      { id: "root", title: "👋 Boas-Vindas Comercial", text: "Olá! Que bom ter você aqui. Escolha uma opção:", x: 30, y: 140, isRoot: true },
+      { id: "opt1", title: "Opção 1", text: "1. Conhecer Produtos e Planos", x: 260, y: 40, parent: "root" },
+      { id: "opt2", title: "Opção 2", text: "2. Solicitar Orçamento", x: 260, y: 140, parent: "root" },
+      { id: "opt3", title: "Opção 3", text: "3. Falar com Consultor de Vendas", x: 260, y: 240, parent: "root" }
+    ],
+    cobranca: [
+      { id: "root", title: "🏦 Atendimento Financeiro", text: "Olá! Você está no setor financeiro. O que deseja?", x: 30, y: 140, isRoot: true },
+      { id: "opt1", title: "Opção 1", text: "1. 2ª Via de Boleto / Código PIX", x: 260, y: 40, parent: "root" },
+      { id: "opt2", title: "Opção 2", text: "2. Renegociação de Acordo", x: 260, y: 140, parent: "root" },
+      { id: "opt3", title: "Opção 3", text: "3. Enviar Comprovante de Pagamento", x: 260, y: 240, parent: "root" }
+    ],
+    clinica: [
+      { id: "root", title: "🏥 Recepção da Clínica", text: "Olá! Bem-vindo à Clínica. Por favor selecione o serviço:", x: 30, y: 140, isRoot: true },
+      { id: "opt1", title: "Opção 1", text: "1. Agendar ou Remarcar Consulta", x: 260, y: 40, parent: "root" },
+      { id: "opt2", title: "Opção 2", text: "2. Resultados de Exames", x: 260, y: 140, parent: "root" },
+      { id: "opt3", title: "Opção 3", text: "3. Convênios Atendidos e Valores", x: 260, y: 240, parent: "root" },
+      { id: "opt4", title: "Opção 4", text: "4. Falar com a Recepção", x: 480, y: 140, parent: "opt1" }
+    ],
+    juridico: [
+      { id: "root", title: "⚖️ Escritório de Advocacia", text: "Olá! Bem-vindo ao escritório. Como podemos auxiliá-lo?", x: 30, y: 140, isRoot: true },
+      { id: "opt1", title: "Opção 1", text: "1. Consultar Andamento de Precatório", x: 260, y: 40, parent: "root" },
+      { id: "opt2", title: "Opção 2", text: "2. Envio de Documentos Pendentes", x: 260, y: 140, parent: "root" },
+      { id: "opt3", title: "Opção 3", text: "3. Falar com a Equipe Jurídica", x: 260, y: 240, parent: "root" }
+    ]
+  };
+
+  function loadMiroTemplate(key) {
+    miroNodes = JSON.parse(JSON.stringify(miroTemplates[key]));
+    renderMiroDOM();
+    updateObsTextFromNodes();
+  }
+
+  function addCustomNode() {
+    const newId = "node_" + Date.now();
+    miroNodes.push({
+      id: newId,
+      title: "Nova Opção",
+      text: "Clique 2x para editar este balão",
+      x: 260,
+      y: 180,
+      parent: "root"
+    });
+    renderMiroDOM();
+    updateObsTextFromNodes();
+  }
+
+  function renderMiroDOM() {
+    const container = document.getElementById("miroCanvas");
+    const svg = document.getElementById("miroSvg");
+    container.querySelectorAll('.miro-node').forEach(el => el.remove());
+
+    miroNodes.forEach(node => {
+      const el = document.createElement("div");
+      el.className = `miro-node ${node.isRoot ? 'root' : ''}`;
+      el.id = node.id;
+      el.style.left = node.x + "px";
+      el.style.top = node.y + "px";
+
+      el.innerHTML = `
+        <div class="miro-node-title">${node.title}</div>
+        <div class="miro-node-desc" contenteditable="true" onblur="updateNodeText('${node.id}', this.innerText)">${node.text}</div>
+      `;
+
+      // Draggable logic
+      let isDragging = false, startX, startY, origX, origY;
+      el.addEventListener('mousedown', (e) => {
+        if (e.target.isContentEditable) return;
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        origX = node.x;
+        origY = node.y;
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+      });
+
+      function onMouseMove(e) {
+        if (!isDragging) return;
+        node.x = Math.max(10, Math.min(850, origX + (e.clientX - startX)));
+        node.y = Math.max(10, Math.min(320, origY + (e.clientY - startY)));
+        el.style.left = node.x + "px";
+        el.style.top = node.y + "px";
+        renderMiroLines();
+      }
+
+      function onMouseUp() {
+        isDragging = false;
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+      }
+
+      container.appendChild(el);
+    });
+
+    renderMiroLines();
+  }
+
+  function updateNodeText(id, newText) {
+    const node = miroNodes.find(n => n.id === id);
+    if(node) node.text = newText;
+    updateObsTextFromNodes();
+  }
+
+  function updateObsTextFromNodes() {
+    let summary = "FLUXO DO BOT:\n";
+    miroNodes.forEach(n => {
+      summary += `- [${n.title}]: ${n.text}\n`;
+    });
+    document.getElementById("fluxo-obs").value = summary;
+  }
+
+  function renderMiroLines() {
+    const svg = document.getElementById("miroSvg");
+    if(!svg) return;
+    svg.innerHTML = "";
+
+    const lineColor = document.documentElement.getAttribute('data-theme') === 'light' ? '#0284c7' : '#3a86ff';
+
+    miroNodes.forEach(node => {
+      if (node.parent) {
+        const parentNode = miroNodes.find(n => n.id === node.parent);
+        if (parentNode) {
+          const x1 = parentNode.x + 160;
+          const y1 = parentNode.y + 35;
+          const x2 = node.x;
+          const y2 = node.y + 35;
+
+          const dx = (x2 - x1) / 2;
+          const d = `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+
+          const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          path.setAttribute("d", d);
+          path.setAttribute("fill", "none");
+          path.setAttribute("stroke", lineColor);
+          path.setAttribute("stroke-width", "2.5");
+          path.setAttribute("stroke-dasharray", "4,3");
+          svg.appendChild(path);
+        }
+      }
+    });
+  }
+
+  /* GERAÇÃO DA IMAGEM AUTOMÁTICA EM BASE64 DO CANVAS */
+  function exportMiroToAttachment() {
+    const canvas = document.createElement("canvas");
+    canvas.width = 900;
+    canvas.height = 420;
+    const ctx = canvas.getContext("2d");
+
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    ctx.fillStyle = isLight ? "#f8fafc" : "#0b132b";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Linhas
+    ctx.strokeStyle = isLight ? "#0284c7" : "#3a86ff";
+    ctx.lineWidth = 2;
+    miroNodes.forEach(node => {
+      if(node.parent) {
+        const parentNode = miroNodes.find(n => n.id === node.parent);
+        if(parentNode) {
+          ctx.beginPath();
+          ctx.moveTo(parentNode.x + 160, parentNode.y + 35);
+          ctx.bezierCurveTo(parentNode.x + 200, parentNode.y + 35, node.x - 40, node.y + 35, node.x, node.y + 35);
+          ctx.stroke();
+        }
+      }
+    });
+
+    // Balões
+    miroNodes.forEach(node => {
+      ctx.fillStyle = isLight ? "#ffffff" : "#162038";
+      ctx.strokeStyle = node.isRoot ? "#10b981" : (isLight ? "#0284c7" : "#3a86ff");
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.roundRect(node.x, node.y, 160, 70, 8);
+      ctx.fill();
+      ctx.stroke();
+
+      // Texto do título
+      ctx.fillStyle = node.isRoot ? "#10b981" : (isLight ? "#0284c7" : "#3a86ff");
+      ctx.font = "bold 11px Inter, sans-serif";
+      ctx.fillText(node.title, node.x + 10, node.y + 20);
+
+      // Texto da descrição
+      ctx.fillStyle = isLight ? "#0f172a" : "#f8fafc";
+      ctx.font = "10px Inter, sans-serif";
+      const words = node.text.split(" ");
+      let line = "", lineY = node.y + 36;
+      for(let w of words) {
+        const testLine = line + w + " ";
+        if(ctx.measureText(testLine).width > 140) {
+          ctx.fillText(line, node.x + 10, lineY);
+          line = w + " ";
+          lineY += 13;
+        } else {
+          line = testLine;
+        }
+      }
+      ctx.fillText(line, node.x + 10, lineY);
+    });
+
+    currentBase64File = canvas.toDataURL("image/png");
+    document.getElementById("file-name").innerText = "📸 Diagrama gerado pelo Construtor Visual!";
+    alert("✨ Diagrama gerado com sucesso e anexado ao fluxo!");
+  }
+
+  // Carrega template inicial de SAC por padrão
+  window.addEventListener('DOMContentLoaded', () => {
+    loadMiroTemplate('sac');
+  });
+
+  /* ==========================================================
+     LÓGICA PADRÃO DE DADOS E FORMULÁRIOS
+  ========================================================== */
   function handleFileSelect(e) {
     const file = e.target.files[0];
     if(!file) return;
 
     const maxSizeInBytes = 10 * 1024 * 1024; 
     if (file.size > maxSizeInBytes) {
-      alert("⚠️ O arquivo selecionado é muito grande! Por favor, escolha um documento ou imagem de até 10MB.");
+      alert("⚠️ Arquivo muito grande! Por favor envie até 10MB.");
       e.target.value = "";
       document.getElementById('file-name').innerText = "Nenhum arquivo selecionado";
       currentBase64File = "";
@@ -514,11 +751,8 @@
     }
     
     document.getElementById('file-name').innerText = file.name;
-
     const reader = new FileReader();
-    reader.onload = function(evt) {
-      currentBase64File = evt.target.result;
-    };
+    reader.onload = function(evt) { currentBase64File = evt.target.result; };
     reader.readAsDataURL(file);
   }
 
@@ -543,7 +777,7 @@
       const agente = document.getElementById('ga-agente').value;
       const grupo = document.getElementById('ga-grupo').value;
       if (!agente || !grupo) {
-        alert("Por favor, selecione tanto o atendente quanto o setor.");
+        alert("Por favor selecione o atendente e o setor.");
         return;
       }
       newItem = { "Agente": agente, "Grupo": grupo };
@@ -557,7 +791,7 @@
         "Anexo/Imagem": currentBase64File || "Sem Anexo"
       };
       currentBase64File = "";
-      document.getElementById('file-name').innerText = "Nenhum arquivo selecionado";
+      document.getElementById('file-name').innerText = "Nenhum arquivo anexado";
     } else if(key === 'templates') {
       newItem = { "Nome": document.getElementById('tpl-nome').value, "Idioma": document.getElementById('tpl-idioma').value, "Texto": document.getElementById('tpl-texto').value };
     }
@@ -602,7 +836,7 @@
       headers.forEach(h => {
         let val = item[h] || '';
         if (typeof val === 'string' && val.indexOf('data:') === 0) {
-          val = '📎 [Arquivo Anexado Pronto para Envio]';
+          val = '📸 [Diagrama Visual Anexado]';
         }
         html += `<td>${val}</td>`;
       });
@@ -629,7 +863,7 @@
           const val1 = Object.values(item)[0] || '';
           let val2 = Object.values(item)[1] || '';
           if (typeof val2 === 'string' && val2.indexOf('data:') === 0) {
-            val2 = '[Arquivo Carregado]';
+            val2 = '[Diagrama Anexado]';
           }
           html += `<li><strong style="color: var(--tx);">${val1}</strong> ${val2 ? ' - ' + val2 : ''}</li>`;
         });
@@ -661,7 +895,7 @@
       btn.style.background = '#16a34a';
     } catch (error) {
       console.error("Erro ao enviar:", error);
-      alert("Houve uma oscilação na rede ao enviar os dados. Por favor, tente novamente.");
+      alert("Houve uma oscilação na rede ao enviar os dados. Por favor tente novamente.");
       btn.disabled = false;
       btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Tentar Enviar Novamente';
     }

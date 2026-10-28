@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Setup WeON — Onboarding Inteligente</title>
   
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>?v=18">
-  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=18">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>?v=19">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=19">
 
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -271,7 +271,7 @@
     .btn.pr:hover { filter: brightness(1.15); transform: translateY(-1px); }
     .btn.dn:hover { border-color: var(--dg); color: var(--dg); }
 
-    /* SEÇÃO IA COM PROMPT LIMPO E TOTALMENTE RESPONSIVO */
+    /* SEÇÃO IA COM PROMPT LIMPO */
     .ai-box-container {
       background: linear-gradient(135deg, rgba(121, 40, 202, 0.18) 0%, rgba(0, 240, 255, 0.15) 100%);
       border: 1.5px solid var(--ac);
@@ -376,7 +376,7 @@
     }
     .up-box:hover { border-color: var(--ac); }
 
-    /* MIRO CANVAS */
+    /* MIRO CANVAS - NAVEGAÇÃO FLUIDA & PAN INFINITO */
     .flow-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
     
     .zoom-controls {
@@ -401,24 +401,28 @@
     .flow-canvas-viewport {
       position: relative;
       width: 100%;
-      height: 560px;
+      height: 580px;
       background: radial-gradient(var(--canvas-dot) 1.5px, transparent 1.5px);
-      background-size: 22px 22px;
+      background-size: 24px 24px;
       background-color: var(--in);
       border: 1px solid var(--bd);
       border-radius: 14px;
       overflow: hidden;
       user-select: none;
-      cursor: crosshair;
+      cursor: grab;
+    }
+    .flow-canvas-viewport.panning {
+      cursor: grabbing !important;
     }
 
     .flow-canvas-content {
       position: absolute;
       top: 0;
       left: 0;
-      width: 3200px;
-      height: 2200px;
+      width: 8000px;
+      height: 6000px;
       transform-origin: 0 0;
+      will-change: transform;
     }
 
     .flow-svg {
@@ -528,6 +532,22 @@
       z-index: 5;
     }
     .node-port:hover { transform: translateY(-50%) scale(1.2); }
+
+    .canvas-hint-overlay {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      background: rgba(8, 14, 30, 0.8);
+      border: 1px solid var(--bd);
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 0.72em;
+      color: var(--mu);
+      pointer-events: none;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+    }
+    .canvas-hint-overlay b { color: var(--ac); }
 
     .fluxo-preview-card {
       background: var(--in);
@@ -833,14 +853,14 @@
       <div class="cd"><div class="tb-wrap" id="table-calendario"></div></div>
     </div>
 
-    <!-- 8. FLUXOS COM IA CHIWE E VISUAL TOTALMENTE RESPONSIVO -->
+    <!-- 8. FLUXOS COM CANVAS PAN & ZOOM INFINITO -->
     <div id="section-fluxos" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-diagram-project"></i> Passo 8: Menu do Bot / Fluxo</h2>
         
         <div class="hint-box">
-          <div class="hint-title"><i class="fa-solid fa-robot"></i> Crie e Incremente com o Chiwe:</div>
-          Descreva a URA da sua empresa por voz ou texto. Para continuar um fluxo existente, basta falar (ex: <i>"Adicione na opção suporte técnico os ramos Software e Hardware"</i>). Se quiser recomeçar um desenho do zero, clique em <b>Limpar Todo o Fluxo</b>.
+          <div class="hint-title"><i class="fa-solid fa-robot"></i> Navegação Estilo Miro:</div>
+          <b>Como navegar:</b> Clique no fundo vazio e arraste para movimentar o quadro para qualquer lado. Use a rodinha do rato para dar zoom. Dite ou digite o que precisa e o Chiwe desenhará o fluxo completo!
         </div>
 
         <div class="ai-box-container">
@@ -879,19 +899,23 @@
           <button type="button" class="btn" onclick="addFreeNode()"><i class="fa-solid fa-plus"></i> Balão Livre</button>
           <button type="button" class="btn" onclick="reorganizeBoardAutoLayout()"><i class="fa-solid fa-wand-magic-sparkles"></i> Auto-Organizar</button>
 
-          <!-- CONTROLE DE ZOOM -->
+          <!-- CONTROLE DE ZOOM & FIT VIEW -->
           <div class="zoom-controls" style="margin-left: auto;">
-            <button type="button" class="zoom-btn" onclick="adjustZoom(-0.1)" title="Zoom Out"><i class="fa-solid fa-minus"></i></button>
-            <button type="button" class="zoom-btn" onclick="resetZoom()" title="Resetar Zoom" id="zoom-label">100%</button>
-            <button type="button" class="zoom-btn" onclick="adjustZoom(0.1)" title="Zoom In"><i class="fa-solid fa-plus"></i></button>
+            <button type="button" class="zoom-btn" onclick="fitViewToNodes()" title="Enquadrar Todos os Nós"><i class="fa-solid fa-expand"></i></button>
+            <button type="button" class="zoom-btn" onclick="adjustZoomAtCenter(-0.1)" title="Zoom Out"><i class="fa-solid fa-minus"></i></button>
+            <button type="button" class="zoom-btn" onclick="resetZoomAndPan()" title="Resetar Visualização" id="zoom-label">100%</button>
+            <button type="button" class="zoom-btn" onclick="adjustZoomAtCenter(0.1)" title="Zoom In"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
 
-        <!-- QUADRO DO MIRO -->
+        <!-- QUADRO DO MIRO INFINITO -->
         <div class="flow-canvas-viewport" id="boardViewport">
           <div class="flow-canvas-content" id="boardContent">
             <svg class="flow-svg" id="boardSvg"></svg>
             <div id="selectionMarquee" class="selection-box f"></div>
+          </div>
+          <div class="canvas-hint-overlay">
+            <span>✋ <b>Arrastar:</b> clique e puxe no fundo | 🔍 <b>Zoom:</b> rodinha do rato</span>
           </div>
         </div>
 
@@ -978,7 +1002,12 @@
   const GEMINI_API_KEY = "AQ.Ab8RN6JTSNsocP6wSiolZkUN-Ox5_QopXuLI0gt5I_k6mAV1Rg";
 
   let currentBase64File = "";
-  let currentZoom = 1.0;
+  
+  // NAVEGAÇÃO PAN & ZOOM INFINITA
+  let panX = 40;
+  let panY = 40;
+  let currentZoom = 0.9;
+  
   let selectedNodeIds = new Set();
   let isRecording = false;
   let speechRecognizer = null;
@@ -1029,9 +1058,10 @@
   function resetBoardCompletely() {
     if (confirm("Tem certeza que deseja apagar todo o desenho do quadro e começar em branco?")) {
       boardNodes = [
-        { id: "root", title: "Início / Boas-Vindas", text: "Olá! Bem-vindo ao atendimento. Escolha uma opção:", x: 40, y: 160, color: "green" }
+        { id: "root", title: "Início / Boas-Vindas", text: "Olá! Bem-vindo ao atendimento. Escolha uma opção:", x: 60, y: 160, color: "green" }
       ];
       selectedNodeIds.clear();
+      resetZoomAndPan();
       renderBoardDOM();
       updateObsTextFromNodes();
     }
@@ -1127,7 +1157,6 @@
 
     let parsedNodes = null;
 
-    // Se uma chave válida do Google AI Studio for detectada (AIzaSy...)
     if (GEMINI_API_KEY && GEMINI_API_KEY.startsWith("AIzaSy")) {
       const currentNodesSummary = boardNodes.map(n => ({ id: n.id, title: n.title, text: n.text, parent: n.parent || null }));
       const systemPrompt = `
@@ -1168,7 +1197,6 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
       }
     }
 
-    // MOTOR HEURÍSTICO SINTÉTICO (SEMPRE GERA MENUS RESUMIDOS)
     if (!parsedNodes) {
       parsedNodes = synthesizeBotStructure(promptText);
     }
@@ -1176,6 +1204,7 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
     if (parsedNodes) {
       boardNodes = parsedNodes;
       reorganizeBoardAutoLayout();
+      fitViewToNodes();
       selectedNodeIds.clear();
       renderBoardDOM();
       updateObsTextFromNodes();
@@ -1187,7 +1216,7 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
     btnGen.innerHTML = '<i class="fa-solid fa-sparkles"></i> Gerar Fluxo';
   }
 
-  /* GERADOR SINTÉTICO: EXTRAI INTENÇÕES E CRIA TÍTULOS CURTOS */
+  /* GERADOR SINTÉTICO COM TÍTULOS CURTOS */
   function synthesizeBotStructure(rawPrompt) {
     const p = rawPrompt.toLowerCase();
 
@@ -1216,7 +1245,6 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
       }
     }
 
-    // Se identificou que é para ramificar um nó existente
     if (targetParent && !p.includes("me ajuda a criar um fluxo") && !p.includes("crie um fluxo do zero")) {
       let subOptions = [];
       if (p.includes("hardware") || p.includes("software")) {
@@ -1226,7 +1254,6 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
           subOptions.push({ title: "Periféricos e Acessórios", text: "Cabos, monitores e componentes" });
         }
       } else {
-        // Tenta extrair nomes limpos
         let cleaned = rawPrompt.replace(/coloque|adicione|crie|na opção|no setor/gi, "").trim();
         subOptions.push({ title: "Opção Detalhada", text: cleaned.substring(0, 45) });
       }
@@ -1246,34 +1273,32 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
       return [...boardNodes];
     }
 
-    // 2. Se for CRIAÇÃO GLOBAL (ex: Caso KaBuM / E-commerce / Loja de Eletrônicos)
+    // 2. Criação completa
     if (p.includes("kabum") || p.includes("eletrônic") || p.includes("loja") || p.includes("computador") || p.includes("e-commerce")) {
       return [
-        { id: "root", title: "Início / Boas-Vindas", text: "Olá! Bem-vindo à nossa central de atendimento. Escolha o setor desejado:", x: 40, y: 160, color: "green" },
-        { id: "n1", title: "Opção 1", text: "1. Vendas, Produtos e Computadores", x: 300, y: 50, parent: "root", color: "yellow" },
-        { id: "n2", title: "Opção 2", text: "2. SAC, Trocas e Status do Pedido", x: 300, y: 155, parent: "root", color: "orange" },
-        { id: "n3", title: "Opção 3", text: "3. Financeiro e Segunda Via de Boleto/PIX", x: 300, y: 260, parent: "root", color: "blue" },
-        { id: "n4", title: "Opção 4", text: "4. Trabalhe Conosco e Parcerias", x: 300, y: 365, parent: "root", color: "purple" }
+        { id: "root", title: "Início / Boas-Vindas", text: "Olá! Bem-vindo à nossa central de atendimento. Escolha o setor desejado:", x: 60, y: 160, color: "green" },
+        { id: "n1", title: "Opção 1", text: "1. Vendas, Produtos e Computadores", x: 320, y: 50, parent: "root", color: "yellow" },
+        { id: "n2", title: "Opção 2", text: "2. SAC, Trocas e Status do Pedido", x: 320, y: 155, parent: "root", color: "orange" },
+        { id: "n3", title: "Opção 3", text: "3. Financeiro e Segunda Via de Boleto/PIX", x: 320, y: 260, parent: "root", color: "blue" },
+        { id: "n4", title: "Opção 4", text: "4. Trabalhe Conosco e Parcerias", x: 320, y: 365, parent: "root", color: "purple" }
       ];
     }
 
-    // Caso Cobrança / Inadimplência
     if (p.includes("cobr") || p.includes("inadimpl") || p.includes("dívida") || p.includes("divida") || p.includes("acordo")) {
       return [
-        { id: "root", title: "Início / Regularização", text: "Olá! Você está no setor financeiro e de acordos. Digite seu CPF para iniciar:", x: 40, y: 160, color: "green" },
-        { id: "n1", title: "Opção 1", text: "1. 2ª Via de Boleto / Código PIX", x: 300, y: 50, parent: "root", color: "yellow" },
-        { id: "n2", title: "Opção 2", text: "2. Proposta de Renegociação / Parcelamento", x: 300, y: 155, parent: "root", color: "orange" },
-        { id: "n3", title: "Opção 3", text: "3. Enviar Comprovante de Pagamento", x: 300, y: 260, parent: "root", color: "blue" },
-        { id: "n4", title: "Opção 4", text: "4. Falar com Especialista Financeiro", x: 300, y: 365, parent: "root", color: "purple" }
+        { id: "root", title: "Início / Regularização", text: "Olá! Você está no setor financeiro e de acordos. Digite seu CPF para iniciar:", x: 60, y: 160, color: "green" },
+        { id: "n1", title: "Opção 1", text: "1. 2ª Via de Boleto / Código PIX", x: 320, y: 50, parent: "root", color: "yellow" },
+        { id: "n2", title: "Opção 2", text: "2. Proposta de Renegociação / Parcelamento", x: 320, y: 155, parent: "root", color: "orange" },
+        { id: "n3", title: "Opção 3", text: "3. Enviar Comprovante de Pagamento", x: 320, y: 260, parent: "root", color: "blue" },
+        { id: "n4", title: "Opção 4", text: "4. Falar com Especialista Financeiro", x: 320, y: 365, parent: "root", color: "purple" }
       ];
     }
 
-    // Padrão Geral Sintetizado
     return [
-      { id: "root", title: "Início / Atendimento", text: "Olá! Bem-vindo ao canal oficial. Como podemos te ajudar?", x: 40, y: 160, color: "green" },
-      { id: "n1", title: "Opção 1", text: "1. Informações e Dúvidas Frequentes", x: 300, y: 50, parent: "root", color: "yellow" },
-      { id: "n2", title: "Opção 2", text: "2. Suporte Técnico Especializado", x: 300, y: 155, parent: "root", color: "blue" },
-      { id: "n3", title: "Opção 3", text: "3. Falar com Atendente Humano", x: 300, y: 260, parent: "root", color: "purple" }
+      { id: "root", title: "Início / Atendimento", text: "Olá! Bem-vindo ao canal oficial. Como podemos te ajudar?", x: 60, y: 160, color: "green" },
+      { id: "n1", title: "Opção 1", text: "1. Informações e Dúvidas Frequentes", x: 320, y: 50, parent: "root", color: "yellow" },
+      { id: "n2", title: "Opção 2", text: "2. Suporte Técnico Especializado", x: 320, y: 155, parent: "root", color: "blue" },
+      { id: "n3", title: "Opção 3", text: "3. Falar com Atendente Humano", x: 320, y: 260, parent: "root", color: "purple" }
     ];
   }
 
@@ -1285,12 +1310,12 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
     let currentY = 50;
 
     function layoutSubtree(node, depth) {
-      node.x = 40 + (depth * 260);
+      node.x = 60 + (depth * 260);
       const children = boardNodes.filter(n => n.parent === node.id);
 
       if (children.length === 0) {
         node.y = currentY;
-        currentY += 105;
+        currentY += 110;
       } else {
         children.forEach(child => layoutSubtree(child, depth + 1));
         const firstChild = children[0];
@@ -1301,6 +1326,119 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
 
     layoutSubtree(root, 0);
     renderBoardLines();
+  }
+
+  /* ==========================================================
+     SISTEMA DE NAVEGAÇÃO MIRO: PAN (DRAG NO FUNDO) & ZOOM COM WHEEL
+  ========================================================== */
+  const viewport = document.getElementById("boardViewport");
+  const content = document.getElementById("boardContent");
+  let isPanning = false, panStartX, panStartY, initialPanX, initialPanY;
+
+  function updateTransform() {
+    content.style.transform = `translate(${panX}px, ${panY}px) scale(${currentZoom})`;
+    document.getElementById("zoom-label").innerText = `${Math.round(currentZoom * 100)}%`;
+  }
+
+  function adjustZoomAtCenter(delta) {
+    const oldZoom = currentZoom;
+    currentZoom = Math.max(0.2, Math.min(2.0, currentZoom + delta));
+    
+    // Zoom a partir do centro do viewport
+    const vRect = viewport.getBoundingClientRect();
+    const cx = vRect.width / 2;
+    const cy = vRect.height / 2;
+
+    panX = cx - (cx - panX) * (currentZoom / oldZoom);
+    panY = cy - (cy - panY) * (currentZoom / oldZoom);
+    
+    updateTransform();
+  }
+
+  function resetZoomAndPan() {
+    panX = 40;
+    panY = 40;
+    currentZoom = 0.9;
+    updateTransform();
+  }
+
+  // ENQUADRA TODOS OS NÓS NA TELA AUTOMATICAMENTE
+  function fitViewToNodes() {
+    if (boardNodes.length === 0) return;
+
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    boardNodes.forEach(n => {
+      minX = Math.min(minX, n.x);
+      minY = Math.min(minY, n.y);
+      maxX = Math.max(maxX, n.x + 220);
+      maxY = Math.max(maxY, n.y + 110);
+    });
+
+    const vRect = viewport.getBoundingClientRect();
+    const padding = 60;
+    const bWidth = (maxX - minX) + padding * 2;
+    const bHeight = (maxY - minY) + padding * 2;
+
+    const scaleX = vRect.width / bWidth;
+    const scaleY = vRect.height / bHeight;
+    currentZoom = Math.max(0.25, Math.min(1.2, Math.min(scaleX, scaleY)));
+
+    panX = (vRect.width - (maxX - minX) * currentZoom) / 2 - minX * currentZoom;
+    panY = (vRect.height - (maxY - minY) * currentZoom) / 2 - minY * currentZoom;
+
+    updateTransform();
+  }
+
+  // Zoom suave com a rodinha do rato focalizado no ponteiro
+  viewport.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    const vRect = viewport.getBoundingClientRect();
+    const mouseX = e.clientX - vRect.left;
+    const mouseY = e.clientY - vRect.top;
+
+    const oldZoom = currentZoom;
+    const zoomFactor = e.deltaY < 0 ? 1.08 : 0.92;
+    currentZoom = Math.max(0.2, Math.min(2.0, currentZoom * zoomFactor));
+
+    // Ajusta o pan para que o ponto sob o rato permaneça no mesmo local
+    panX = mouseX - (mouseX - panX) * (currentZoom / oldZoom);
+    panY = mouseY - (mouseY - panY) * (currentZoom / oldZoom);
+
+    updateTransform();
+  }, { passive: false });
+
+  // Pan ao arrastar no fundo do viewport
+  viewport.addEventListener("mousedown", (e) => {
+    if (e.target.id === 'boardViewport' || e.target.id === 'boardContent' || e.target.id === 'boardSvg') {
+      isPanning = true;
+      viewport.classList.add("panning");
+      panStartX = e.clientX;
+      panStartY = e.clientY;
+      initialPanX = panX;
+      initialPanY = panY;
+
+      if (!e.ctrlKey && !e.metaKey) {
+        selectedNodeIds.clear();
+        document.querySelectorAll('.flow-node.selected').forEach(n => n.classList.remove('selected'));
+      }
+
+      document.addEventListener("mousemove", onPanMove);
+      document.addEventListener("mouseup", onPanUp);
+    }
+  });
+
+  function onPanMove(e) {
+    if (!isPanning) return;
+    panX = initialPanX + (e.clientX - panStartX);
+    panY = initialPanY + (e.clientY - panStartY);
+    updateTransform();
+  }
+
+  function onPanUp() {
+    isPanning = false;
+    viewport.classList.remove("panning");
+    document.removeEventListener("mousemove", onPanMove);
+    document.removeEventListener("mouseup", onPanUp);
   }
 
   function toggleTheme() {
@@ -1325,7 +1463,10 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
     }
 
     if(tabId === 'grupos_agentes') updateSelectsVinculo();
-    if(tabId === 'fluxos') renderBoardLines();
+    if(tabId === 'fluxos') {
+      updateTransform();
+      renderBoardLines();
+    }
     if(tabId === 'revisao') renderRevisao();
   }
 
@@ -1357,34 +1498,34 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
 
   const boardTemplates = {
     sac: [
-      { id: "root", title: "Início / Boas-Vindas", text: "Olá! Bem-vindo ao atendimento. Escolha uma opção:", x: 40, y: 160, color: "green" },
-      { id: "n1", title: "Opção 1", text: "1. Dúvidas Frequentes", x: 300, y: 50, parent: "root", color: "yellow" },
-      { id: "n2", title: "Opção 2", text: "2. Suporte Técnico", x: 300, y: 155, parent: "root", color: "blue" },
-      { id: "n3", title: "Opção 3", text: "3. Falar com Atendente", x: 300, y: 260, parent: "root", color: "purple" }
+      { id: "root", title: "Início / Boas-Vindas", text: "Olá! Bem-vindo ao atendimento. Escolha uma opção:", x: 60, y: 160, color: "green" },
+      { id: "n1", title: "Opção 1", text: "1. Dúvidas Frequentes", x: 320, y: 50, parent: "root", color: "yellow" },
+      { id: "n2", title: "Opção 2", text: "2. Suporte Técnico", x: 320, y: 155, parent: "root", color: "blue" },
+      { id: "n3", title: "Opção 3", text: "3. Falar com Atendente", x: 320, y: 260, parent: "root", color: "purple" }
     ],
     vendas: [
-      { id: "root", title: "Boas-Vindas Comercial", text: "Olá! Que bom ter você aqui. Como posso te ajudar?", x: 40, y: 160, color: "green" },
-      { id: "n1", title: "Opção 1", text: "1. Conhecer Produtos e Planos", x: 300, y: 50, parent: "root", color: "yellow" },
-      { id: "n2", title: "Opção 2", text: "2. Solicitar Orçamento", x: 300, y: 155, parent: "root", color: "orange" },
-      { id: "n3", title: "Opção 3", text: "3. Falar com Consultor", x: 300, y: 260, parent: "root", color: "blue" }
+      { id: "root", title: "Boas-Vindas Comercial", text: "Olá! Que bom ter você aqui. Como posso te ajudar?", x: 60, y: 160, color: "green" },
+      { id: "n1", title: "Opção 1", text: "1. Conhecer Produtos e Planos", x: 320, y: 50, parent: "root", color: "yellow" },
+      { id: "n2", title: "Opção 2", text: "2. Solicitar Orçamento", x: 320, y: 155, parent: "root", color: "orange" },
+      { id: "n3", title: "Opção 3", text: "3. Falar com Consultor", x: 320, y: 260, parent: "root", color: "blue" }
     ],
     cobranca: [
-      { id: "root", title: "Menu Financeiro", text: "Olá! Você está no setor de cobrança e finanças:", x: 40, y: 160, color: "green" },
-      { id: "n1", title: "Opção 1", text: "1. 2ª Via de Boleto / Código PIX", x: 300, y: 50, parent: "root", color: "yellow" },
-      { id: "n2", title: "Opção 2", text: "2. Negociação de Acordo", x: 300, y: 155, parent: "root", color: "orange" },
-      { id: "n3", title: "Opção 3", text: "3. Enviar Comprovante de Pagamento", x: 300, y: 260, parent: "root", color: "purple" }
+      { id: "root", title: "Menu Financeiro", text: "Olá! Você está no setor de cobrança e finanças:", x: 60, y: 160, color: "green" },
+      { id: "n1", title: "Opção 1", text: "1. 2ª Via de Boleto / Código PIX", x: 320, y: 50, parent: "root", color: "yellow" },
+      { id: "n2", title: "Opção 2", text: "2. Negociação de Acordo", x: 320, y: 155, parent: "root", color: "orange" },
+      { id: "n3", title: "Opção 3", text: "3. Enviar Comprovante de Pagamento", x: 320, y: 260, parent: "root", color: "purple" }
     ],
     clinica: [
-      { id: "root", title: "Recepção Médica", text: "Olá! Bem-vindo à Clínica. Selecione o serviço:", x: 40, y: 160, color: "green" },
-      { id: "n1", title: "Opção 1", text: "1. Agendamento de Consulta", x: 300, y: 50, parent: "root", color: "blue" },
-      { id: "n2", title: "Opção 2", text: "2. Resultados de Exames", x: 300, y: 155, parent: "root", color: "yellow" },
-      { id: "n3", title: "Opção 3", text: "3. Falar com Atendente", x: 300, y: 260, parent: "root", color: "purple" }
+      { id: "root", title: "Recepção Médica", text: "Olá! Bem-vindo à Clínica. Selecione o serviço:", x: 60, y: 160, color: "green" },
+      { id: "n1", title: "Opção 1", text: "1. Agendamento de Consulta", x: 320, y: 50, parent: "root", color: "blue" },
+      { id: "n2", title: "Opção 2", text: "2. Resultados de Exames", x: 320, y: 155, parent: "root", color: "yellow" },
+      { id: "n3", title: "Opção 3", text: "3. Falar com Atendente", x: 320, y: 260, parent: "root", color: "purple" }
     ],
     juridico: [
-      { id: "root", title: "Escritório Jurídico", text: "Olá! Bem-vindo. Como nossa equipe pode auxiliar?", x: 40, y: 160, color: "green" },
-      { id: "n1", title: "Opção 1", text: "1. Consultar Andamento de Processo", x: 300, y: 50, parent: "root", color: "yellow" },
-      { id: "n2", title: "Opção 2", text: "2. Enviar Documentos", x: 300, y: 155, parent: "root", color: "orange" },
-      { id: "n3", title: "Opção 3", text: "3. Falar com Advogado", x: 300, y: 260, parent: "root", color: "blue" }
+      { id: "root", title: "Escritório Jurídico", text: "Olá! Bem-vindo. Como nossa equipe pode auxiliar?", x: 60, y: 160, color: "green" },
+      { id: "n1", title: "Opção 1", text: "1. Consultar Andamento de Processo", x: 320, y: 50, parent: "root", color: "yellow" },
+      { id: "n2", title: "Opção 2", text: "2. Enviar Documentos", x: 320, y: 155, parent: "root", color: "orange" },
+      { id: "n3", title: "Opção 3", text: "3. Falar com Advogado", x: 320, y: 260, parent: "root", color: "blue" }
     ]
   };
 
@@ -1393,24 +1534,9 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
   function loadBoardTemplate(key) {
     boardNodes = JSON.parse(JSON.stringify(boardTemplates[key]));
     selectedNodeIds.clear();
+    resetZoomAndPan();
     renderBoardDOM();
     updateObsTextFromNodes();
-  }
-
-  function adjustZoom(delta) {
-    currentZoom = Math.max(0.4, Math.min(1.8, currentZoom + delta));
-    applyZoom();
-  }
-
-  function resetZoom() {
-    currentZoom = 1.0;
-    applyZoom();
-  }
-
-  function applyZoom() {
-    const content = document.getElementById("boardContent");
-    content.style.transform = `scale(${currentZoom})`;
-    document.getElementById("zoom-label").innerText = `${Math.round(currentZoom * 100)}%`;
   }
 
   function branchFromNode(parentId) {
@@ -1445,7 +1571,7 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
       id: newId,
       title: "Nova Etapa",
       text: "Instrução ou mensagem...",
-      x: 300,
+      x: 320,
       y: 200,
       color: "blue"
     });
@@ -1510,11 +1636,12 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
         <div class="node-port" onclick="branchFromNode('${node.id}')" title="Clique para ramificar novo nó">+</div>
       `;
 
-      let isDragging = false, startX, startY;
+      let isDraggingNode = false, startX, startY;
       const initialPositions = new Map();
 
       el.addEventListener('mousedown', (e) => {
         if (['INPUT', 'TEXTAREA', 'BUTTON'].includes(e.target.tagName) || e.target.classList.contains('node-port')) return;
+        e.stopPropagation();
 
         if (e.ctrlKey || e.metaKey) {
           if (selectedNodeIds.has(node.id)) {
@@ -1534,7 +1661,7 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
           el.classList.add('selected');
         }
 
-        isDragging = true;
+        isDraggingNode = true;
         startX = e.clientX;
         startY = e.clientY;
 
@@ -1544,12 +1671,12 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
           if (n) initialPositions.set(selId, { x: n.x, y: n.y });
         });
 
-        document.addEventListener('mousemove', onMouseMove);
-        document.addEventListener('mouseup', onMouseUp);
+        document.addEventListener('mousemove', onNodeDragMove);
+        document.addEventListener('mouseup', onNodeDragUp);
       });
 
-      function onMouseMove(e) {
-        if (!isDragging) return;
+      function onNodeDragMove(e) {
+        if (!isDraggingNode) return;
         const dx = (e.clientX - startX) / currentZoom;
         const dy = (e.clientY - startY) / currentZoom;
 
@@ -1557,8 +1684,8 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
           const n = boardNodes.find(item => item.id === selId);
           const orig = initialPositions.get(selId);
           if (n && orig) {
-            n.x = Math.max(10, Math.min(2950, orig.x + dx));
-            n.y = Math.max(10, Math.min(2050, orig.y + dy));
+            n.x = Math.max(10, Math.min(7600, orig.x + dx));
+            n.y = Math.max(10, Math.min(5600, orig.y + dy));
             const nodeEl = document.getElementById(selId);
             if (nodeEl) {
               nodeEl.style.left = n.x + "px";
@@ -1570,76 +1697,16 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
         renderBoardLines();
       }
 
-      function onMouseUp() {
-        isDragging = false;
-        document.removeEventListener('mousemove', onMouseMove);
-        document.removeEventListener('mouseup', onMouseUp);
+      function onNodeDragUp() {
+        isDraggingNode = false;
+        document.removeEventListener('mousemove', onNodeDragMove);
+        document.removeEventListener('mouseup', onNodeDragUp);
       }
 
       container.appendChild(el);
     });
 
     renderBoardLines();
-  }
-
-  /* MARQUEE SELECTION */
-  const viewport = document.getElementById("boardViewport");
-  const marquee = document.getElementById("selectionMarquee");
-  let isSelecting = false, selStartX, selStartY;
-
-  viewport.addEventListener('mousedown', (e) => {
-    if (e.target.id === 'boardViewport' || e.target.id === 'boardContent' || e.target.id === 'boardSvg') {
-      if (!e.ctrlKey && !e.metaKey) {
-        selectedNodeIds.clear();
-        document.querySelectorAll('.flow-node.selected').forEach(n => n.classList.remove('selected'));
-      }
-      isSelecting = true;
-      const rect = document.getElementById("boardContent").getBoundingClientRect();
-      selStartX = (e.clientX - rect.left) / currentZoom;
-      selStartY = (e.clientY - rect.top) / currentZoom;
-
-      marquee.style.left = selStartX + "px";
-      marquee.style.top = selStartY + "px";
-      marquee.style.width = "0px";
-      marquee.style.height = "0px";
-      marquee.classList.remove('f');
-
-      document.addEventListener('mousemove', onMarqueeMove);
-      document.addEventListener('mouseup', onMarqueeUp);
-    }
-  });
-
-  function onMarqueeMove(e) {
-    if (!isSelecting) return;
-    const rect = document.getElementById("boardContent").getBoundingClientRect();
-    const currX = (e.clientX - rect.left) / currentZoom;
-    const currY = (e.clientY - rect.top) / currentZoom;
-
-    const x = Math.min(selStartX, currX);
-    const y = Math.min(selStartY, currY);
-    const w = Math.abs(currX - selStartX);
-    const h = Math.abs(currY - selStartY);
-
-    marquee.style.left = x + "px";
-    marquee.style.top = y + "px";
-    marquee.style.width = w + "px";
-    marquee.style.height = h + "px";
-
-    boardNodes.forEach(node => {
-      const nodeEl = document.getElementById(node.id);
-      const inBox = (node.x < x + w && node.x + 210 > x && node.y < y + h && node.y + 85 > y);
-      if (inBox) {
-        selectedNodeIds.add(node.id);
-        if (nodeEl) nodeEl.classList.add('selected');
-      }
-    });
-  }
-
-  function onMarqueeUp() {
-    isSelecting = false;
-    marquee.classList.add('f');
-    document.removeEventListener('mousemove', onMarqueeMove);
-    document.removeEventListener('mouseup', onMarqueeUp);
   }
 
   function updateNodeTitle(id, val) {
@@ -1843,6 +1910,7 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
 
   window.addEventListener('DOMContentLoaded', () => {
     loadBoardTemplate('sac');
+    updateTransform();
   });
 
   /* LÓGICA PADRÃO DE DADOS */

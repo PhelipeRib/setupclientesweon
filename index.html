@@ -3,156 +3,299 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Configurando a sua empresa</title>
+  <title>Setup WeON — Onboarding Inteligente</title>
   
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>?v=11">
-  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=11">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>?v=12">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=12">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
   <style>
     :root {
-      --bg: #0b132b;
-      --cd: #1c2541;
-      --in: #0b132b;
-      --ac: #3a86ff;
-      --ac-hover: #2563eb;
-      --dg: #ff4a4a;
+      --bg: #050814;
+      --cd: rgba(18, 26, 53, 0.65);
+      --cd-hover: rgba(28, 40, 80, 0.75);
+      --in: rgba(8, 14, 30, 0.85);
+      --ac: #00f0ff;
+      --ac-hover: #00c8d7;
+      --ac-glow: rgba(0, 240, 255, 0.35);
+      --secondary: #7928ca;
+      --dg: #ff3366;
       --tx: #f8fafc;
       --mu: #94a3b8;
-      --bd: #ffffff1f;
-      /* TOOLTIP NO DARK MODE: ALTO CONTRASTE */
-      --hint-bg: #1e3a8a;
-      --hint-border: #38bdf8;
-      --hint-title: #fde047;
-      --hint-tx: #ffffff;
-      --canvas-dot: rgba(255, 255, 255, 0.15);
-      --step-bg: rgba(255, 255, 255, 0.08);
-      --step-tx: #94a3b8;
+      --bd: rgba(255, 255, 255, 0.08);
+      --bd-glow: rgba(0, 240, 255, 0.4);
+      --hint-bg: linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(121, 40, 202, 0.15) 100%);
+      --hint-border: #00f0ff;
+      --hint-title: #00f0ff;
+      --canvas-dot: rgba(0, 240, 255, 0.12);
+      --step-bg: rgba(0, 240, 255, 0.1);
+      --step-tx: #00f0ff;
     }
 
     [data-theme="light"] {
-      --bg: #f8fafc;
-      --cd: #ffffff;
-      --in: #f1f5f9;
+      --bg: #f4f7fb;
+      --cd: rgba(255, 255, 255, 0.9);
+      --cd-hover: #ffffff;
+      --in: #f8fafc;
       --ac: #0284c7;
       --ac-hover: #0369a1;
+      --ac-glow: rgba(2, 132, 199, 0.25);
+      --secondary: #6366f1;
       --dg: #dc2626;
       --tx: #0f172a;
       --mu: #64748b;
-      --bd: #0000001a;
-      /* TOOLTIP NO LIGHT MODE */
-      --hint-bg: #e0f2fe;
+      --bd: rgba(0, 0, 0, 0.08);
+      --bd-glow: rgba(2, 132, 199, 0.3);
+      --hint-bg: linear-gradient(135deg, #e0f2fe 0%, #ede9fe 100%);
       --hint-border: #0284c7;
       --hint-title: #0369a1;
-      --hint-tx: #0f172a;
-      --canvas-dot: rgba(0, 0, 0, 0.12);
+      --canvas-dot: rgba(0, 0, 0, 0.08);
       --step-bg: #e2e8f0;
-      --step-tx: #475569;
+      --step-tx: #0284c7;
     }
 
-    * { box-sizing: border-box; margin: 0; font-family: 'Inter', sans-serif; transition: background 0.15s, color 0.15s, border-color 0.15s; }
-    body { background: var(--bg); color: var(--tx); min-height: 100vh; overflow-x: hidden; }
+    * { box-sizing: border-box; margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; transition: background 0.2s, border-color 0.2s, color 0.2s; }
     
-    /* BARRA LATERAL EXPANDIDA PARA 320px */
+    body { 
+      background: var(--bg); 
+      color: var(--tx); 
+      min-height: 100vh; 
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(121, 40, 202, 0.06) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+    
     .app { display: grid; grid-template-columns: 320px 1fr; min-height: 100vh; width: 100vw; }
     
-    aside { background: var(--cd); border-right: 1px solid var(--bd); padding: 22px 18px; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; gap: 5px; }
-    aside h1 { color: var(--ac); font-size: 1.15em; font-weight: 800; margin-bottom: 2px; display: flex; align-items: center; gap: 10px; }
-    aside small { color: var(--mu); margin: 14px 0 6px; font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; }
+    /* SIDEBAR FUTURISTA */
+    aside { 
+      background: rgba(8, 14, 30, 0.85); 
+      backdrop-filter: blur(20px);
+      border-right: 1px solid var(--bd); 
+      padding: 24px 18px; 
+      position: sticky; 
+      top: 0; 
+      height: 100vh; 
+      overflow-y: auto; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 6px; 
+      z-index: 20;
+    }
+
+    .brand-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--bd);
+      margin-bottom: 6px;
+    }
+    .brand-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #00f0ff, #7928ca);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 0 15px var(--ac-glow);
+    }
+    .brand-text h1 { font-size: 1.1em; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+    .brand-text span { font-size: 0.7em; color: var(--ac); font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+
+    aside small { color: var(--mu); margin: 12px 0 4px; font-size: 0.68em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
     
-    /* BOTÕES DA SIDEBAR COM INDICAÇÃO DE PASSO */
+    /* ITENS DA BARRA LATERAL */
     .nv { 
       padding: 10px 12px; 
-      border-radius: 9px; 
+      border-radius: 10px; 
       color: var(--mu); 
-      font-size: 0.83em; 
+      font-size: 0.82em; 
       font-weight: 600; 
       display: flex; 
       gap: 10px; 
       align-items: center; 
-      border: 0; 
-      background: 0; 
+      border: 1px solid transparent; 
+      background: transparent; 
       text-align: left; 
       width: 100%; 
       cursor: pointer; 
     }
-    .nv:hover, .nv.on { background: color-mix(in srgb, var(--ac) 15%, transparent); color: var(--ac); }
-    .nv.on .step-tag { background: var(--ac); color: #ffffff; }
-    .nv.on .badge { background: var(--ac); color: #ffffff; border-color: var(--ac); }
+    .nv:hover { 
+      background: rgba(255, 255, 255, 0.04); 
+      color: var(--tx); 
+      border-color: rgba(255, 255, 255, 0.05); 
+    }
+    .nv.on { 
+      background: rgba(0, 240, 255, 0.08); 
+      color: var(--ac); 
+      border-color: var(--ac-glow); 
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.1); 
+    }
+    .nv.on .step-tag { background: var(--ac); color: #000; font-weight: 800; }
+    .nv.on .badge { background: var(--ac); color: #000; border-color: var(--ac); font-weight: 800; }
 
     .step-tag {
       background: var(--step-bg);
       color: var(--step-tx);
-      font-size: 0.72em;
-      font-weight: 800;
-      padding: 3px 6px;
+      font-size: 0.7em;
+      font-weight: 700;
+      padding: 2px 7px;
       border-radius: 6px;
-      white-space: nowrap;
-      letter-spacing: 0.3px;
+      font-family: 'JetBrains Mono', monospace;
     }
 
-    .badge { background: var(--in); color: var(--tx); border: 1px solid var(--bd); font-size: 0.72em; padding: 2px 7px; border-radius: 12px; font-weight: 600; margin-left: auto; }
+    .badge { 
+      background: rgba(255, 255, 255, 0.05); 
+      color: var(--tx); 
+      border: 1px solid var(--bd); 
+      font-size: 0.72em; 
+      padding: 2px 7px; 
+      border-radius: 10px; 
+      font-weight: 600; 
+      margin-left: auto; 
+    }
 
     .theme-toggle { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--bd); }
 
-    main { padding: 24px 28px; min-width: 0; width: 100%; max-width: 1450px; margin: 0 auto; }
+    main { padding: 26px 36px; min-width: 0; width: 100%; max-width: 1450px; margin: 0 auto; }
     @media(max-width: 950px) { .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } }
 
-    .cd { background: var(--cd); border: 1px solid var(--bd); border-radius: 14px; padding: 24px; margin-bottom: 20px; width: 100%; box-shadow: 0 4px 14px rgba(0,0,0,0.05); }
-    h2 { font-size: 1.25em; margin-bottom: 12px; color: var(--tx); display: flex; align-items: center; gap: 10px; }
+    /* CHIWE BANNER (GUIA INTERATIVO) */
+    .chiwe-guide-banner {
+      background: linear-gradient(135deg, rgba(18, 26, 53, 0.85) 0%, rgba(30, 42, 85, 0.7) 100%);
+      border: 1px solid var(--bd-glow);
+      backdrop-filter: blur(16px);
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+    .chiwe-avatar {
+      font-size: 2.2em;
+      filter: drop-shadow(0 0 10px var(--ac-glow));
+      animation: floatChiwe 3s ease-in-out infinite;
+    }
+    @keyframes floatChiwe {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(4deg); }
+    }
+    .chiwe-speech { flex: 1; }
+    .chiwe-speech-name { font-size: 0.75em; text-transform: uppercase; color: var(--ac); font-family: 'JetBrains Mono', monospace; font-weight: 800; letter-spacing: 0.5px; }
+    .chiwe-speech-text { font-size: 0.88em; color: var(--tx); line-height: 1.45; margin-top: 2px; }
+
+    /* CARDS GLASSMORPHISM */
+    .cd { 
+      background: var(--cd); 
+      border: 1px solid var(--bd); 
+      backdrop-filter: blur(16px);
+      border-radius: 16px; 
+      padding: 24px; 
+      margin-bottom: 20px; 
+      width: 100%; 
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+    }
+    h2 { font-size: 1.3em; margin-bottom: 12px; color: #ffffff; display: flex; align-items: center; gap: 10px; font-weight: 800; }
+    [data-theme="light"] h2 { color: #0f172a; }
     
-    /* TOOLTIP DE ALTO CONTRASTE COM GLOW SUTIL */
+    /* TOOLTIP / HINT-BOX REFORÇADA COM GLOW */
     .hint-box { 
       background: var(--hint-bg); 
-      border: 1.5px solid var(--hint-border); 
-      border-left: 6px solid var(--hint-border); 
-      border-radius: 10px; 
+      border: 1px solid var(--hint-border); 
+      border-left: 5px solid var(--hint-border); 
+      border-radius: 12px; 
       padding: 14px 18px; 
       margin-bottom: 20px; 
       font-size: 0.86em; 
       line-height: 1.6; 
-      color: var(--hint-tx); 
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+      color: var(--tx); 
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.08); 
     }
     .hint-box .hint-title {
       font-weight: 800;
       color: var(--hint-title);
-      font-size: 0.92em;
+      font-size: 0.85em;
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
+      font-family: 'JetBrains Mono', monospace;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
-    .hint-box b { color: #ffffff; text-decoration: underline; }
-    [data-theme="light"] .hint-box b { color: #0284c7; }
     
-    label { display: block; font-size: 0.78em; color: var(--mu); margin-bottom: 5px; font-weight: 600; }
-    input, select, textarea { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 10px 12px; width: 100%; font-size: 0.86em; margin-bottom: 12px; outline: none; }
-    input:focus, select:focus, textarea:focus { border-color: var(--ac); box-shadow: 0 0 0 2px color-mix(in srgb, var(--ac) 25%, transparent); }
+    label { display: block; font-size: 0.78em; color: var(--mu); margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+    input, select, textarea { 
+      background: var(--in); 
+      border: 1px solid var(--bd); 
+      color: var(--tx); 
+      border-radius: 10px; 
+      padding: 11px 14px; 
+      width: 100%; 
+      font-size: 0.88em; 
+      margin-bottom: 14px; 
+      outline: none; 
+    }
+    input:focus, select:focus, textarea:focus { 
+      border-color: var(--ac); 
+      box-shadow: 0 0 15px var(--ac-glow); 
+    }
     
-    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
     @media(max-width: 768px) { .g2, .g3 { grid-template-columns: 1fr; } }
 
-    .btn { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 8px 14px; font-size: 0.82em; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
-    .btn:hover { border-color: var(--ac); color: var(--ac); }
-    .btn.pr { background: var(--ac); color: #ffffff !important; border-color: var(--ac); font-weight: 700; }
-    .btn.pr:hover { background: var(--ac-hover); border-color: var(--ac-hover); }
+    .btn { 
+      background: rgba(255, 255, 255, 0.05); 
+      border: 1px solid var(--bd); 
+      color: var(--tx); 
+      border-radius: 10px; 
+      padding: 9px 16px; 
+      font-size: 0.83em; 
+      font-weight: 600; 
+      cursor: pointer; 
+      display: inline-flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 8px; 
+    }
+    .btn:hover { border-color: var(--ac); color: var(--ac); box-shadow: 0 0 15px rgba(0, 240, 255, 0.2); }
+    .btn.pr { 
+      background: linear-gradient(135deg, var(--ac), #0284c7); 
+      color: #000000 !important; 
+      border-color: var(--ac); 
+      font-weight: 800; 
+      box-shadow: 0 0 20px var(--ac-glow);
+    }
+    .btn.pr:hover { filter: brightness(1.15); transform: translateY(-1px); }
     .btn.dn:hover { border-color: var(--dg); color: var(--dg); }
 
     .tb-wrap { overflow-x: auto; margin-top: 10px; }
     table { width: 100%; border-collapse: collapse; font-size: 0.84em; text-align: left; }
-    th { background: var(--in); color: var(--ac); padding: 10px 12px; border-bottom: 1px solid var(--bd); font-weight: 700; font-size: 0.76em; text-transform: uppercase; }
-    td { padding: 10px 12px; border-bottom: 1px solid var(--bd); color: var(--tx); word-break: break-word; }
-    tr:hover td { background: color-mix(in srgb, var(--in) 50%, transparent); }
+    th { background: rgba(0, 0, 0, 0.25); color: var(--ac); padding: 12px 14px; border-bottom: 1px solid var(--bd); font-weight: 700; font-size: 0.74em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+    td { padding: 12px 14px; border-bottom: 1px solid var(--bd); color: var(--tx); word-break: break-word; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
 
-    .up-box { border: 2px dashed var(--bd); background: var(--in); border-radius: 8px; padding: 14px; text-align: center; cursor: pointer; margin-bottom: 12px; }
+    .up-box { 
+      border: 2px dashed var(--bd); 
+      background: var(--in); 
+      border-radius: 12px; 
+      padding: 16px; 
+      text-align: center; 
+      cursor: pointer; 
+      margin-bottom: 12px; 
+    }
     .up-box:hover { border-color: var(--ac); }
 
-    /* MIRO BOARD / CANVAS */
+    /* MIRO BOARD / CANVAS ESTILIZADO */
     .flow-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
     
     .zoom-controls {
@@ -160,8 +303,8 @@
       background: var(--in);
       border: 1px solid var(--bd);
       border-radius: 8px;
-      padding: 2px;
-      gap: 2px;
+      padding: 3px;
+      gap: 3px;
     }
     .zoom-btn {
       background: transparent;
@@ -172,17 +315,17 @@
       cursor: pointer;
       border-radius: 6px;
     }
-    .zoom-btn:hover { background: color-mix(in srgb, var(--ac) 20%, transparent); color: var(--ac); }
+    .zoom-btn:hover { background: rgba(0, 240, 255, 0.15); color: var(--ac); }
 
     .flow-canvas-viewport {
       position: relative;
       width: 100%;
       height: 560px;
       background: radial-gradient(var(--canvas-dot) 1.5px, transparent 1.5px);
-      background-size: 20px 20px;
+      background-size: 22px 22px;
       background-color: var(--in);
       border: 1px solid var(--bd);
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
       user-select: none;
       cursor: crosshair;
@@ -210,7 +353,7 @@
     .selection-box {
       position: absolute;
       border: 1.5px dashed var(--ac);
-      background: color-mix(in srgb, var(--ac) 15%, transparent);
+      background: rgba(0, 240, 255, 0.15);
       pointer-events: none;
       z-index: 10;
       border-radius: 4px;
@@ -220,8 +363,8 @@
       position: absolute;
       width: 210px;
       border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-      padding: 9px 11px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      padding: 10px 12px;
       z-index: 2;
       display: flex;
       flex-direction: column;
@@ -230,11 +373,11 @@
       border: 2px solid transparent;
       outline: none;
     }
-    .flow-node:active { cursor: grabbing; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45); }
+    .flow-node:active { cursor: grabbing; box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5); }
 
     .flow-node.selected {
-      border-color: #38bdf8 !important;
-      box-shadow: 0 0 0 3px #38bdf8, 0 10px 25px rgba(0,0,0,0.4) !important;
+      border-color: #00f0ff !important;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.5) !important;
     }
 
     .flow-node.color-yellow { background: #fef08a; border-color: #eab308; color: #713f12; }
@@ -291,39 +434,38 @@
       width: 22px;
       height: 22px;
       background: var(--ac);
-      color: #ffffff;
+      color: #000000;
+      font-weight: 900;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.75em;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      box-shadow: 0 0 10px var(--ac-glow);
       border: 2px solid var(--cd);
       z-index: 5;
     }
-    .node-port:hover { transform: translateY(-50%) scale(1.2); background: var(--ac-hover); }
+    .node-port:hover { transform: translateY(-50%) scale(1.2); }
 
     .fluxo-preview-card {
       background: var(--in);
       border: 1px solid var(--bd);
-      border-radius: 10px;
-      padding: 12px;
+      border-radius: 12px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
     .fluxo-preview-img {
       width: 100%;
-      max-height: 220px;
+      max-height: 240px;
       object-fit: contain;
-      background: #0f172a;
+      background: #050814;
       border-radius: 8px;
       border: 1px solid var(--bd);
       cursor: pointer;
-      transition: transform 0.2s;
     }
-    .fluxo-preview-img:hover { transform: scale(1.01); }
 
     .f { display: none; }
   </style>
@@ -332,58 +474,65 @@
 
 <div class="app">
   <aside>
-    <h1><i class="fas fa-clipboard-check"></i> Setup WeON</h1>
+    <div class="brand-header">
+      <div class="brand-avatar">🐵</div>
+      <div class="brand-text">
+        <h1>WeON Setup</h1>
+        <span>CHIWE CO-PILOT</span>
+      </div>
+    </div>
+    
     <small>Roteiro de Configuração</small>
     
     <button class="nv on" onclick="switchTab('numeros')" id="btn-numeros">
-      <span class="step-tag">Passo 1</span>
+      <span class="step-tag">01</span>
       <span><i class="fa-solid fa-phone"></i> Telefones / WhatsApp</span>
       <span class="badge" id="count-numeros">0</span>
     </button>
     <button class="nv" onclick="switchTab('grupos')" id="btn-grupos">
-      <span class="step-tag">Passo 2</span>
+      <span class="step-tag">02</span>
       <span><i class="fa-solid fa-layer-group"></i> Setores / Filas</span>
       <span class="badge" id="count-grupos">0</span>
     </button>
     <button class="nv" onclick="switchTab('supervisores')" id="btn-supervisores">
-      <span class="step-tag">Passo 3</span>
-      <span><i class="fa-solid fa-user-tie"></i> Gestores / Supervisores</span>
+      <span class="step-tag">03</span>
+      <span><i class="fa-solid fa-user-tie"></i> Gestores / Supervisão</span>
       <span class="badge" id="count-supervisores">0</span>
     </button>
     <button class="nv" onclick="switchTab('agentes')" id="btn-agentes">
-      <span class="step-tag">Passo 4</span>
+      <span class="step-tag">04</span>
       <span><i class="fa-solid fa-headset"></i> Atendentes (Equipe)</span>
       <span class="badge" id="count-agentes">0</span>
     </button>
     <button class="nv" onclick="switchTab('grupos_agentes')" id="btn-grupos_agentes">
-      <span class="step-tag">Passo 5</span>
+      <span class="step-tag">05</span>
       <span><i class="fa-solid fa-sitemap"></i> Atendente x Setor</span>
       <span class="badge" id="count-grupos_agentes">0</span>
     </button>
     <button class="nv" onclick="switchTab('qualificacoes')" id="btn-qualificacoes">
-      <span class="step-tag">Passo 6</span>
-      <span><i class="fa-solid fa-tags"></i> Motivos de Finalização</span>
+      <span class="step-tag">06</span>
+      <span><i class="fa-solid fa-tags"></i> Motivos de Encerramento</span>
       <span class="badge" id="count-qualificacoes">0</span>
     </button>
     <button class="nv" onclick="switchTab('calendario')" id="btn-calendario">
-      <span class="step-tag">Passo 7</span>
+      <span class="step-tag">07</span>
       <span><i class="fa-solid fa-clock"></i> Horário de Atendimento</span>
       <span class="badge" id="count-calendario">0</span>
     </button>
     <button class="nv" onclick="switchTab('fluxos')" id="btn-fluxos">
-      <span class="step-tag">Passo 8</span>
+      <span class="step-tag">08</span>
       <span><i class="fa-solid fa-diagram-project"></i> Menu do Bot / Fluxo</span>
       <span class="badge" id="count-fluxos">0</span>
     </button>
     <button class="nv" onclick="switchTab('templates')" id="btn-templates">
-      <span class="step-tag">Passo 9</span>
+      <span class="step-tag">09</span>
       <span><i class="fa-brands fa-whatsapp"></i> Modelos de Mensagens</span>
       <span class="badge" id="count-templates">0</span>
     </button>
 
     <small>Finalização</small>
     <button class="nv" onclick="switchTab('revisao')" id="btn-revisao" style="color: var(--ac); font-weight: 700;">
-      <span class="step-tag" style="background: color-mix(in srgb, var(--ac) 20%, transparent); color: var(--ac);">Fim</span>
+      <span class="step-tag" style="background: var(--ac); color: #000;">FIM</span>
       <span><i class="fa-solid fa-paper-plane"></i> Revisar & Concluir</span>
       <i class="fa-solid fa-chevron-right" style="font-size: 0.75em; margin-left: auto;"></i>
     </button>
@@ -396,6 +545,17 @@
   </aside>
 
   <main>
+    <!-- CHIWE CO-PILOT BANNER INTERATIVO -->
+    <div class="chiwe-guide-banner">
+      <div class="chiwe-avatar">🐵</div>
+      <div class="chiwe-speech">
+        <div class="chiwe-speech-name">Dica do Chiwe</div>
+        <div class="chiwe-speech-text" id="chiwe-message">
+          E aí! Eu sou o Chiwe, mascote da WeON! Vou te acompanhar em cada passo para deixar o atendimento da sua empresa voando. Comece cadastrando as suas linhas de WhatsApp!
+        </div>
+      </div>
+    </div>
+
     <!-- 1. NÚMEROS -->
     <div id="section-numeros" class="tab-content">
       <div class="cd">
@@ -428,7 +588,7 @@
         <div class="hint-box">
           <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> O que são setores / filas?</div>
           São os departamentos da sua empresa para onde as conversas e ligações serão distribuídas.<br>
-          <b>Exemplos comuns:</b> <i>Comercial / Vendas, Financeiro, Cobrança, Suporte Técnico, Agendamento de Consultas</i>.
+          <b>Exemplos comuns:</b> Comercial / Vendas, Financeiro, Cobrança, Suporte Técnico, Agendamento.
         </div>
         <form onsubmit="addData('grupos', event)">
           <div class="g2">
@@ -544,8 +704,8 @@
         <h2><i class="fa-solid fa-tags"></i> Passo 6: Motivos de Finalização (Tabulações)</h2>
         <div class="hint-box">
           <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Para que servem os motivos de finalização?</div>
-          São os desfechos que os atendentes selecionam ao encerrar cada chamado para alimentar os relatórios da diretoria.<br>
-          <b>Exemplos:</b> <i>Venda Concluída, Dúvida Sanada, Cliente Inadimplente, Sem Resposta do Cliente, Reunião Agendada</i>.
+          São os desfechos que os atendentes selecionam ao encerrar cada chamado para alimentar os relatórios gerenciais da sua empresa.<br>
+          <b>Exemplos:</b> Venda Concluída, Dúvida Sanada, Cliente Inadimplente, Sem Resposta do Cliente, Reunião Agendada.
         </div>
         <form onsubmit="addData('qualificacoes', event)">
           <div class="g2">
@@ -644,7 +804,7 @@
             </div>
           </div>
           <div style="text-align: right;">
-            <button type="submit" class="btn pr" id="btn-salvar-fluxo" style="padding: 10px 22px; font-size: 0.9em; background: #16a34a; border-color: #16a34a;">
+            <button type="submit" class="btn pr" id="btn-salvar-fluxo" style="padding: 10px 22px; font-size: 0.9em;">
               <i class="fa-solid fa-camera"></i> Salvar Fluxo & Anexar Imagem Automaticamente
             </button>
           </div>
@@ -713,6 +873,19 @@
   let currentZoom = 1.0;
   let selectedNodeIds = new Set();
 
+  const chiweTips = {
+    numeros: "E aí! Comece cadastrando os números de WhatsApp e telefone que a sua empresa vai usar. Quanto mais organizado, melhor!",
+    grupos: "Esses são os setores do seu atendimento. Exemplo: Vendas, Suporte ou Financeiro. É para cá que os clientes serão distribuídos!",
+    supervisores: "Aqui entram os chefes e líderes! Quem estiver cadastrado aqui poderá ver relatórios e dashboards em tempo real.",
+    agentes: "Cadastre a sua tropa de atendimento! São os operadores que vão trocar mensagens e atender as ligações.",
+    grupos_agentes: "Agora conecte cada atendente ao seu setor correspondente. É só selecionar quem atende o quê!",
+    qualificacoes: "Como cada conversa termina? 'Venda realizada', 'Dúvida tirada' ou 'Sem retorno'? Isso gera as métricas da sua empresa!",
+    calendario: "Qual é o expediente do seu escritório? Horário de abertura e fechamento para os clientes saberem quando vocês atendem.",
+    fluxos: "Essa é a minha parte favorita! Escolha um modelo de bot do seu segmento ou monte o seu no quadro interativo!",
+    templates: "Mensagens pré-definidas para envio rápido! Lembretes de cobrança, confirmação de reunião e saudações ativas.",
+    revisao: "Tudo pronto! Dê uma última olhada com calma no resumo do seu setup antes de enviar para a nossa equipe técnica!"
+  };
+
   const setupData = {
     "Números de Atendimento": [],
     "Lista de Grupos": [],
@@ -753,6 +926,12 @@
     const activeBtn = document.getElementById(`btn-${tabId}`);
     if(activeBtn) activeBtn.classList.add('on');
 
+    // Atualiza fala dinâmica do Chiwe
+    const speechEl = document.getElementById('chiwe-message');
+    if (speechEl && chiweTips[tabId]) {
+      speechEl.innerText = chiweTips[tabId];
+    }
+
     if(tabId === 'grupos_agentes') updateSelectsVinculo();
     if(tabId === 'fluxos') renderBoardLines();
     if(tabId === 'revisao') renderRevisao();
@@ -781,7 +960,7 @@
     }
   }
 
-  /* MOTOR VISUAL MIRO */
+  /* MOTOR VISUAL DO MIRO */
   let boardNodes = [];
 
   const boardTemplates = {
@@ -1098,7 +1277,7 @@
     if (!svg) return;
     svg.innerHTML = "";
 
-    const lineColor = document.documentElement.getAttribute('data-theme') === 'light' ? '#0284c7' : '#3a86ff';
+    const lineColor = document.documentElement.getAttribute('data-theme') === 'light' ? '#0284c7' : '#00f0ff';
 
     const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
     defs.innerHTML = `
@@ -1151,13 +1330,13 @@
     const ctx = canvas.getContext("2d");
 
     const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-    ctx.fillStyle = isLight ? "#f8fafc" : "#0b132b";
+    ctx.fillStyle = isLight ? "#f8fafc" : "#050814";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     const offX = pad - minX;
     const offY = pad - minY;
 
-    ctx.strokeStyle = isLight ? "#0284c7" : "#3a86ff";
+    ctx.strokeStyle = isLight ? "#0284c7" : "#00f0ff";
     ctx.lineWidth = 2.2;
 
     boardNodes.forEach(node => {
@@ -1207,7 +1386,7 @@
       ctx.stroke();
 
       ctx.fillStyle = theme.text;
-      ctx.font = "bold 11px Inter, sans-serif";
+      ctx.font = "bold 11px 'Plus Jakarta Sans', sans-serif";
       ctx.fillText(node.title.substring(0, 24), nx + 10, ny + 18);
 
       ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
@@ -1216,7 +1395,7 @@
       ctx.fill();
 
       ctx.fillStyle = "#0f172a";
-      ctx.font = "10px Inter, sans-serif";
+      ctx.font = "10px 'Plus Jakarta Sans', sans-serif";
       const words = (node.text || "").split(" ");
       let line = "", lineY = ny + 40;
       for (let w of words) {
@@ -1383,10 +1562,10 @@
     let html = '';
 
     for (const [sheet, items] of Object.entries(setupData)) {
-      html += `<div style="background: var(--in); padding: 14px; border-radius: 8px; border: 1px solid var(--bd);">
+      html += `<div style="background: var(--in); padding: 16px; border-radius: 12px; border: 1px solid var(--bd);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <strong style="color: var(--ac); font-size: 0.9em;">${sheet}</strong>
-          <span class="badge" style="background: var(--ac); color: #ffffff;">${items.length}</span>
+          <strong style="color: var(--ac); font-size: 0.9em; font-family:'JetBrains Mono', monospace;">${sheet}</strong>
+          <span class="badge" style="background: var(--ac); color: #000; font-weight:800;">${items.length}</span>
         </div>`;
 
       if (items.length > 0) {
@@ -1399,7 +1578,7 @@
               <div class="fluxo-preview-card">
                 ${isImage ? `
                   <div>
-                    <label style="margin-bottom:4px; color:var(--ac); font-weight:700;"><i class="fa-solid fa-image"></i> Diagrama do Bot Anexado:</label>
+                    <label style="margin-bottom:6px; color:var(--ac); font-weight:700;"><i class="fa-solid fa-image"></i> Diagrama do Bot Anexado:</label>
                     <img src="${anexo}" class="fluxo-preview-img" alt="Diagrama do Fluxo" title="Clique com o botão direito se quiser abrir em nova aba">
                   </div>
                 ` : `
@@ -1407,7 +1586,7 @@
                 `}
                 <div>
                   <label style="margin-bottom:2px; font-weight:700;">Instruções Cadastradas:</label>
-                  <p style="font-size:0.78em; color:var(--mu); white-space:pre-line; max-height:80px; overflow-y:auto; background:rgba(0,0,0,0.2); padding:6px 8px; border-radius:6px;">
+                  <p style="font-size:0.78em; color:var(--mu); white-space:pre-line; max-height:80px; overflow-y:auto; background:rgba(0,0,0,0.2); padding:8px 10px; border-radius:8px;">
                     ${item["Descrição/Lógica"].substring(0, 300)}${item["Descrição/Lógica"].length > 300 ? '...' : ''}
                   </p>
                 </div>

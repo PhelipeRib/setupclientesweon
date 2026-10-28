@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Configurando a sua empresa</title>
   
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>?v=7">
-  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=7">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>?v=8">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=8">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     :root {
@@ -23,7 +23,7 @@
       --bd: #ffffff1f;
       --hint-bg: #1e293b;
       --hint-border: #38bdf844;
-      --canvas-dot: rgba(255, 255, 255, 0.12);
+      --canvas-dot: rgba(255, 255, 255, 0.15);
     }
 
     [data-theme="light"] {
@@ -38,177 +38,193 @@
       --bd: #0000001a;
       --hint-bg: #f0f9ff;
       --hint-border: #0284c733;
-      --canvas-dot: rgba(0, 0, 0, 0.1);
+      --canvas-dot: rgba(0, 0, 0, 0.12);
     }
 
-    * { box-sizing: border-box; margin: 0; font-family: 'Inter', sans-serif; transition: background 0.2s, color 0.2s, border-color 0.2s; }
-    body { background: var(--bg); color: var(--tx); min-height: 100vh; }
-    .app { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+    * { box-sizing: border-box; margin: 0; font-family: 'Inter', sans-serif; transition: background 0.15s, color 0.15s, border-color 0.15s; }
+    body { background: var(--bg); color: var(--tx); min-height: 100vh; overflow-x: hidden; }
     
-    aside { background: var(--cd); border-right: 1px solid var(--bd); padding: 20px 16px; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
-    aside h1 { color: var(--ac); font-size: 1.1em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
-    aside small { color: var(--mu); margin: 16px 0 6px; font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .app { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; width: 100vw; }
     
-    .nv { padding: 9px 12px; border-radius: 8px; color: var(--mu); font-size: 0.82em; font-weight: 600; display: flex; gap: 10px; align-items: center; justify-content: space-between; border: 0; background: 0; text-align: left; width: 100%; cursor: pointer; }
+    aside { background: var(--cd); border-right: 1px solid var(--bd); padding: 18px 14px; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
+    aside h1 { color: var(--ac); font-size: 1.05em; font-weight: 800; margin-bottom: 2px; display: flex; align-items: center; gap: 8px; }
+    aside small { color: var(--mu); margin: 12px 0 4px; font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .nv { padding: 8px 10px; border-radius: 8px; color: var(--mu); font-size: 0.8em; font-weight: 600; display: flex; gap: 8px; align-items: center; justify-content: space-between; border: 0; background: 0; text-align: left; width: 100%; cursor: pointer; }
     .nv:hover, .nv.on { background: color-mix(in srgb, var(--ac) 15%, transparent); color: var(--ac); }
-    .nv i { width: 18px; text-align: center; }
-    .badge { background: var(--in); color: var(--tx); border: 1px solid var(--bd); font-size: 0.75em; padding: 2px 7px; border-radius: 12px; font-weight: 600; }
+    .nv i { width: 16px; text-align: center; }
+    .badge { background: var(--in); color: var(--tx); border: 1px solid var(--bd); font-size: 0.72em; padding: 2px 6px; border-radius: 12px; font-weight: 600; }
     .nv.on .badge { background: var(--ac); color: #ffffff; border-color: var(--ac); }
 
-    .theme-toggle { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--bd); }
+    .theme-toggle { margin-top: auto; padding-top: 10px; border-top: 1px solid var(--bd); }
 
-    main { padding: 24px; min-width: 0; max-width: 1250px; }
+    main { padding: 20px 24px; min-width: 0; width: 100%; max-width: 1400px; margin: 0 auto; }
     @media(max-width: 900px) { .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } }
 
-    .cd { background: var(--cd); border: 1px solid var(--bd); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
-    h2 { font-size: 1.25em; margin-bottom: 6px; color: var(--tx); display: flex; align-items: center; gap: 10px; }
+    .cd { background: var(--cd); border: 1px solid var(--bd); border-radius: 12px; padding: 20px; margin-bottom: 18px; width: 100%; }
+    h2 { font-size: 1.2em; margin-bottom: 6px; color: var(--tx); display: flex; align-items: center; gap: 8px; }
     
-    .hint-box { background: var(--hint-bg); border: 1px solid var(--hint-border); border-left: 4px solid var(--ac); border-radius: 8px; padding: 12px 14px; margin-bottom: 16px; font-size: 0.84em; line-height: 1.5; color: var(--tx); }
+    .hint-box { background: var(--hint-bg); border: 1px solid var(--hint-border); border-left: 4px solid var(--ac); border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.82em; line-height: 1.5; color: var(--tx); }
     .hint-box b { color: var(--ac); }
     
-    label { display: block; font-size: 0.78em; color: var(--mu); margin-bottom: 6px; font-weight: 600; }
-    input, select, textarea { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 10px 12px; width: 100%; font-size: 0.88em; margin-bottom: 12px; outline: none; }
+    label { display: block; font-size: 0.76em; color: var(--mu); margin-bottom: 5px; font-weight: 600; }
+    input, select, textarea { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 9px 12px; width: 100%; font-size: 0.85em; margin-bottom: 10px; outline: none; }
     input:focus, select:focus, textarea:focus { border-color: var(--ac); box-shadow: 0 0 0 2px color-mix(in srgb, var(--ac) 25%, transparent); }
     
     .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
-    @media(max-width: 700px) { .g2, .g3 { grid-template-columns: 1fr; } }
+    @media(max-width: 768px) { .g2, .g3 { grid-template-columns: 1fr; } }
 
-    .btn { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 8px 14px; font-size: 0.82em; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+    .btn { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 7px 12px; font-size: 0.8em; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
     .btn:hover { border-color: var(--ac); color: var(--ac); }
-    .btn.pr { background: var(--ac); color: #ffffff !important; border-color: var(--ac); font-weight: 800; }
+    .btn.pr { background: var(--ac); color: #ffffff !important; border-color: var(--ac); font-weight: 700; }
     .btn.pr:hover { background: var(--ac-hover); border-color: var(--ac-hover); }
     .btn.dn:hover { border-color: var(--dg); color: var(--dg); }
 
     .tb-wrap { overflow-x: auto; margin-top: 10px; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.85em; text-align: left; }
-    th { background: var(--in); color: var(--ac); padding: 10px 12px; border-bottom: 1px solid var(--bd); font-weight: 700; font-size: 0.78em; text-transform: uppercase; }
-    td { padding: 10px 12px; border-bottom: 1px solid var(--bd); color: var(--tx); word-break: break-word; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.82em; text-align: left; }
+    th { background: var(--in); color: var(--ac); padding: 9px 10px; border-bottom: 1px solid var(--bd); font-weight: 700; font-size: 0.75em; text-transform: uppercase; }
+    td { padding: 9px 10px; border-bottom: 1px solid var(--bd); color: var(--tx); word-break: break-word; }
     tr:hover td { background: color-mix(in srgb, var(--in) 50%, transparent); }
 
-    .up-box { border: 2px dashed var(--bd); background: var(--in); border-radius: 10px; padding: 14px; text-align: center; cursor: pointer; margin-bottom: 12px; }
+    .up-box { border: 2px dashed var(--bd); background: var(--in); border-radius: 8px; padding: 12px; text-align: center; cursor: pointer; margin-bottom: 10px; }
     .up-box:hover { border-color: var(--ac); }
 
     /* ========================================================
-       MIRO / FIGJAM STYLE CANVAS
+       MIRO BOARD / CANVAS ESTENDIDO COM ZOOM
     ======================================================== */
     .flow-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
-    .flow-canvas-wrapper {
+    
+    .zoom-controls {
+      display: inline-flex;
+      background: var(--in);
+      border: 1px solid var(--bd);
+      border-radius: 8px;
+      padding: 2px;
+      gap: 2px;
+    }
+    .zoom-btn {
+      background: transparent;
+      border: 0;
+      color: var(--tx);
+      padding: 5px 9px;
+      font-size: 0.78em;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    .zoom-btn:hover { background: color-mix(in srgb, var(--ac) 20%, transparent); color: var(--ac); }
+
+    .flow-canvas-viewport {
       position: relative;
       width: 100%;
-      height: 520px;
+      height: 560px;
       background: radial-gradient(var(--canvas-dot) 1.5px, transparent 1.5px);
-      background-size: 24px 24px;
+      background-size: 20px 20px;
       background-color: var(--in);
       border: 1px solid var(--bd);
       border-radius: 12px;
-      overflow: auto;
+      overflow: hidden;
       user-select: none;
+      cursor: default;
     }
+
+    .flow-canvas-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3200px;
+      height: 2200px;
+      transform-origin: 0 0;
+    }
+
     .flow-svg {
       position: absolute;
       top: 0;
       left: 0;
-      width: 2600px;
-      height: 1600px;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
       z-index: 1;
     }
 
-    /* NODES */
     .flow-node {
       position: absolute;
-      width: 200px;
+      width: 210px;
       border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
-      padding: 10px 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      padding: 9px 11px;
       z-index: 2;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
       cursor: grab;
       border: 2px solid transparent;
-      transition: box-shadow 0.15s, border-color 0.15s;
     }
-    .flow-node:active { cursor: grabbing; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4); }
+    .flow-node:active { cursor: grabbing; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45); }
 
-    /* CORES ESTILO FIGJAM / MIRO */
     .flow-node.color-yellow { background: #fef08a; border-color: #eab308; color: #713f12; }
     .flow-node.color-orange { background: #fed7aa; border-color: #f97316; color: #7c2d12; }
     .flow-node.color-green  { background: #bbf7d0; border-color: #22c55e; color: #14532d; }
     .flow-node.color-blue   { background: #bfdbfe; border-color: #3b82f6; color: #1e3a8a; }
     .flow-node.color-purple { background: #e9d5ff; border-color: #a855f7; color: #581c87; }
+    .flow-node.shape-decision { border-radius: 20px; border-style: dashed; }
 
-    /* FORMA LOSANGO (DECISÃO) */
-    .flow-node.shape-decision {
-      border-radius: 18px;
-      border-style: dashed;
-    }
-
-    .node-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 4px;
-    }
+    .node-header { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
     .node-header input {
       background: transparent;
       border: 0;
       font-weight: 800;
-      font-size: 0.85em;
+      font-size: 0.82em;
       padding: 0;
       margin: 0;
       outline: none;
       color: inherit;
       width: 100%;
     }
-    .node-tools { display: flex; gap: 4px; align-items: center; }
+    .node-tools { display: flex; gap: 3px; align-items: center; }
     .node-tool-btn {
       background: rgba(0,0,0,0.08);
       border: 0;
       color: inherit;
       border-radius: 4px;
-      padding: 2px 5px;
-      font-size: 0.72em;
+      padding: 2px 4px;
+      font-size: 0.7em;
       cursor: pointer;
       line-height: 1;
     }
     .node-tool-btn:hover { background: rgba(0,0,0,0.18); }
 
     .node-body textarea {
-      background: rgba(255, 255, 255, 0.55);
+      background: rgba(255, 255, 255, 0.65);
       border: 1px solid rgba(0, 0, 0, 0.12);
       border-radius: 6px;
-      font-size: 0.82em;
+      font-size: 0.8em;
       padding: 6px 8px;
       color: #0f172a;
       resize: vertical;
-      min-height: 48px;
+      min-height: 44px;
       margin: 0;
       width: 100%;
       outline: none;
-      font-family: inherit;
     }
 
-    /* CONECTOR DE SAÍDA (+) */
     .node-port {
       position: absolute;
-      right: -13px;
+      right: -12px;
       top: 50%;
       transform: translateY(-50%);
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       background: var(--ac);
       color: #ffffff;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8em;
+      font-size: 0.75em;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
       border: 2px solid var(--cd);
-      transition: transform 0.15s, background 0.15s;
       z-index: 5;
     }
     .node-port:hover { transform: translateY(-50%) scale(1.2); background: var(--ac-hover); }
@@ -278,7 +294,7 @@
     <div id="section-numeros" class="tab-content">
       <div class="cd">
         <h2><i class="fa-solid fa-phone"></i> 1. Números de WhatsApp e Telefone</h2>
-        <div class="hint-box">Cadastre os números de contato da sua empresa (WhatsApp geral, suporte ou números receptivos).</div>
+        <div class="hint-box">Cadastre os números de contato da sua empresa (WhatsApp geral, comercial ou suporte).</div>
         <form onsubmit="addData('numeros', event)">
           <div class="g2">
             <div>
@@ -451,53 +467,59 @@
       <div class="cd"><div class="tb-wrap" id="table-calendario"></div></div>
     </div>
 
-    <!-- 8. FLUXOS & MIRO BOARD BUILDER -->
+    <!-- 8. FLUXOS & MIRO BOARD COM ZOOM -->
     <div id="section-fluxos" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-diagram-project"></i> 8. Construtor Visual do Bot (Estilo Miro / FigJam)</h2>
+        <h2><i class="fa-solid fa-diagram-project"></i> 8. Construtor Visual do Bot (Estilo Miro)</h2>
         <div class="hint-box">
-          <b>Como montar:</b> Escolha um template abaixo ou use o botão <b>+</b> na lateral de qualquer balão para puxar novos nós. Você pode criar quantas ramificações quiser a partir do mesmo balão[cite: 29]. Arraste os balões livremente pelo quadro[cite: 29]!
+          <b>Como montar:</b> Escolha um modelo abaixo ou clique no <b>+</b> na lateral dos balões para puxar novos nós. Use os botões de <b>Zoom</b> para afastar e aproximar a visão. Quando terminar, basta clicar em <b>"Salvar Fluxo & Anexar Imagem"</b> abaixo!
         </div>
 
-        <!-- TOOLBAR DE TEMPLATES -->
         <div class="flow-toolbar">
-          <label style="margin:0; font-weight:700; color:var(--tx); font-size:0.82em;"><i class="fa-solid fa-wand-magic-sparkles"></i> Modelos Prontos:</label>
-          <button type="button" class="btn" onclick="loadBoardTemplate('sac')"><i class="fa-solid fa-headset"></i> SAC / Geral</button>
+          <label style="margin:0; font-weight:700; color:var(--tx); font-size:0.8em;"><i class="fa-solid fa-wand-magic-sparkles"></i> Modelos:</label>
+          <button type="button" class="btn" onclick="loadBoardTemplate('sac')"><i class="fa-solid fa-headset"></i> SAC</button>
           <button type="button" class="btn" onclick="loadBoardTemplate('vendas')"><i class="fa-solid fa-cart-shopping"></i> Vendas</button>
           <button type="button" class="btn" onclick="loadBoardTemplate('cobranca')"><i class="fa-solid fa-barcode"></i> Cobrança</button>
           <button type="button" class="btn" onclick="loadBoardTemplate('clinica')"><i class="fa-solid fa-hospital-user"></i> Clínicas</button>
           <button type="button" class="btn" onclick="loadBoardTemplate('juridico')"><i class="fa-solid fa-scale-balanced"></i> Jurídico</button>
           
-          <div style="margin-left: auto; display: flex; gap: 8px;">
-            <button type="button" class="btn" onclick="addFreeNode()"><i class="fa-solid fa-plus"></i> Novo Balão Livre</button>
-            <button type="button" class="btn pr" onclick="exportBoardToAttachment()" style="background:#16a34a; border-color:#16a34a;">
-              <i class="fa-solid fa-camera"></i> 📸 Gerar Imagem do Fluxo e Anexar
-            </button>
+          <button type="button" class="btn" onclick="addFreeNode()"><i class="fa-solid fa-plus"></i> Balão Livre</button>
+
+          <!-- CONTROLE DE ZOOM -->
+          <div class="zoom-controls" style="margin-left: auto;">
+            <button type="button" class="zoom-btn" onclick="adjustZoom(-0.1)" title="Zoom Out"><i class="fa-solid fa-minus"></i></button>
+            <button type="button" class="zoom-btn" onclick="resetZoom()" title="Resetar Zoom" id="zoom-label">100%</button>
+            <button type="button" class="zoom-btn" onclick="adjustZoom(0.1)" title="Zoom In"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
 
-        <!-- CANVAS DO QUADRO INTERATIVO -->
-        <div class="flow-canvas-wrapper" id="boardCanvasWrapper">
-          <svg class="flow-svg" id="boardSvg"></svg>
-          <!-- Balões gerados dinamicamente via JS -->
+        <!-- QUADRO DO MIRO -->
+        <div class="flow-canvas-viewport" id="boardViewport">
+          <div class="flow-canvas-content" id="boardContent">
+            <svg class="flow-svg" id="boardSvg"></svg>
+          </div>
         </div>
 
-        <form onsubmit="addData('fluxos', event)" style="margin-top: 18px;">
+        <form onsubmit="handleSalvarFluxoComImagem(event)" style="margin-top: 16px;">
           <div class="g2">
             <div>
               <label>Ou faça upload de arquivo próprio (opcional, máx 10MB):</label>
               <div class="up-box" onclick="document.getElementById('fluxo-file').click()">
                 <i class="fa-solid fa-cloud-arrow-up"></i>
-                <span id="file-name" style="font-size: 0.8em; color: var(--ac); display: block; margin-top: 4px;">Nenhum arquivo anexado</span>
+                <span id="file-name" style="font-size: 0.8em; color: var(--ac); display: block; margin-top: 4px;">Nenhum arquivo avulso selecionado</span>
               </div>
               <input type="file" id="fluxo-file" accept="image/*,.pdf" hidden onchange="handleFileSelect(event)">
             </div>
             <div>
               <label>Instruções / Resumo em Texto do Bot *</label>
-              <textarea id="fluxo-obs" rows="4" placeholder="O resumo estruturado do fluxo aparecerá aqui automaticamente..." required></textarea>
+              <textarea id="fluxo-obs" rows="4" placeholder="O texto estruturado gerado pelo diagrama aparecerá aqui..." required></textarea>
             </div>
           </div>
-          <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Salvar Instruções do Bot</button></div>
+          <div style="text-align: right;">
+            <button type="submit" class="btn pr" id="btn-salvar-fluxo" style="padding: 10px 22px; font-size: 0.9em; background: #16a34a; border-color: #16a34a;">
+              <i class="fa-solid fa-camera"></i> Salvar Fluxo & Anexar Imagem Automaticamente
+            </button>
+          </div>
         </form>
       </div>
       <div class="cd"><div class="tb-wrap" id="table-fluxos"></div></div>
@@ -554,6 +576,7 @@
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyuWjtlSMOC-AORhO1Yb_jiX-wniwpVSFOGaakMS010IGd3cmTujNOazVFTPTs-vsO7kA/exec";
 
   let currentBase64File = "";
+  let currentZoom = 1.0;
 
   const setupData = {
     "Números de Atendimento": [],
@@ -624,7 +647,7 @@
   }
 
   /* ==========================================================
-     MOTOR VISUAL ESTILO MIRO / FIGJAM (MULTI-RAMOS LIVRES)
+     MOTOR VISUAL ESTILO MIRO / FIGJAM COM ZOOM E DRAG
   ========================================================== */
   let boardNodes = [];
 
@@ -669,7 +692,22 @@
     updateObsTextFromNodes();
   }
 
-  // Cria um ramo filho a partir de um balão específico (porta +)
+  function adjustZoom(delta) {
+    currentZoom = Math.max(0.4, Math.min(1.8, currentZoom + delta));
+    applyZoom();
+  }
+
+  function resetZoom() {
+    currentZoom = 1.0;
+    applyZoom();
+  }
+
+  function applyZoom() {
+    const content = document.getElementById("boardContent");
+    content.style.transform = `scale(${currentZoom})`;
+    document.getElementById("zoom-label").innerText = `${Math.round(currentZoom * 100)}%`;
+  }
+
   function branchFromNode(parentId) {
     const parent = boardNodes.find(n => n.id === parentId);
     if (!parent) return;
@@ -731,7 +769,6 @@
       alert("O balão inicial não pode ser excluído.");
       return;
     }
-    // Remove o nó e atualiza os filhos para ficarem soltos ou limpos
     boardNodes = boardNodes.filter(n => n.id !== nodeId);
     boardNodes.forEach(n => {
       if (n.parent === nodeId) delete n.parent;
@@ -741,7 +778,7 @@
   }
 
   function renderBoardDOM() {
-    const container = document.getElementById("boardCanvasWrapper");
+    const container = document.getElementById("boardContent");
     container.querySelectorAll('.flow-node').forEach(el => el.remove());
 
     boardNodes.forEach(node => {
@@ -755,7 +792,7 @@
         <div class="node-header">
           <input type="text" value="${node.title}" oninput="updateNodeTitle('${node.id}', this.value)" placeholder="Título do balão">
           <div class="node-tools">
-            <button type="button" class="node-tool-btn" onclick="cycleNodeColor('${node.id}')" title="Mudar cor do balão">🎨</button>
+            <button type="button" class="node-tool-btn" onclick="cycleNodeColor('${node.id}')" title="Mudar cor">🎨</button>
             <button type="button" class="node-tool-btn" onclick="toggleNodeShape('${node.id}')" title="Alternar formato">🔷</button>
             ${node.id !== 'root' ? `<button type="button" class="node-tool-btn" onclick="deleteBoardNode('${node.id}')" title="Excluir">✕</button>` : ''}
           </div>
@@ -763,11 +800,9 @@
         <div class="node-body">
           <textarea oninput="updateNodeText('${node.id}', this.value)" placeholder="Digite a mensagem...">${node.text}</textarea>
         </div>
-        <!-- PORTA LATERAL PARA PUXAR RAMIFICAÇÕES LIVRES (+) -->
         <div class="node-port" onclick="branchFromNode('${node.id}')" title="Clique para ramificar novo nó">+</div>
       `;
 
-      // Arrasto Suave (Drag & Drop)
       let isDragging = false, startX, startY, origX, origY;
       el.addEventListener('mousedown', (e) => {
         if (['INPUT', 'TEXTAREA', 'BUTTON'].includes(e.target.tagName) || e.target.classList.contains('node-port')) return;
@@ -782,8 +817,8 @@
 
       function onMouseMove(e) {
         if (!isDragging) return;
-        node.x = Math.max(10, Math.min(2350, origX + (e.clientX - startX)));
-        node.y = Math.max(10, Math.min(1450, origY + (e.clientY - startY)));
+        node.x = Math.max(10, Math.min(2950, origX + (e.clientX - startX) / currentZoom));
+        node.y = Math.max(10, Math.min(2050, origY + (e.clientY - startY) / currentZoom));
         el.style.left = node.x + "px";
         el.style.top = node.y + "px";
         renderBoardLines();
@@ -830,7 +865,6 @@
 
     const lineColor = document.documentElement.getAttribute('data-theme') === 'light' ? '#0284c7' : '#3a86ff';
 
-    // Marcador de seta elegante
     const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
     defs.innerHTML = `
       <marker id="flowArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
@@ -843,7 +877,7 @@
       if (node.parent) {
         const parentNode = boardNodes.find(n => n.id === node.parent);
         if (parentNode) {
-          const x1 = parentNode.x + 200;
+          const x1 = parentNode.x + 210;
           const y1 = parentNode.y + 45;
           const x2 = node.x;
           const y2 = node.y + 45;
@@ -863,19 +897,19 @@
     });
   }
 
-  /* GERAÇÃO DA IMAGEM AUTOMÁTICA EM BASE64 DO CANVAS */
-  function exportBoardToAttachment() {
+  /* GERA O PNG DO DIAGRAMA DIRETAMENTE EM MEMÓRIA */
+  function generateBoardImageBase64() {
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
     boardNodes.forEach(n => {
       minX = Math.min(minX, n.x);
       minY = Math.min(minY, n.y);
-      maxX = Math.max(maxX, n.x + 220);
-      maxY = Math.max(maxY, n.y + 120);
+      maxX = Math.max(maxX, n.x + 230);
+      maxY = Math.max(maxY, n.y + 130);
     });
 
     const pad = 40;
-    const width = Math.max(850, (maxX - minX) + pad * 2);
-    const height = Math.max(480, (maxY - minY) + pad * 2);
+    const width = Math.max(900, (maxX - minX) + pad * 2);
+    const height = Math.max(500, (maxY - minY) + pad * 2);
 
     const canvas = document.createElement("canvas");
     canvas.width = width;
@@ -889,7 +923,6 @@
     const offX = pad - minX;
     const offY = pad - minY;
 
-    // Linhas conectoras
     ctx.strokeStyle = isLight ? "#0284c7" : "#3a86ff";
     ctx.lineWidth = 2.2;
 
@@ -897,7 +930,7 @@
       if (node.parent) {
         const parentNode = boardNodes.find(n => n.id === node.parent);
         if (parentNode) {
-          const x1 = parentNode.x + 200 + offX;
+          const x1 = parentNode.x + 210 + offX;
           const y1 = parentNode.y + 45 + offY;
           const x2 = node.x + offX;
           const y2 = node.y + 45 + offY;
@@ -908,7 +941,6 @@
           ctx.bezierCurveTo(x1 + dx, y1, x2 - dx, y2, x2, y2);
           ctx.stroke();
 
-          // Seta
           ctx.fillStyle = ctx.strokeStyle;
           ctx.beginPath();
           ctx.moveTo(x2, y2);
@@ -919,7 +951,6 @@
       }
     });
 
-    // Nós desenhados com suas cores
     const colorMap = {
       yellow: { bg: "#fef08a", border: "#eab308", text: "#713f12" },
       orange: { bg: "#fed7aa", border: "#f97316", text: "#7c2d12" },
@@ -937,52 +968,82 @@
       ctx.strokeStyle = theme.border;
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.roundRect(nx, ny, 200, 80, node.isDecision ? 16 : 10);
+      ctx.roundRect(nx, ny, 210, 85, node.isDecision ? 18 : 10);
       ctx.fill();
       ctx.stroke();
 
-      // Título
       ctx.fillStyle = theme.text;
       ctx.font = "bold 11px Inter, sans-serif";
       ctx.fillText(node.title.substring(0, 24), nx + 10, ny + 18);
 
-      // Caixa de texto interna
       ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
       ctx.beginPath();
-      ctx.roundRect(nx + 8, ny + 26, 184, 46, 5);
+      ctx.roundRect(nx + 8, ny + 26, 194, 50, 5);
       ctx.fill();
 
-      // Texto da mensagem
       ctx.fillStyle = "#0f172a";
       ctx.font = "10px Inter, sans-serif";
       const words = (node.text || "").split(" ");
       let line = "", lineY = ny + 40;
       for (let w of words) {
         const testLine = line + w + " ";
-        if (ctx.measureText(testLine).width > 170) {
+        if (ctx.measureText(testLine).width > 180) {
           ctx.fillText(line, nx + 14, lineY);
           line = w + " ";
           lineY += 13;
-          if (lineY > ny + 68) break;
+          if (lineY > ny + 72) break;
         } else {
           line = testLine;
         }
       }
-      if (lineY <= ny + 68) ctx.fillText(line, nx + 14, lineY);
+      if (lineY <= ny + 72) ctx.fillText(line, nx + 14, lineY);
     });
 
-    currentBase64File = canvas.toDataURL("image/png");
-    document.getElementById("file-name").innerText = "📸 Diagrama capturado e anexado com sucesso!";
-    alert("✨ Diagrama gerado com sucesso! Já está vinculado ao seu envio final.");
+    return canvas.toDataURL("image/png");
   }
 
-  // Carrega template SAC por padrão
+  /* SALVA O FLUXO E JÁ ANEXA A IMAGEM EM 1 CLIQUE */
+  function handleSalvarFluxoComImagem(event) {
+    event.preventDefault();
+    const btn = document.getElementById("btn-salvar-fluxo");
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Gerando imagem e salvando...';
+
+    setTimeout(() => {
+      // Se o usuário não subiu um arquivo manual próprio, gera automaticamente a imagem do Miro
+      let finalAttachment = currentBase64File;
+      if (!finalAttachment) {
+        finalAttachment = generateBoardImageBase64();
+      }
+
+      const newItem = {
+        "Descrição/Lógica": document.getElementById('fluxo-obs').value,
+        "Anexo/Imagem": finalAttachment
+      };
+
+      setupData["Fluxos x Atendimento"].push(newItem);
+      updateBadge('fluxos');
+      renderTable('fluxos');
+
+      currentBase64File = "";
+      document.getElementById('file-name').innerText = "Nenhum arquivo avulso selecionado";
+
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Fluxo & Imagem Salvos com Sucesso!';
+      setTimeout(() => {
+        btn.innerHTML = '<i class="fa-solid fa-camera"></i> Salvar Fluxo & Anexar Imagem Automaticamente';
+      }, 2500);
+
+      alert("✨ Sucesso! O fluxograma visual foi capturado, transformado em imagem e anexado à sua lista de dados!");
+    }, 150);
+  }
+
   window.addEventListener('DOMContentLoaded', () => {
     loadBoardTemplate('sac');
   });
 
   /* ==========================================================
-     LÓGICA PADRÃO DE ENVIO & DADOS
+     LÓGICA PADRÃO DE DADOS
   ========================================================== */
   function handleFileSelect(e) {
     const file = e.target.files[0];
@@ -992,7 +1053,7 @@
     if (file.size > maxSizeInBytes) {
       alert("⚠️ Arquivo muito grande! Por favor envie até 10MB.");
       e.target.value = "";
-      document.getElementById('file-name').innerText = "Nenhum arquivo anexado";
+      document.getElementById('file-name').innerText = "Nenhum arquivo avulso selecionado";
       currentBase64File = "";
       return;
     }
@@ -1032,13 +1093,6 @@
       newItem = { "Qualificação": document.getElementById('qual-nome').value, "Categoria": document.getElementById('qual-cat').value || "Geral" };
     } else if(key === 'calendario') {
       newItem = { "Dias": document.getElementById('cal-dias').value, "Início": document.getElementById('cal-inicio').value, "Fim": document.getElementById('cal-fim').value };
-    } else if(key === 'fluxos') {
-      newItem = { 
-        "Descrição/Lógica": document.getElementById('fluxo-obs').value,
-        "Anexo/Imagem": currentBase64File || "Sem Anexo"
-      };
-      currentBase64File = "";
-      document.getElementById('file-name').innerText = "Nenhum arquivo anexado";
     } else if(key === 'templates') {
       newItem = { "Nome": document.getElementById('tpl-nome').value, "Idioma": document.getElementById('tpl-idioma').value, "Texto": document.getElementById('tpl-texto').value };
     }
@@ -1083,7 +1137,7 @@
       headers.forEach(h => {
         let val = item[h] || '';
         if (typeof val === 'string' && val.indexOf('data:') === 0) {
-          val = '📸 [Diagrama Visual Anexado]';
+          val = '📸 [Diagrama Visual Anexado Pronto para Envio]';
         }
         html += `<td>${val}</td>`;
       });

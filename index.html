@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Setup WeON — Onboarding Inteligente</title>
   
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>?v=13">
-  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=13">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>?v=14">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=14">
 
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -69,7 +69,6 @@
     
     .app { display: grid; grid-template-columns: 320px 1fr; min-height: 100vh; width: 100vw; }
     
-    /* SIDEBAR */
     aside { 
       background: rgba(8, 14, 30, 0.85); 
       backdrop-filter: blur(20px);
@@ -164,7 +163,6 @@
     main { padding: 32px 36px 60px 36px; min-width: 0; width: 100%; max-width: 1450px; margin: 0 auto; }
     @media(max-width: 950px) { .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } }
 
-    /* BANNER DO CHIWE */
     .chiwe-guide-banner {
       background: linear-gradient(135deg, rgba(18, 26, 53, 0.85) 0%, rgba(30, 42, 85, 0.7) 100%);
       border: 1px solid var(--bd-glow);
@@ -273,53 +271,54 @@
     .btn.pr:hover { filter: brightness(1.15); transform: translateY(-1px); }
     .btn.dn:hover { border-color: var(--dg); color: var(--dg); }
 
-    /* SEÇÃO IA COM GEMINI & VOZ */
+    /* SEÇÃO IA COM GEMINI 3.8 / 3.6 E GRAVAÇÃO START/STOP */
     .ai-box-container {
-      background: linear-gradient(135deg, rgba(121, 40, 202, 0.15) 0%, rgba(0, 240, 255, 0.12) 100%);
-      border: 1px solid var(--ac);
+      background: linear-gradient(135deg, rgba(121, 40, 202, 0.18) 0%, rgba(0, 240, 255, 0.15) 100%);
+      border: 1.5px solid var(--ac);
       border-radius: 14px;
-      padding: 16px 20px;
+      padding: 18px 22px;
       margin-bottom: 18px;
-      box-shadow: 0 0 25px rgba(0, 240, 255, 0.12);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.18);
     }
     .ai-box-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .ai-box-header h3 {
-      font-size: 0.95em;
+      font-size: 0.96em;
       color: var(--ac);
       font-weight: 800;
       display: flex;
       align-items: center;
       gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
     }
     .mic-btn {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid var(--bd);
       color: var(--tx);
       border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 0.8em;
+      padding: 7px 14px;
+      font-size: 0.82em;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       transition: all 0.2s;
     }
     .mic-btn:hover { border-color: var(--ac); color: var(--ac); }
     .mic-btn.recording {
-      background: var(--dg);
-      color: #fff;
-      border-color: var(--dg);
+      background: var(--dg) !important;
+      color: #fff !important;
+      border-color: var(--dg) !important;
       animation: pulseMic 1.2s infinite;
     }
     @keyframes pulseMic {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 51, 102, 0.6); }
-      50% { box-shadow: 0 0 0 8px rgba(255, 51, 102, 0); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 51, 102, 0.7); }
+      50% { box-shadow: 0 0 0 10px rgba(255, 51, 102, 0); }
     }
 
     .tb-wrap { overflow-x: auto; margin-top: 10px; }
@@ -797,33 +796,32 @@
       <div class="cd"><div class="tb-wrap" id="table-calendario"></div></div>
     </div>
 
-    <!-- 8. FLUXOS COM IA GEMINI E VOZ -->
+    <!-- 8. FLUXOS COM GEMINI 3.8 / 3.6 E GRAVAÇÃO DE VOZ TOGGLE -->
     <div id="section-fluxos" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-diagram-project"></i> Passo 8: Menu do Bot / Fluxo</h2>
         
-        <!-- TOOLTIP ORIENTATIVO DA IA -->
         <div class="hint-box">
           <div class="hint-title"><i class="fa-solid fa-robot"></i> Crie com a IA do Chiwe (Texto ou Áudio):</div>
-          Não quer montar os balões na mão? <b>Peça em linguagem natural!</b> Você pode digitar ou clicar no microfone para falar como funciona a URA da sua empresa. A inteligência artificial irá gerar toda a árvore de opções no quadro abaixo em segundos!
+          Não quer montar os balões na mão? <b>Peça em linguagem natural!</b> Clique em <b>Iniciar Gravação</b> para falar por voz sem pressa, ou digite o fluxo da sua empresa no campo abaixo. O Gemini 3.8 Flash desenhará toda a árvore de opções no quadro em segundos!
         </div>
 
-        <!-- CAIXA DE PROMPT IA COM CAPTURA DE VOZ -->
+        <!-- CAIXA DE PROMPT IA COM CONTROLE MANUAL DE VOZ (START / STOP) -->
         <div class="ai-box-container">
           <div class="ai-box-header">
-            <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Assistente IA para Criação de Fluxo</h3>
+            <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Assistente IA do Chiwe (Gemini 3.8 Flash)</h3>
             <button type="button" class="mic-btn" id="btn-mic" onclick="toggleVoiceRecognition()">
-              <i class="fa-solid fa-microphone"></i> <span id="mic-label">Falar por Áudio</span>
+              <i class="fa-solid fa-microphone" id="mic-icon"></i> <span id="mic-label">Iniciar Gravação</span>
             </button>
           </div>
           <div style="display: flex; gap: 10px; align-items: stretch;">
-            <input type="text" id="ai-prompt-input" style="margin-bottom:0;" placeholder="Ex: 'Sou de uma imobiliária. Opção 1 para aluguel, 2 para compra e 3 para falar com corretor...'">
+            <input type="text" id="ai-prompt-input" style="margin-bottom:0;" placeholder="Ex: 'Me ajude a criar um fluxo de bot para cobrança de inadimplentes com consulta de CPF, boleto e falar com atendente'">
             <button type="button" class="btn pr" id="btn-generate-ai" onclick="generateFlowWithGemini()" style="white-space: nowrap;">
               <i class="fa-solid fa-sparkles"></i> Gerar Fluxo com IA
             </button>
           </div>
-          <small style="color: var(--mu); font-size: 0.72em; margin-top: 6px; display: block;">
-            💡 <i>Dica: Quanto mais detalhes você der sobre seu setor e opções, mais preciso o fluxo ficará!</i>
+          <small style="color: var(--mu); font-size: 0.72em; margin-top: 8px; display: block;">
+            💡 <i>Clique no microfone para começar a falar; quando terminar a sua explicação, clique nele novamente para parar.</i>
           </small>
         </div>
 
@@ -979,127 +977,177 @@
   };
 
   /* ==========================================================
-     INTEGRAÇÃO COM GEMINI 1.5 FLASH + CAPTURA DE VOZ
+     RECONHECIMENTO DE VOZ (TOGGLE MANUAL START / STOP)
   ========================================================== */
   function toggleVoiceRecognition() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
-      alert("Seu navegador não suporta captura de voz nativa. Recomendamos utilizar o Google Chrome ou Microsoft Edge.");
+      alert("Seu navegador não suporta captura de voz nativa. Utilize o Google Chrome ou Microsoft Edge.");
       return;
     }
 
     const btnMic = document.getElementById("btn-mic");
     const micLabel = document.getElementById("mic-label");
+    const micIcon = document.getElementById("mic-icon");
     const promptInput = document.getElementById("ai-prompt-input");
 
+    // SE JÁ ESTÁ GRAVANDO: PARA MANUALMENTE
     if (isRecording) {
       if (speechRecognizer) speechRecognizer.stop();
       isRecording = false;
       btnMic.classList.remove("recording");
-      micLabel.innerText = "Falar por Áudio";
+      micLabel.innerText = "Iniciar Gravação";
+      micIcon.className = "fa-solid fa-microphone";
       return;
     }
 
+    // INICIA GRAVAÇÃO COM MODO CONTÍNUO (NÃO CORTA ENQUANTO VOCÊ RESPIRA)
     speechRecognizer = new SpeechRecognition();
     speechRecognizer.lang = "pt-BR";
-    speechRecognizer.continuous = false;
-    speechRecognizer.interimResults = false;
+    speechRecognizer.continuous = true;
+    speechRecognizer.interimResults = true;
+
+    let finalTranscript = promptInput.value ? promptInput.value + " " : "";
 
     speechRecognizer.onstart = function() {
       isRecording = true;
       btnMic.classList.add("recording");
-      micLabel.innerText = "Ouvindo... Fale agora!";
+      micLabel.innerText = "Parar Gravação";
+      micIcon.className = "fa-solid fa-stop";
     };
 
     speechRecognizer.onresult = function(event) {
-      const transcript = event.results[0][0].transcript;
-      promptInput.value = transcript;
+      let interimTranscript = "";
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          finalTranscript += event.results[i][0].transcript + " ";
+        } else {
+          interimTranscript += event.results[i][0].transcript;
+        }
+      }
+      promptInput.value = (finalTranscript + interimTranscript).trim();
     };
 
-    speechRecognizer.onerror = function() {
+    speechRecognizer.onerror = function(err) {
+      console.warn("Speech error:", err);
       isRecording = false;
       btnMic.classList.remove("recording");
-      micLabel.innerText = "Falar por Áudio";
+      micLabel.innerText = "Iniciar Gravação";
+      micIcon.className = "fa-solid fa-microphone";
     };
 
     speechRecognizer.onend = function() {
       isRecording = false;
       btnMic.classList.remove("recording");
-      micLabel.innerText = "Falar por Áudio";
+      micLabel.innerText = "Iniciar Gravação";
+      micIcon.className = "fa-solid fa-microphone";
     };
 
     speechRecognizer.start();
   }
 
+  /* ==========================================================
+     INTEGRAÇÃO EXCLUSIVA COM GEMINI 3.8 / 3.6 FLASH COM JSON SCHEMA
+  ========================================================== */
   async function generateFlowWithGemini() {
     const promptInput = document.getElementById("ai-prompt-input");
     const promptText = promptInput.value.trim();
     if (!promptText) {
-      alert("Por favor, digite ou fale por áudio o que você gostaria que o seu bot fizesse!");
+      alert("Por favor, digite ou fale por áudio como você gostaria do fluxo do seu bot!");
       return;
+    }
+
+    // Se estiver com o gravador aberto, encerra antes de enviar
+    if (isRecording && speechRecognizer) {
+      speechRecognizer.stop();
+      isRecording = false;
+      document.getElementById("btn-mic").classList.remove("recording");
+      document.getElementById("mic-label").innerText = "Iniciar Gravação";
+      document.getElementById("mic-icon").className = "fa-solid fa-microphone";
     }
 
     const btnGen = document.getElementById("btn-generate-ai");
     btnGen.disabled = true;
     btnGen.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> O Chiwe está desenhando...';
 
-    const systemInstruction = `
-Você é o assistente Chiwe da empresa WeON, especialista em UX de atendimento e fluxos de bots.
-O usuário vai descrever como deseja o menu/URA ou fluxo de WhatsApp da empresa dele.
-Sua tarefa é retornar ESTRITAMENTE um array JSON contendo a lista de nós do fluxograma, sem blocos markdown de texto extra.
+    const systemPrompt = `
+Você é o Chiwe, assistente e mascote oficial da plataforma de atendimento WeON.
+O usuário vai descrever como deseja o menu inicial ou a URA de atendimento do WhatsApp da empresa dele.
+Sua responsabilidade é estruturar um fluxograma organizado de opções e retornar ESTRITAMENTE um array JSON de nós no seguinte formato:
 
-Formato esperado de cada nó no JSON:
 [
-  { "id": "root", "title": "Início / Boas-Vindas", "text": "Texto da saudação e menu", "x": 40, "y": 160, "color": "green" },
-  { "id": "n1", "title": "Opção 1", "text": "Descrição da Opção 1", "x": 300, "y": 50, "parent": "root", "color": "yellow" },
-  { "id": "n2", "title": "Opção 2", "text": "Descrição da Opção 2", "x": 300, "y": 160, "parent": "root", "color": "blue" }
+  { "id": "root", "title": "Início / Boas-Vindas", "text": "Mensagem inicial de saudação da empresa e opções", "x": 40, "y": 160, "color": "green" },
+  { "id": "n1", "title": "Opção 1", "text": "Texto descritivo ou pergunta da opção 1", "x": 300, "y": 50, "parent": "root", "color": "yellow" },
+  { "id": "n2", "title": "Opção 2", "text": "Texto descritivo ou pergunta da opção 2", "x": 300, "y": 160, "parent": "root", "color": "orange" },
+  { "id": "n3", "title": "Opção 3", "text": "Texto descritivo ou pergunta da opção 3", "x": 300, "y": 270, "parent": "root", "color": "blue" }
 ]
 
-Regras de Cores: "yellow", "orange", "green", "blue", "purple".
-Regras de Posição: O nó "root" fica em x: 40, y: 160. Os nós filhos em x: parent.x + 260, com y variando de 50 a 450 para não sobrepor.
-Retorne APENAS o JSON puro.
+Regras de Cores disponíveis: "yellow", "orange", "green", "blue", "purple".
+Regras de Posição:
+- O nó principal de entrada SEMPRE tem id: "root", x: 40, y: 160, color: "green".
+- Os nós que derivam diretamente dele têm parent: "root", x: 300, com y variando de 50 a 400 sem sobrepor.
+- Se houver sub-ramos (filhos de opções), posicione-os em x: 560 com y ajustado ao pai.
+Retorne exclusivamente o JSON bruto.
 `;
 
-    try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [
-            {
-              role: "user",
-              parts: [{ text: `${systemInstruction}\n\nPedido do usuário: "${promptText}"` }]
-            }
-          ]
-        })
-      });
+    // Modelos estritos solicitados: Gemini 3.8 Flash com fallback para Gemini 3.6 Flash
+    const targetModels = ["gemini-3.8-flash", "gemini-3.6-flash"];
+    let success = false;
+    let lastError = null;
 
-      const data = await response.json();
-      if (data.candidates && data.candidates[0].content.parts[0].text) {
-        let rawText = data.candidates[0].content.parts[0].text.trim();
-        // Remove possíveis formatações ```json ... ``` que a IA insere
-        rawText = rawText.replace(/```json/g, "").replace(/```/g, "").trim();
-        
-        const newNodes = JSON.parse(rawText);
-        if (Array.isArray(newNodes) && newNodes.length > 0) {
-          boardNodes = newNodes;
-          selectedNodeIds.clear();
-          renderBoardDOM();
-          updateObsTextFromNodes();
-          alert("✨ Pronto! O Chiwe gerou o fluxo completo de acordo com o seu pedido! Você pode arrastar ou editar os textos como quiser.");
-        } else {
-          throw new Error("Formato inválido retornado pela IA.");
+    for (const model of targetModels) {
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [
+              {
+                role: "user",
+                parts: [{ text: `${systemPrompt}\n\nDescrição do usuário: "${promptText}"` }]
+              }
+            ],
+            generationConfig: {
+              response_mime_type: "application/json"
+            }
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+          throw new Error(data.error.message || JSON.stringify(data.error));
         }
-      } else {
-        throw new Error("Resposta vazia da API.");
+
+        if (data.candidates && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
+          let textResult = data.candidates[0].content.parts[0].text.trim();
+          textResult = textResult.replace(/^```json/i, "").replace(/```$/g, "").trim();
+
+          const parsedNodes = JSON.parse(textResult);
+          if (Array.isArray(parsedNodes) && parsedNodes.length > 0) {
+            boardNodes = parsedNodes;
+            selectedNodeIds.clear();
+            renderBoardDOM();
+            updateObsTextFromNodes();
+            success = true;
+            alert("✨ Perfeito! O Chiwe utilizou a inteligência Gemini para estruturar e desenhar todo o seu fluxo no quadro!");
+            break;
+          }
+        }
+      } catch (err) {
+        console.warn(`Tentativa com ${model} falhou:`, err);
+        lastError = err;
       }
-    } catch (err) {
-      console.error("Erro na API Gemini:", err);
-      alert("Houve uma oscilação com a IA. Verifique sua conexão ou tente formular o pedido com outras palavras!");
-    } finally {
-      btnGen.disabled = false;
-      btnGen.innerHTML = '<i class="fa-solid fa-sparkles"></i> Gerar Fluxo com IA';
     }
+
+    if (!success) {
+      console.error("Falha final ao gerar com Gemini 3.8 / 3.6:", lastError);
+      alert("Houve uma instabilidade na comunicação com a API do Gemini. Detalhes: " + (lastError ? lastError.message : "Erro desconhecido"));
+    }
+
+    btnGen.disabled = false;
+    btnGen.innerHTML = '<i class="fa-solid fa-sparkles"></i> Gerar Fluxo com IA';
   }
 
   function toggleTheme() {

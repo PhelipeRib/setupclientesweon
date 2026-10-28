@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Setup WeON — Onboarding Inteligente</title>
   
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>?v=20">
-  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=20">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>?v=21">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=21">
 
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -93,14 +93,14 @@
       margin-bottom: 6px;
     }
     .brand-avatar {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border-radius: 12px;
       background: linear-gradient(135deg, #00f0ff, #7928ca);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
+      font-size: 26px;
       box-shadow: 0 0 15px var(--ac-glow);
     }
     .brand-text h1 { font-size: 1.1em; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
@@ -115,7 +115,7 @@
       font-size: 0.82em; 
       font-weight: 600; 
       display: flex; 
-      gap: 10px; 
+      gap: 8px; 
       align-items: center; 
       border: 1px solid transparent; 
       background: transparent; 
@@ -141,10 +141,11 @@
       background: var(--step-bg);
       color: var(--step-tx);
       font-size: 0.7em;
-      font-weight: 700;
-      padding: 2px 7px;
+      font-weight: 800;
+      padding: 3px 6px;
       border-radius: 6px;
       font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
     }
 
     .badge { 
@@ -163,30 +164,32 @@
     main { padding: 32px 36px 60px 36px; min-width: 0; width: 100%; max-width: 1450px; margin: 0 auto; }
     @media(max-width: 950px) { .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } }
 
+    /* BANNER DO CHIWE COM VISIBILIDADE REALÇADA */
     .chiwe-guide-banner {
       background: linear-gradient(135deg, rgba(18, 26, 53, 0.85) 0%, rgba(30, 42, 85, 0.7) 100%);
       border: 1px solid var(--bd-glow);
       backdrop-filter: blur(16px);
       border-radius: 16px;
-      padding: 16px 20px;
+      padding: 18px 22px;
       margin-bottom: 22px;
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
     }
     .chiwe-avatar {
-      font-size: 2.2em;
-      filter: drop-shadow(0 0 10px var(--ac-glow));
+      font-size: 3.4em;
+      filter: drop-shadow(0 0 14px var(--ac-glow));
       animation: floatChiwe 3s ease-in-out infinite;
+      user-select: none;
     }
     @keyframes floatChiwe {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-5px) rotate(4deg); }
+      0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+      50% { transform: translateY(-7px) rotate(5deg) scale(1.05); }
     }
     .chiwe-speech { flex: 1; }
-    .chiwe-speech-name { font-size: 0.75em; text-transform: uppercase; color: var(--ac); font-family: 'JetBrains Mono', monospace; font-weight: 800; letter-spacing: 0.5px; }
-    .chiwe-speech-text { font-size: 0.88em; color: var(--tx); line-height: 1.45; margin-top: 2px; }
+    .chiwe-speech-name { font-size: 0.8em; text-transform: uppercase; color: var(--ac); font-family: 'JetBrains Mono', monospace; font-weight: 800; letter-spacing: 0.6px; }
+    .chiwe-speech-text { font-size: 0.9em; color: var(--tx); line-height: 1.5; margin-top: 3px; }
 
     .cd { 
       background: var(--cd); 
@@ -435,7 +438,6 @@
       z-index: 1;
     }
 
-    /* CAIXA DE MULTI-SELEÇÃO MARQUEE */
     .selection-box {
       position: absolute;
       border: 1.5px dashed var(--ac);
@@ -588,47 +590,47 @@
     <small>Roteiro de Configuração</small>
     
     <button class="nv on" onclick="switchTab('numeros')" id="btn-numeros">
-      <span class="step-tag">01</span>
+      <span class="step-tag">Passo 1</span>
       <span><i class="fa-solid fa-phone"></i> Telefones / WhatsApp</span>
       <span class="badge" id="count-numeros">0</span>
     </button>
     <button class="nv" onclick="switchTab('grupos')" id="btn-grupos">
-      <span class="step-tag">02</span>
+      <span class="step-tag">Passo 2</span>
       <span><i class="fa-solid fa-layer-group"></i> Setores / Filas</span>
       <span class="badge" id="count-grupos">0</span>
     </button>
     <button class="nv" onclick="switchTab('supervisores')" id="btn-supervisores">
-      <span class="step-tag">03</span>
+      <span class="step-tag">Passo 3</span>
       <span><i class="fa-solid fa-user-tie"></i> Gestores / Supervisão</span>
       <span class="badge" id="count-supervisores">0</span>
     </button>
     <button class="nv" onclick="switchTab('agentes')" id="btn-agentes">
-      <span class="step-tag">04</span>
+      <span class="step-tag">Passo 4</span>
       <span><i class="fa-solid fa-headset"></i> Atendentes (Equipe)</span>
       <span class="badge" id="count-agentes">0</span>
     </button>
     <button class="nv" onclick="switchTab('grupos_agentes')" id="btn-grupos_agentes">
-      <span class="step-tag">05</span>
+      <span class="step-tag">Passo 5</span>
       <span><i class="fa-solid fa-sitemap"></i> Atendente x Setor</span>
       <span class="badge" id="count-grupos_agentes">0</span>
     </button>
     <button class="nv" onclick="switchTab('qualificacoes')" id="btn-qualificacoes">
-      <span class="step-tag">06</span>
+      <span class="step-tag">Passo 6</span>
       <span><i class="fa-solid fa-tags"></i> Motivos de Encerramento</span>
       <span class="badge" id="count-qualificacoes">0</span>
     </button>
     <button class="nv" onclick="switchTab('calendario')" id="btn-calendario">
-      <span class="step-tag">07</span>
+      <span class="step-tag">Passo 7</span>
       <span><i class="fa-solid fa-clock"></i> Horário de Atendimento</span>
       <span class="badge" id="count-calendario">0</span>
     </button>
     <button class="nv" onclick="switchTab('fluxos')" id="btn-fluxos">
-      <span class="step-tag">08</span>
+      <span class="step-tag">Passo 8</span>
       <span><i class="fa-solid fa-diagram-project"></i> Menu do Bot / Fluxo</span>
       <span class="badge" id="count-fluxos">0</span>
     </button>
     <button class="nv" onclick="switchTab('templates')" id="btn-templates">
-      <span class="step-tag">09</span>
+      <span class="step-tag">Passo 9</span>
       <span><i class="fa-brands fa-whatsapp"></i> Modelos de Mensagens</span>
       <span class="badge" id="count-templates">0</span>
     </button>
@@ -653,7 +655,7 @@
       <div class="chiwe-speech">
         <div class="chiwe-speech-name">Dica do Chiwe</div>
         <div class="chiwe-speech-text" id="chiwe-message">
-          E aí! Eu sou o Chiwe, mascote da WeON! Vou te acompanhar em cada passo para deixar o atendimento da sua empresa voando. Comece cadastrando o nome da empresa e as suas linhas de WhatsApp!
+          E aí! Eu sou o Chiwe, mascote da WeON! Vou te acompanhar em cada passo para deixar o atendimento da sua empresa voando. Comece cadastrando o nome da sua empresa e os números de WhatsApp que vai usar!
         </div>
       </div>
     </div>
@@ -1407,7 +1409,6 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
     updateTransform();
   }
 
-  // Monitora barra de espaço para Pan rápido
   window.addEventListener("keydown", (e) => {
     if (e.code === "Space" && e.target.tagName !== "INPUT" && e.target.tagName !== "TEXTAREA") {
       isSpacePressed = true;
@@ -1422,7 +1423,6 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
     }
   });
 
-  // Zoom suave com a rodinha
   viewport.addEventListener("wheel", (e) => {
     e.preventDefault();
     const vRect = viewport.getBoundingClientRect();
@@ -1439,11 +1439,8 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
     updateTransform();
   }, { passive: false });
 
-  // MOUSE DOWN NO VIEWPORT (DISTINGUE PAN DE MARQUEE)
   viewport.addEventListener("mousedown", (e) => {
     if (e.target.id === 'boardViewport' || e.target.id === 'boardContent' || e.target.id === 'boardSvg') {
-      
-      // CASO 1: PAN (Botão do meio, ou Espaço pressionado)
       if (e.button === 1 || isSpacePressed) {
         isPanning = true;
         viewport.classList.add("panning");
@@ -1457,7 +1454,6 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
         return;
       }
 
-      // CASO 2: MARQUEE SELECTION (Botão esquerdo normal)
       if (e.button === 0) {
         isMarquee = true;
         
@@ -2173,6 +2169,7 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
     container.innerHTML = html;
   }
 
+  /* ENVIO BLINDADO: MANTÉM TODAS AS CHAVES COMO ARRAYS */
   async function enviarDadosGoogleSheets() {
     const nomeEmpresaInput = document.getElementById('empresa-nome');
     const nomeEmpresa = nomeEmpresaInput ? nomeEmpresaInput.value.trim() : "";
@@ -2188,10 +2185,12 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
     btn.disabled = true;
     btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando dados para a WeON...';
 
-    // Insere o nome da empresa no payload enviado para o Apps Script
-    const finalPayload = {
-      ...setupData,
-      "_NomeEmpresa": nomeEmpresa
+    // Cria a seção de identificação no formato de lista padrão compatível com o backend
+    const payloadEnvio = {
+      "Identificação da Empresa": [
+        { "Nome da Empresa": nomeEmpresa }
+      ],
+      ...setupData
     };
 
     try {
@@ -2199,7 +2198,7 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(finalPayload)
+        body: JSON.stringify(payloadEnvio)
       });
 
       alert(`✨ Parabéns! As configurações da empresa "${nomeEmpresa}" foram enviadas com sucesso!`);

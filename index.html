@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Configurando a sua empresa</title>
   
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>?v=8">
-  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=8">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>?v=9">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=9">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -91,7 +91,7 @@
     .up-box:hover { border-color: var(--ac); }
 
     /* ========================================================
-       MIRO BOARD / CANVAS ESTENDIDO COM ZOOM
+       MIRO BOARD / CANVAS COM ZOOM & MULTI-SELEÇÃO
     ======================================================== */
     .flow-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
     
@@ -125,7 +125,7 @@
       border-radius: 12px;
       overflow: hidden;
       user-select: none;
-      cursor: default;
+      cursor: crosshair;
     }
 
     .flow-canvas-content {
@@ -147,6 +147,16 @@
       z-index: 1;
     }
 
+    /* CAIXA DE MULTI-SELEÇÃO DO MOUSE */
+    .selection-box {
+      position: absolute;
+      border: 1.5px dashed var(--ac);
+      background: color-mix(in srgb, var(--ac) 15%, transparent);
+      pointer-events: none;
+      z-index: 10;
+      border-radius: 4px;
+    }
+
     .flow-node {
       position: absolute;
       width: 210px;
@@ -159,8 +169,15 @@
       gap: 5px;
       cursor: grab;
       border: 2px solid transparent;
+      outline: none;
     }
     .flow-node:active { cursor: grabbing; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45); }
+
+    /* ESTADO MULTI-SELECIONADO (CTRL + CLICK OU MARQUEE) */
+    .flow-node.selected {
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 0 3px #38bdf8, 0 10px 25px rgba(0,0,0,0.4) !important;
+    }
 
     .flow-node.color-yellow { background: #fef08a; border-color: #eab308; color: #713f12; }
     .flow-node.color-orange { background: #fed7aa; border-color: #f97316; color: #7c2d12; }
@@ -228,6 +245,30 @@
       z-index: 5;
     }
     .node-port:hover { transform: translateY(-50%) scale(1.2); background: var(--ac-hover); }
+
+    /* CARD DE PREVIEW VISUAL NA REVISÃO */
+    .fluxo-preview-card {
+      background: var(--in);
+      border: 1px solid var(--bd);
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .fluxo-preview-img {
+      width: 100%;
+      max-height: 220px;
+      object-fit: contain;
+      background: #0f172a;
+      border-radius: 8px;
+      border: 1px solid var(--bd);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .fluxo-preview-img:hover {
+      transform: scale(1.01);
+    }
 
     .f { display: none; }
   </style>
@@ -467,12 +508,12 @@
       <div class="cd"><div class="tb-wrap" id="table-calendario"></div></div>
     </div>
 
-    <!-- 8. FLUXOS & MIRO BOARD COM ZOOM -->
+    <!-- 8. FLUXOS & MIRO BOARD COM MULTI-SELEÇÃO E ZOOM -->
     <div id="section-fluxos" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-diagram-project"></i> 8. Construtor Visual do Bot (Estilo Miro)</h2>
         <div class="hint-box">
-          <b>Como montar:</b> Escolha um modelo abaixo ou clique no <b>+</b> na lateral dos balões para puxar novos nós. Use os botões de <b>Zoom</b> para afastar e aproximar a visão. Quando terminar, basta clicar em <b>"Salvar Fluxo & Anexar Imagem"</b> abaixo!
+          <b>Dicas Rápidas:</b> Use o botão <b>+</b> nos balões para derivar ramos. Segure <b>Ctrl + Clique</b> ou <b>clique e arraste no fundo</b> para selecionar e mover vários nós ao mesmo tempo! Use os botões de zoom para afastar ou aproximar a visão.
         </div>
 
         <div class="flow-toolbar">
@@ -485,7 +526,7 @@
           
           <button type="button" class="btn" onclick="addFreeNode()"><i class="fa-solid fa-plus"></i> Balão Livre</button>
 
-          <!-- CONTROLE DE ZOOM -->
+          <!-- ZOOM -->
           <div class="zoom-controls" style="margin-left: auto;">
             <button type="button" class="zoom-btn" onclick="adjustZoom(-0.1)" title="Zoom Out"><i class="fa-solid fa-minus"></i></button>
             <button type="button" class="zoom-btn" onclick="resetZoom()" title="Resetar Zoom" id="zoom-label">100%</button>
@@ -497,6 +538,7 @@
         <div class="flow-canvas-viewport" id="boardViewport">
           <div class="flow-canvas-content" id="boardContent">
             <svg class="flow-svg" id="boardSvg"></svg>
+            <div id="selectionMarquee" class="selection-box f"></div>
           </div>
         </div>
 
@@ -553,12 +595,14 @@
       <div class="cd"><div class="tb-wrap" id="table-templates"></div></div>
     </div>
 
-    <!-- REVISÃO & ENVIO -->
+    <!-- REVISÃO & ENVIO COM CARD VISUAL -->
     <div id="section-revisao" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-paper-plane"></i> Revisão Final</h2>
-        <div class="hint-box">Confira o resumo de todos os itens antes de enviar para a equipe de implantação da WeON.</div>
-        <div id="reumo-container" style="display: grid; gap: 12px;" class="g2"></div>
+        <div class="hint-box">
+          Confira o resumo de todos os itens cadastrados antes de enviar para a equipe de implantação da WeON.
+        </div>
+        <div id="reumo-container" style="display: grid; gap: 14px;" class="g2"></div>
       </div>
 
       <div class="cd" style="border-color: var(--ac); text-align: center;">
@@ -577,6 +621,7 @@
 
   let currentBase64File = "";
   let currentZoom = 1.0;
+  let selectedNodeIds = new Set();
 
   const setupData = {
     "Números de Atendimento": [],
@@ -647,7 +692,7 @@
   }
 
   /* ==========================================================
-     MOTOR VISUAL ESTILO MIRO / FIGJAM COM ZOOM E DRAG
+     MOTOR VISUAL ESTILO MIRO: ZOOM, MULTI-SELEÇÃO & DRAG
   ========================================================== */
   let boardNodes = [];
 
@@ -688,6 +733,7 @@
 
   function loadBoardTemplate(key) {
     boardNodes = JSON.parse(JSON.stringify(boardTemplates[key]));
+    selectedNodeIds.clear();
     renderBoardDOM();
     updateObsTextFromNodes();
   }
@@ -770,6 +816,7 @@
       return;
     }
     boardNodes = boardNodes.filter(n => n.id !== nodeId);
+    selectedNodeIds.delete(nodeId);
     boardNodes.forEach(n => {
       if (n.parent === nodeId) delete n.parent;
     });
@@ -783,7 +830,8 @@
 
     boardNodes.forEach(node => {
       const el = document.createElement("div");
-      el.className = `flow-node color-${node.color || 'yellow'} ${node.isDecision ? 'shape-decision' : ''}`;
+      const isSel = selectedNodeIds.has(node.id);
+      el.className = `flow-node color-${node.color || 'yellow'} ${node.isDecision ? 'shape-decision' : ''} ${isSel ? 'selected' : ''}`;
       el.id = node.id;
       el.style.left = node.x + "px";
       el.style.top = node.y + "px";
@@ -803,24 +851,67 @@
         <div class="node-port" onclick="branchFromNode('${node.id}')" title="Clique para ramificar novo nó">+</div>
       `;
 
-      let isDragging = false, startX, startY, origX, origY;
+      // Evento de Seleção (Ctrl + Click) & Drag em Grupo
+      let isDragging = false, startX, startY;
+      const initialPositions = new Map();
+
       el.addEventListener('mousedown', (e) => {
         if (['INPUT', 'TEXTAREA', 'BUTTON'].includes(e.target.tagName) || e.target.classList.contains('node-port')) return;
+        
+        // Se Ctrl/Cmd pressionado: alterna seleção deste nó
+        if (e.ctrlKey || e.metaKey) {
+          if (selectedNodeIds.has(node.id)) {
+            selectedNodeIds.delete(node.id);
+            el.classList.remove('selected');
+          } else {
+            selectedNodeIds.add(node.id);
+            el.classList.add('selected');
+          }
+          return;
+        }
+
+        // Se clicar sem Ctrl e o nó não pertencia ao grupo selecionado, foca apenas nele
+        if (!selectedNodeIds.has(node.id)) {
+          selectedNodeIds.clear();
+          container.querySelectorAll('.flow-node.selected').forEach(n => n.classList.remove('selected'));
+          selectedNodeIds.add(node.id);
+          el.classList.add('selected');
+        }
+
         isDragging = true;
         startX = e.clientX;
         startY = e.clientY;
-        origX = node.x;
-        origY = node.y;
+
+        // Guarda as posições originais de todos os nós selecionados
+        initialPositions.clear();
+        selectedNodeIds.forEach(selId => {
+          const n = boardNodes.find(item => item.id === selId);
+          if (n) initialPositions.set(selId, { x: n.x, y: n.y });
+        });
+
         document.addEventListener('mousemove', onMouseMove);
         document.addEventListener('mouseup', onMouseUp);
       });
 
       function onMouseMove(e) {
         if (!isDragging) return;
-        node.x = Math.max(10, Math.min(2950, origX + (e.clientX - startX) / currentZoom));
-        node.y = Math.max(10, Math.min(2050, origY + (e.clientY - startY) / currentZoom));
-        el.style.left = node.x + "px";
-        el.style.top = node.y + "px";
+        const dx = (e.clientX - startX) / currentZoom;
+        const dy = (e.clientY - startY) / currentZoom;
+
+        selectedNodeIds.forEach(selId => {
+          const n = boardNodes.find(item => item.id === selId);
+          const orig = initialPositions.get(selId);
+          if (n && orig) {
+            n.x = Math.max(10, Math.min(2950, orig.x + dx));
+            n.y = Math.max(10, Math.min(2050, orig.y + dy));
+            const nodeEl = document.getElementById(selId);
+            if (nodeEl) {
+              nodeEl.style.left = n.x + "px";
+              nodeEl.style.top = n.y + "px";
+            }
+          }
+        });
+
         renderBoardLines();
       }
 
@@ -834,6 +925,70 @@
     });
 
     renderBoardLines();
+  }
+
+  /* ==========================================================
+     MARQUEE SELECTION (ARRASTAR NO FUNDO PARA SELECIONAR VÁRIOS)
+  ========================================================== */
+  const viewport = document.getElementById("boardViewport");
+  const marquee = document.getElementById("selectionMarquee");
+  let isSelecting = false, selStartX, selStartY;
+
+  viewport.addEventListener('mousedown', (e) => {
+    // Se clicou direto no fundo do viewport (não em nó nem botão)
+    if (e.target.id === 'boardViewport' || e.target.id === 'boardContent' || e.target.id === 'boardSvg') {
+      if (!e.ctrlKey && !e.metaKey) {
+        selectedNodeIds.clear();
+        document.querySelectorAll('.flow-node.selected').forEach(n => n.classList.remove('selected'));
+      }
+      isSelecting = true;
+      const rect = document.getElementById("boardContent").getBoundingClientRect();
+      selStartX = (e.clientX - rect.left) / currentZoom;
+      selStartY = (e.clientY - rect.top) / currentZoom;
+
+      marquee.style.left = selStartX + "px";
+      marquee.style.top = selStartY + "px";
+      marquee.style.width = "0px";
+      marquee.style.height = "0px";
+      marquee.classList.remove('f');
+
+      document.addEventListener('mousemove', onMarqueeMove);
+      document.addEventListener('mouseup', onMarqueeUp);
+    }
+  });
+
+  function onMarqueeMove(e) {
+    if (!isSelecting) return;
+    const rect = document.getElementById("boardContent").getBoundingClientRect();
+    const currX = (e.clientX - rect.left) / currentZoom;
+    const currY = (e.clientY - rect.top) / currentZoom;
+
+    const x = Math.min(selStartX, currX);
+    const y = Math.min(selStartY, currY);
+    const w = Math.abs(currX - selStartX);
+    const h = Math.abs(currY - selStartY);
+
+    marquee.style.left = x + "px";
+    marquee.style.top = y + "px";
+    marquee.style.width = w + "px";
+    marquee.style.height = h + "px";
+
+    // Detecta interseção com cada balão
+    boardNodes.forEach(node => {
+      const nodeEl = document.getElementById(node.id);
+      const inBox = (node.x < x + w && node.x + 210 > x && node.y < y + h && node.y + 85 > y);
+      if (inBox) {
+        selectedNodeIds.add(node.id);
+        if (nodeEl) nodeEl.classList.add('selected');
+      }
+    });
+  }
+
+  function onMarqueeUp() {
+    isSelecting = false;
+    marquee.classList.add('f');
+    document.removeEventListener('mousemove', onMarqueeMove);
+    document.removeEventListener('mouseup', onMarqueeUp);
   }
 
   function updateNodeTitle(id, val) {
@@ -1010,7 +1165,6 @@
     btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Gerando imagem e salvando...';
 
     setTimeout(() => {
-      // Se o usuário não subiu um arquivo manual próprio, gera automaticamente a imagem do Miro
       let finalAttachment = currentBase64File;
       if (!finalAttachment) {
         finalAttachment = generateBoardImageBase64();
@@ -1148,6 +1302,9 @@
     container.innerHTML = html;
   }
 
+  /* ==========================================================
+     REVISÃO VISUAL MODERNA COM MINIATURA DO FLUXOGRAMA
+  ========================================================== */
   function renderRevisao() {
     const container = document.getElementById('reumo-container');
     let html = '';
@@ -1158,17 +1315,42 @@
           <strong style="color: var(--ac); font-size: 0.9em;">${sheet}</strong>
           <span class="badge" style="background: var(--ac); color: #ffffff;">${items.length}</span>
         </div>`;
-      if(items.length > 0) {
-        html += '<ul style="font-size: 0.8em; color: var(--mu); padding-left: 18px;">';
-        items.forEach(item => {
-          const val1 = Object.values(item)[0] || '';
-          let val2 = Object.values(item)[1] || '';
-          if (typeof val2 === 'string' && val2.indexOf('data:') === 0) {
-            val2 = '[Diagrama Anexado]';
-          }
-          html += `<li><strong style="color: var(--tx);">${val1}</strong> ${val2 ? ' - ' + val2 : ''}</li>`;
-        });
-        html += '</ul>';
+
+      if (items.length > 0) {
+        // TRATAMENTO EXCLUSIVO E VISUAL PARA O FLUXO DO BOT
+        if (sheet === "Fluxos x Atendimento") {
+          items.forEach(item => {
+            const anexo = item["Anexo/Imagem"] || "";
+            const isImage = typeof anexo === 'string' && anexo.indexOf('data:image') === 0;
+
+            html += `
+              <div class="fluxo-preview-card">
+                ${isImage ? `
+                  <div>
+                    <label style="margin-bottom:4px; color:var(--ac); font-weight:700;"><i class="fa-solid fa-image"></i> Diagrama do Bot Anexado:</label>
+                    <img src="${anexo}" class="fluxo-preview-img" alt="Diagrama do Fluxo" title="Clique com o botão direito se quiser abrir em nova aba">
+                  </div>
+                ` : `
+                  <p style="font-size:0.8em; color:var(--mu);"><i class="fa-solid fa-file"></i> Arquivo anexado manualmente</p>
+                `}
+                <div>
+                  <label style="margin-bottom:2px; font-weight:700;">Instruções Cadastradas:</label>
+                  <p style="font-size:0.78em; color:var(--mu); white-space:pre-line; max-height:80px; overflow-y:auto; background:rgba(0,0,0,0.2); padding:6px 8px; border-radius:6px;">
+                    ${item["Descrição/Lógica"].substring(0, 300)}${item["Descrição/Lógica"].length > 300 ? '...' : ''}
+                  </p>
+                </div>
+              </div>
+            `;
+          });
+        } else {
+          html += '<ul style="font-size: 0.8em; color: var(--mu); padding-left: 18px;">';
+          items.forEach(item => {
+            const val1 = Object.values(item)[0] || '';
+            const val2 = Object.values(item)[1] || '';
+            html += `<li><strong style="color: var(--tx);">${val1}</strong> ${val2 ? ' - ' + val2 : ''}</li>`;
+          });
+          html += '</ul>';
+        }
       } else {
         html += '<p style="font-size: 0.78em; color: var(--mu); font-style: italic;">Nenhum item preenchido</p>';
       }

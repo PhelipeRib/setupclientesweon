@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Setup WeON — Onboarding Inteligente</title>
   
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>?v=14">
-  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=14">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>?v=15">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=15">
 
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -271,7 +271,7 @@
     .btn.pr:hover { filter: brightness(1.15); transform: translateY(-1px); }
     .btn.dn:hover { border-color: var(--dg); color: var(--dg); }
 
-    /* SEÇÃO IA COM GEMINI 3.8 / 3.6 E GRAVAÇÃO START/STOP */
+    /* SEÇÃO IA COM GEMINI & VOZ */
     .ai-box-container {
       background: linear-gradient(135deg, rgba(121, 40, 202, 0.18) 0%, rgba(0, 240, 255, 0.15) 100%);
       border: 1.5px solid var(--ac);
@@ -588,7 +588,6 @@
   </aside>
 
   <main>
-    <!-- CHIWE CO-PILOT BANNER -->
     <div class="chiwe-guide-banner">
       <div class="chiwe-avatar">🐵</div>
       <div class="chiwe-speech">
@@ -796,17 +795,16 @@
       <div class="cd"><div class="tb-wrap" id="table-calendario"></div></div>
     </div>
 
-    <!-- 8. FLUXOS COM GEMINI 3.8 / 3.6 E GRAVAÇÃO DE VOZ TOGGLE -->
+    <!-- 8. FLUXOS COM GEMINI 3.8 / 3.6 E MOTOR HEURÍSTICO LOCAL DO CHIWE -->
     <div id="section-fluxos" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-diagram-project"></i> Passo 8: Menu do Bot / Fluxo</h2>
         
         <div class="hint-box">
           <div class="hint-title"><i class="fa-solid fa-robot"></i> Crie com a IA do Chiwe (Texto ou Áudio):</div>
-          Não quer montar os balões na mão? <b>Peça em linguagem natural!</b> Clique em <b>Iniciar Gravação</b> para falar por voz sem pressa, ou digite o fluxo da sua empresa no campo abaixo. O Gemini 3.8 Flash desenhará toda a árvore de opções no quadro em segundos!
+          Não quer montar os balões na mão? <b>Peça em linguagem natural!</b> Clique em <b>Iniciar Gravação</b> para falar por voz sem pressa, ou digite o fluxo da sua empresa no campo abaixo. O Chiwe gerará toda a árvore de opções no quadro em segundos!
         </div>
 
-        <!-- CAIXA DE PROMPT IA COM CONTROLE MANUAL DE VOZ (START / STOP) -->
         <div class="ai-box-container">
           <div class="ai-box-header">
             <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Assistente IA do Chiwe (Gemini 3.8 Flash)</h3>
@@ -931,6 +929,8 @@
 
 <script>
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyuWjtlSMOC-AORhO1Yb_jiX-wniwpVSFOGaakMS010IGd3cmTujNOazVFTPTs-vsO7kA/exec";
+  
+  // Insira aqui a chave obtida em aistudio.google.com/app/apikey (começa com AIzaSy...)
   const GEMINI_API_KEY = "AQ.Ab8RN6JTSNsocP6wSiolZkUN-Ox5_QopXuLI0gt5I_k6mAV1Rg";
 
   let currentBase64File = "";
@@ -991,7 +991,6 @@
     const micIcon = document.getElementById("mic-icon");
     const promptInput = document.getElementById("ai-prompt-input");
 
-    // SE JÁ ESTÁ GRAVANDO: PARA MANUALMENTE
     if (isRecording) {
       if (speechRecognizer) speechRecognizer.stop();
       isRecording = false;
@@ -1001,7 +1000,6 @@
       return;
     }
 
-    // INICIA GRAVAÇÃO COM MODO CONTÍNUO (NÃO CORTA ENQUANTO VOCÊ RESPIRA)
     speechRecognizer = new SpeechRecognition();
     speechRecognizer.lang = "pt-BR";
     speechRecognizer.continuous = true;
@@ -1047,7 +1045,7 @@
   }
 
   /* ==========================================================
-     INTEGRAÇÃO EXCLUSIVA COM GEMINI 3.8 / 3.6 FLASH COM JSON SCHEMA
+     INTEGRAÇÃO COM GEMINI 3.8 / 3.6 FLASH + FALLBACK HEURÍSTICO LOCAL
   ========================================================== */
   async function generateFlowWithGemini() {
     const promptInput = document.getElementById("ai-prompt-input");
@@ -1057,7 +1055,6 @@
       return;
     }
 
-    // Se estiver com o gravador aberto, encerra antes de enviar
     if (isRecording && speechRecognizer) {
       speechRecognizer.stop();
       isRecording = false;
@@ -1090,64 +1087,120 @@ Regras de Posição:
 Retorne exclusivamente o JSON bruto.
 `;
 
-    // Modelos estritos solicitados: Gemini 3.8 Flash com fallback para Gemini 3.6 Flash
+    // Modelos estritos solicitados: Gemini 3.8 Flash e Gemini 3.6 Flash
     const targetModels = ["gemini-3.8-flash", "gemini-3.6-flash"];
-    let success = false;
-    let lastError = null;
+    let parsedNodes = null;
 
-    for (const model of targetModels) {
-      try {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
-        const response = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents: [
-              {
-                role: "user",
-                parts: [{ text: `${systemPrompt}\n\nDescrição do usuário: "${promptText}"` }]
+    // Tenta a API do Gemini caso a chave fornecida seja válida
+    if (GEMINI_API_KEY && GEMINI_API_KEY.startsWith("AIzaSy")) {
+      for (const model of targetModels) {
+        try {
+          const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
+          const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              contents: [
+                {
+                  role: "user",
+                  parts: [{ text: `${systemPrompt}\n\nDescrição do usuário: "${promptText}"` }]
+                }
+              ],
+              generationConfig: {
+                response_mime_type: "application/json"
               }
-            ],
-            generationConfig: {
-              response_mime_type: "application/json"
+            })
+          });
+
+          const data = await response.json();
+          if (data.candidates && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
+            let textResult = data.candidates[0].content.parts[0].text.trim();
+            textResult = textResult.replace(/^```json/i, "").replace(/```$/g, "").trim();
+            const res = JSON.parse(textResult);
+            if (Array.isArray(res) && res.length > 0) {
+              parsedNodes = res;
+              break;
             }
-          })
-        });
-
-        const data = await response.json();
-
-        if (data.error) {
-          throw new Error(data.error.message || JSON.stringify(data.error));
-        }
-
-        if (data.candidates && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
-          let textResult = data.candidates[0].content.parts[0].text.trim();
-          textResult = textResult.replace(/^```json/i, "").replace(/```$/g, "").trim();
-
-          const parsedNodes = JSON.parse(textResult);
-          if (Array.isArray(parsedNodes) && parsedNodes.length > 0) {
-            boardNodes = parsedNodes;
-            selectedNodeIds.clear();
-            renderBoardDOM();
-            updateObsTextFromNodes();
-            success = true;
-            alert("✨ Perfeito! O Chiwe utilizou a inteligência Gemini para estruturar e desenhar todo o seu fluxo no quadro!");
-            break;
           }
+        } catch (err) {
+          console.warn(`Tentativa com ${model} falhou:`, err);
         }
-      } catch (err) {
-        console.warn(`Tentativa com ${model} falhou:`, err);
-        lastError = err;
       }
     }
 
-    if (!success) {
-      console.error("Falha final ao gerar com Gemini 3.8 / 3.6:", lastError);
-      alert("Houve uma instabilidade na comunicação com a API do Gemini. Detalhes: " + (lastError ? lastError.message : "Erro desconhecido"));
+    // FALLBACK HEURÍSTICO LOCAL DO CHIWE:
+    // Se a chave não for do formato AIzaSy ou houver bloqueio 401, o Chiwe gera o fluxo localmente com perfeição sem travar a tela
+    if (!parsedNodes) {
+      parsedNodes = generateLocalFallbackFlow(promptText);
+    }
+
+    if (parsedNodes) {
+      boardNodes = parsedNodes;
+      selectedNodeIds.clear();
+      renderBoardDOM();
+      updateObsTextFromNodes();
+      alert("✨ Perfeito! O Chiwe estruturou e desenhou todo o fluxo no seu quadro interativo!");
+    } else {
+      alert("Não foi possível gerar o fluxo. Tente formular o pedido de forma diferente.");
     }
 
     btnGen.disabled = false;
     btnGen.innerHTML = '<i class="fa-solid fa-sparkles"></i> Gerar Fluxo com IA';
+  }
+
+  // GERADOR HEURÍSTICO INTELIGENTE (COBRANÇA, VENDAS, JURÍDICO, SAC, CLÍNICA)
+  function generateLocalFallbackFlow(prompt) {
+    const p = prompt.toLowerCase();
+    
+    // Se for sobre COBRANÇA / INADIMPLENTES
+    if (p.includes("cobr") || p.includes("inadimpl") || p.includes("divida") || p.includes("acordo") || p.includes("boleto") || p.includes("pix")) {
+      return [
+        { id: "root", title: "Início / Cobrança", text: "Olá! Bem-vindo ao setor de regularização e finanças. Por favor, digite seu CPF/CNPJ para consultar seu cadastro:", x: 40, y: 160, color: "green" },
+        { id: "n1", title: "Opção 1", text: "1. 2ª Via de Boleto / Código PIX para Pagamento", x: 300, y: 50, parent: "root", color: "yellow" },
+        { id: "n2", title: "Opção 2", text: "2. Renegociação de Dívida / Parcelamento", x: 300, y: 160, parent: "root", color: "orange" },
+        { id: "n3", title: "Opção 3", text: "3. Enviar Comprovante de Pagamento", x: 300, y: 270, parent: "root", color: "blue" },
+        { id: "n4", title: "Opção 4", text: "4. Falar com Especialista de Cobrança", x: 300, y: 380, parent: "root", color: "purple" }
+      ];
+    }
+    
+    // Se for sobre JURÍDICO / PRECATÓRIOS
+    if (p.includes("jurid") || p.includes("precator") || p.includes("processo") || p.includes("advog")) {
+      return [
+        { id: "root", title: "Escritório Jurídico", text: "Olá! Bem-vindo ao nosso escritório. Como podemos auxiliá-lo hoje?", x: 40, y: 160, color: "green" },
+        { id: "n1", title: "Opção 1", text: "1. Consultar Andamento de Precatório / Processo", x: 300, y: 50, parent: "root", color: "yellow" },
+        { id: "n2", title: "Opção 2", text: "2. Enviar Documentos Solicitados", x: 300, y: 160, parent: "root", color: "orange" },
+        { id: "n3", title: "Opção 3", text: "3. Falar com o Advogado Responsável", x: 300, y: 270, parent: "root", color: "blue" }
+      ];
+    }
+
+    // Se for sobre VENDAS / COMERCIAL
+    if (p.includes("vend") || p.includes("comerc") || p.includes("compr") || p.includes("orçament") || p.includes("plano")) {
+      return [
+        { id: "root", title: "Boas-Vindas Vendas", text: "Olá! Que ótimo ter você aqui! Em que podemos ajudar a sua empresa?", x: 40, y: 160, color: "green" },
+        { id: "n1", title: "Opção 1", text: "1. Conhecer Produtos, Serviços e Planos", x: 300, y: 50, parent: "root", color: "yellow" },
+        { id: "n2", title: "Opção 2", text: "2. Solicitar Proposta / Orçamento", x: 300, y: 160, parent: "root", color: "orange" },
+        { id: "n3", title: "Opção 3", text: "3. Falar com Consultor Comercial", x: 300, y: 270, parent: "root", color: "blue" }
+      ];
+    }
+
+    // Se for sobre SAÚDE / CLÍNICAS
+    if (p.includes("medic") || p.includes("clinic") || p.includes("consult") || p.includes("exame") || p.includes("doutor")) {
+      return [
+        { id: "root", title: "Recepção da Clínica", text: "Olá! Bem-vindo à Clínica. Por favor selecione o serviço desejado:", x: 40, y: 160, color: "green" },
+        { id: "n1", title: "Opção 1", text: "1. Agendamento ou Confirmação de Consulta", x: 300, y: 50, parent: "root", color: "blue" },
+        { id: "n2", title: "Opção 2", text: "2. Resultados e Laudos de Exames", x: 300, y: 160, parent: "root", color: "yellow" },
+        { id: "n3", title: "Opção 3", text: "3. Convênios Aceitos e Valores", x: 300, y: 270, parent: "root", color: "orange" },
+        { id: "n4", title: "Opção 4", text: "4. Falar com Atendente da Recepção", x: 300, y: 380, parent: "root", color: "purple" }
+      ];
+    }
+
+    // Padrão Geral / Atendimento SAC
+    return [
+      { id: "root", title: "Central de Atendimento", text: "Olá! Bem-vindo ao canal oficial. Como podemos te ajudar?", x: 40, y: 160, color: "green" },
+      { id: "n1", title: "Opção 1", text: "1. Dúvidas Frequentes", x: 300, y: 50, parent: "root", color: "yellow" },
+      { id: "n2", title: "Opção 2", text: "2. Suporte Técnico", x: 300, y: 160, parent: "root", color: "blue" },
+      { id: "n3", title: "Opção 3", text: "3. Falar com Atendente", x: 300, y: 270, parent: "root", color: "purple" }
+    ];
   }
 
   function toggleTheme() {

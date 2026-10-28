@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Configurando a sua empresa</title>
   
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>?v=10">
-  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=10">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>?v=11">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=11">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -21,10 +21,14 @@
       --tx: #f8fafc;
       --mu: #94a3b8;
       --bd: #ffffff1f;
-      --hint-bg: linear-gradient(135deg, #1e293b 0%, #172554 100%);
+      /* TOOLTIP NO DARK MODE: ALTO CONTRASTE */
+      --hint-bg: #1e3a8a;
       --hint-border: #38bdf8;
-      --hint-title: #38bdf8;
+      --hint-title: #fde047;
+      --hint-tx: #ffffff;
       --canvas-dot: rgba(255, 255, 255, 0.15);
+      --step-bg: rgba(255, 255, 255, 0.08);
+      --step-tx: #94a3b8;
     }
 
     [data-theme="light"] {
@@ -37,85 +41,119 @@
       --tx: #0f172a;
       --mu: #64748b;
       --bd: #0000001a;
-      --hint-bg: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+      /* TOOLTIP NO LIGHT MODE */
+      --hint-bg: #e0f2fe;
       --hint-border: #0284c7;
       --hint-title: #0369a1;
+      --hint-tx: #0f172a;
       --canvas-dot: rgba(0, 0, 0, 0.12);
+      --step-bg: #e2e8f0;
+      --step-tx: #475569;
     }
 
     * { box-sizing: border-box; margin: 0; font-family: 'Inter', sans-serif; transition: background 0.15s, color 0.15s, border-color 0.15s; }
     body { background: var(--bg); color: var(--tx); min-height: 100vh; overflow-x: hidden; }
     
-    .app { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; width: 100vw; }
+    /* BARRA LATERAL EXPANDIDA PARA 320px */
+    .app { display: grid; grid-template-columns: 320px 1fr; min-height: 100vh; width: 100vw; }
     
-    aside { background: var(--cd); border-right: 1px solid var(--bd); padding: 18px 14px; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
-    aside h1 { color: var(--ac); font-size: 1.05em; font-weight: 800; margin-bottom: 2px; display: flex; align-items: center; gap: 8px; }
-    aside small { color: var(--mu); margin: 12px 0 4px; font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    aside { background: var(--cd); border-right: 1px solid var(--bd); padding: 22px 18px; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; gap: 5px; }
+    aside h1 { color: var(--ac); font-size: 1.15em; font-weight: 800; margin-bottom: 2px; display: flex; align-items: center; gap: 10px; }
+    aside small { color: var(--mu); margin: 14px 0 6px; font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; }
     
-    .nv { padding: 8px 10px; border-radius: 8px; color: var(--mu); font-size: 0.8em; font-weight: 600; display: flex; gap: 8px; align-items: center; justify-content: space-between; border: 0; background: 0; text-align: left; width: 100%; cursor: pointer; }
+    /* BOTÕES DA SIDEBAR COM INDICAÇÃO DE PASSO */
+    .nv { 
+      padding: 10px 12px; 
+      border-radius: 9px; 
+      color: var(--mu); 
+      font-size: 0.83em; 
+      font-weight: 600; 
+      display: flex; 
+      gap: 10px; 
+      align-items: center; 
+      border: 0; 
+      background: 0; 
+      text-align: left; 
+      width: 100%; 
+      cursor: pointer; 
+    }
     .nv:hover, .nv.on { background: color-mix(in srgb, var(--ac) 15%, transparent); color: var(--ac); }
-    .nv i { width: 16px; text-align: center; }
-    .badge { background: var(--in); color: var(--tx); border: 1px solid var(--bd); font-size: 0.72em; padding: 2px 6px; border-radius: 12px; font-weight: 600; }
+    .nv.on .step-tag { background: var(--ac); color: #ffffff; }
     .nv.on .badge { background: var(--ac); color: #ffffff; border-color: var(--ac); }
 
-    .theme-toggle { margin-top: auto; padding-top: 10px; border-top: 1px solid var(--bd); }
+    .step-tag {
+      background: var(--step-bg);
+      color: var(--step-tx);
+      font-size: 0.72em;
+      font-weight: 800;
+      padding: 3px 6px;
+      border-radius: 6px;
+      white-space: nowrap;
+      letter-spacing: 0.3px;
+    }
 
-    main { padding: 20px 24px; min-width: 0; width: 100%; max-width: 1400px; margin: 0 auto; }
-    @media(max-width: 900px) { .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } }
+    .badge { background: var(--in); color: var(--tx); border: 1px solid var(--bd); font-size: 0.72em; padding: 2px 7px; border-radius: 12px; font-weight: 600; margin-left: auto; }
 
-    .cd { background: var(--cd); border: 1px solid var(--bd); border-radius: 12px; padding: 22px; margin-bottom: 18px; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-    h2 { font-size: 1.2em; margin-bottom: 10px; color: var(--tx); display: flex; align-items: center; gap: 8px; }
+    .theme-toggle { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--bd); }
+
+    main { padding: 24px 28px; min-width: 0; width: 100%; max-width: 1450px; margin: 0 auto; }
+    @media(max-width: 950px) { .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } }
+
+    .cd { background: var(--cd); border: 1px solid var(--bd); border-radius: 14px; padding: 24px; margin-bottom: 20px; width: 100%; box-shadow: 0 4px 14px rgba(0,0,0,0.05); }
+    h2 { font-size: 1.25em; margin-bottom: 12px; color: var(--tx); display: flex; align-items: center; gap: 10px; }
     
-    /* TOOLTIP / HINT-BOX REFORÇADA E CHAMATIVA */
+    /* TOOLTIP DE ALTO CONTRASTE COM GLOW SUTIL */
     .hint-box { 
       background: var(--hint-bg); 
-      border: 1px solid var(--hint-border); 
-      border-left: 5px solid var(--hint-border); 
+      border: 1.5px solid var(--hint-border); 
+      border-left: 6px solid var(--hint-border); 
       border-radius: 10px; 
-      padding: 12px 16px; 
-      margin-bottom: 18px; 
-      font-size: 0.84em; 
-      line-height: 1.55; 
-      color: var(--tx); 
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      padding: 14px 18px; 
+      margin-bottom: 20px; 
+      font-size: 0.86em; 
+      line-height: 1.6; 
+      color: var(--hint-tx); 
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
     }
     .hint-box .hint-title {
       font-weight: 800;
       color: var(--hint-title);
-      font-size: 0.9em;
+      font-size: 0.92em;
       display: flex;
       align-items: center;
-      gap: 6px;
-      margin-bottom: 4px;
+      gap: 8px;
+      margin-bottom: 6px;
       text-transform: uppercase;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.5px;
     }
+    .hint-box b { color: #ffffff; text-decoration: underline; }
+    [data-theme="light"] .hint-box b { color: #0284c7; }
     
     label { display: block; font-size: 0.78em; color: var(--mu); margin-bottom: 5px; font-weight: 600; }
-    input, select, textarea { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 9px 12px; width: 100%; font-size: 0.85em; margin-bottom: 10px; outline: none; }
+    input, select, textarea { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 10px 12px; width: 100%; font-size: 0.86em; margin-bottom: 12px; outline: none; }
     input:focus, select:focus, textarea:focus { border-color: var(--ac); box-shadow: 0 0 0 2px color-mix(in srgb, var(--ac) 25%, transparent); }
     
-    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
     @media(max-width: 768px) { .g2, .g3 { grid-template-columns: 1fr; } }
 
-    .btn { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 7px 12px; font-size: 0.8em; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+    .btn { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 8px 14px; font-size: 0.82em; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
     .btn:hover { border-color: var(--ac); color: var(--ac); }
     .btn.pr { background: var(--ac); color: #ffffff !important; border-color: var(--ac); font-weight: 700; }
     .btn.pr:hover { background: var(--ac-hover); border-color: var(--ac-hover); }
     .btn.dn:hover { border-color: var(--dg); color: var(--dg); }
 
     .tb-wrap { overflow-x: auto; margin-top: 10px; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.82em; text-align: left; }
-    th { background: var(--in); color: var(--ac); padding: 9px 10px; border-bottom: 1px solid var(--bd); font-weight: 700; font-size: 0.75em; text-transform: uppercase; }
-    td { padding: 9px 10px; border-bottom: 1px solid var(--bd); color: var(--tx); word-break: break-word; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.84em; text-align: left; }
+    th { background: var(--in); color: var(--ac); padding: 10px 12px; border-bottom: 1px solid var(--bd); font-weight: 700; font-size: 0.76em; text-transform: uppercase; }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--bd); color: var(--tx); word-break: break-word; }
     tr:hover td { background: color-mix(in srgb, var(--in) 50%, transparent); }
 
-    .up-box { border: 2px dashed var(--bd); background: var(--in); border-radius: 8px; padding: 12px; text-align: center; cursor: pointer; margin-bottom: 10px; }
+    .up-box { border: 2px dashed var(--bd); background: var(--in); border-radius: 8px; padding: 14px; text-align: center; cursor: pointer; margin-bottom: 12px; }
     .up-box:hover { border-color: var(--ac); }
 
     /* MIRO BOARD / CANVAS */
-    .flow-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+    .flow-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
     
     .zoom-controls {
       display: inline-flex;
@@ -295,49 +333,59 @@
 <div class="app">
   <aside>
     <h1><i class="fas fa-clipboard-check"></i> Setup WeON</h1>
-    <small>Etapas de Cadastro</small>
+    <small>Roteiro de Configuração</small>
     
     <button class="nv on" onclick="switchTab('numeros')" id="btn-numeros">
-      <span><i class="fa-solid fa-phone"></i> 1. WhatsApp / Telefones</span>
+      <span class="step-tag">Passo 1</span>
+      <span><i class="fa-solid fa-phone"></i> Telefones / WhatsApp</span>
       <span class="badge" id="count-numeros">0</span>
     </button>
     <button class="nv" onclick="switchTab('grupos')" id="btn-grupos">
-      <span><i class="fa-solid fa-layer-group"></i> 2. Setores / Filas</span>
+      <span class="step-tag">Passo 2</span>
+      <span><i class="fa-solid fa-layer-group"></i> Setores / Filas</span>
       <span class="badge" id="count-grupos">0</span>
     </button>
     <button class="nv" onclick="switchTab('supervisores')" id="btn-supervisores">
-      <span><i class="fa-solid fa-user-tie"></i> 3. Gestores / Supervisão</span>
+      <span class="step-tag">Passo 3</span>
+      <span><i class="fa-solid fa-user-tie"></i> Gestores / Supervisores</span>
       <span class="badge" id="count-supervisores">0</span>
     </button>
     <button class="nv" onclick="switchTab('agentes')" id="btn-agentes">
-      <span><i class="fa-solid fa-headset"></i> 4. Atendentes (Equipe)</span>
+      <span class="step-tag">Passo 4</span>
+      <span><i class="fa-solid fa-headset"></i> Atendentes (Equipe)</span>
       <span class="badge" id="count-agentes">0</span>
     </button>
     <button class="nv" onclick="switchTab('grupos_agentes')" id="btn-grupos_agentes">
-      <span><i class="fa-solid fa-sitemap"></i> 5. Atendente x Setor</span>
+      <span class="step-tag">Passo 5</span>
+      <span><i class="fa-solid fa-sitemap"></i> Atendente x Setor</span>
       <span class="badge" id="count-grupos_agentes">0</span>
     </button>
     <button class="nv" onclick="switchTab('qualificacoes')" id="btn-qualificacoes">
-      <span><i class="fa-solid fa-tags"></i> 6. Motivos de Finalização</span>
+      <span class="step-tag">Passo 6</span>
+      <span><i class="fa-solid fa-tags"></i> Motivos de Finalização</span>
       <span class="badge" id="count-qualificacoes">0</span>
     </button>
     <button class="nv" onclick="switchTab('calendario')" id="btn-calendario">
-      <span><i class="fa-solid fa-clock"></i> 7. Horário de Atendimento</span>
+      <span class="step-tag">Passo 7</span>
+      <span><i class="fa-solid fa-clock"></i> Horário de Atendimento</span>
       <span class="badge" id="count-calendario">0</span>
     </button>
     <button class="nv" onclick="switchTab('fluxos')" id="btn-fluxos">
-      <span><i class="fa-solid fa-diagram-project"></i> 8. Menu do Bot / Fluxo</span>
+      <span class="step-tag">Passo 8</span>
+      <span><i class="fa-solid fa-diagram-project"></i> Menu do Bot / Fluxo</span>
       <span class="badge" id="count-fluxos">0</span>
     </button>
     <button class="nv" onclick="switchTab('templates')" id="btn-templates">
-      <span><i class="fa-brands fa-whatsapp"></i> 9. Modelos de Mensagens</span>
+      <span class="step-tag">Passo 9</span>
+      <span><i class="fa-brands fa-whatsapp"></i> Modelos de Mensagens</span>
       <span class="badge" id="count-templates">0</span>
     </button>
 
     <small>Finalização</small>
-    <button class="nv" onclick="switchTab('revisao')" id="btn-revisao" style="color: var(--ac);">
+    <button class="nv" onclick="switchTab('revisao')" id="btn-revisao" style="color: var(--ac); font-weight: 700;">
+      <span class="step-tag" style="background: color-mix(in srgb, var(--ac) 20%, transparent); color: var(--ac);">Fim</span>
       <span><i class="fa-solid fa-paper-plane"></i> Revisar & Concluir</span>
-      <i class="fa-solid fa-chevron-right" style="font-size: 0.75em;"></i>
+      <i class="fa-solid fa-chevron-right" style="font-size: 0.75em; margin-left: auto;"></i>
     </button>
 
     <div class="theme-toggle">
@@ -351,7 +399,7 @@
     <!-- 1. NÚMEROS -->
     <div id="section-numeros" class="tab-content">
       <div class="cd">
-        <h2><i class="fa-solid fa-phone"></i> 1. Números de WhatsApp e Telefone</h2>
+        <h2><i class="fa-solid fa-phone"></i> Passo 1: Números de WhatsApp e Telefone</h2>
         <div class="hint-box">
           <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Como preencher esta etapa:</div>
           Cadastre os números de telefone ou WhatsApp que sua empresa utilizará para se comunicar com clientes. Você pode cadastrar uma linha principal, números por filial ou ramais fixos.
@@ -376,7 +424,7 @@
     <!-- 2. GRUPOS / SETORES -->
     <div id="section-grupos" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-layer-group"></i> 2. Setores e Filas de Atendimento</h2>
+        <h2><i class="fa-solid fa-layer-group"></i> Passo 2: Setores e Filas de Atendimento</h2>
         <div class="hint-box">
           <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> O que são setores / filas?</div>
           São os departamentos da sua empresa para onde as conversas e ligações serão distribuídas.<br>
@@ -402,7 +450,7 @@
     <!-- 3. SUPERVISORES -->
     <div id="section-supervisores" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-user-tie"></i> 3. Gestores e Supervisores</h2>
+        <h2><i class="fa-solid fa-user-tie"></i> Passo 3: Gestores e Supervisores</h2>
         <div class="hint-box">
           <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Quem deve ser cadastrado aqui?</div>
           Pessoas com cargo de liderança, gerência ou coordenação que precisam de acesso aos relatórios completos de atendimento, gravações de chamadas e painel em tempo real da equipe.
@@ -427,7 +475,7 @@
     <!-- 4. AGENTES -->
     <div id="section-agentes" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-headset"></i> 4. Atendentes (Equipe Operacional)</h2>
+        <h2><i class="fa-solid fa-headset"></i> Passo 4: Atendentes (Equipe Operacional)</h2>
         <div class="hint-box">
           <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Como funciona o cadastro de atendentes?</div>
           Cadastre os membros da equipe que conversarão diretamente com os clientes no dia a dia. Você já pode definir se o colaborador atenderá via WhatsApp, por telefone ou ambos.
@@ -468,7 +516,7 @@
     <!-- 5. GRUPOS X AGENTES -->
     <div id="section-grupos_agentes" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-sitemap"></i> 5. Quem atende qual setor?</h2>
+        <h2><i class="fa-solid fa-sitemap"></i> Passo 5: Quem atende qual setor?</h2>
         <div class="hint-box">
           <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Como vincular?</div>
           Selecione um atendente e o setor em que ele atua. Um mesmo atendente pode ser vinculado a mais de um setor se a sua empresa tiver equipes flexíveis.
@@ -493,7 +541,7 @@
     <!-- 6. QUALIFICAÇÕES -->
     <div id="section-qualificacoes" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-tags"></i> 6. Motivos de Finalização (Tabulações)</h2>
+        <h2><i class="fa-solid fa-tags"></i> Passo 6: Motivos de Finalização (Tabulações)</h2>
         <div class="hint-box">
           <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Para que servem os motivos de finalização?</div>
           São os desfechos que os atendentes selecionam ao encerrar cada chamado para alimentar os relatórios da diretoria.<br>
@@ -519,7 +567,7 @@
     <!-- 7. CALENDÁRIO / HORÁRIO DE EXPEDIENTE -->
     <div id="section-calendario" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-clock"></i> 7. Horário de Atendimento da Empresa</h2>
+        <h2><i class="fa-solid fa-clock"></i> Passo 7: Horário de Atendimento da Empresa</h2>
         <div class="hint-box">
           <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Expediente de funcionamento:</div>
           Informe os dias da semana e os horários em que a sua empresa funciona para atendimento aos clientes.
@@ -548,7 +596,7 @@
     <!-- 8. FLUXOS & MIRO BOARD -->
     <div id="section-fluxos" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-diagram-project"></i> 8. Menu do Bot / Fluxo</h2>
+        <h2><i class="fa-solid fa-diagram-project"></i> Passo 8: Menu do Bot / Fluxo</h2>
         <div class="hint-box">
           <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Como montar seu fluxo visual:</div>
           Escolha um modelo pronto ou clique no botão <b>+</b> na lateral dos balões para puxar novos caminhos. Segure <b>Ctrl + Clique</b> ou <b>arraste no fundo</b> para selecionar vários nós ao mesmo tempo. Ao terminar, clique no botão verde para salvar e anexar a imagem automaticamente.
@@ -608,7 +656,7 @@
     <!-- 9. MODELOS DE MENSAGENS -->
     <div id="section-templates" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-brands fa-whatsapp"></i> 9. Modelos de Mensagens</h2>
+        <h2><i class="fa-brands fa-whatsapp"></i> Passo 9: Modelos de Mensagens</h2>
         <div class="hint-box">
           <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Para que servem os modelos de mensagens?</div>
           Cadastre mensagens padrão que a sua equipe costuma enviar com frequência (ex: confirmações de agendamento, avisos de cobrança, boas-vindas). Use chaves como <code>{{1}}</code> onde for entrar o nome do cliente.

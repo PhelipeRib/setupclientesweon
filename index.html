@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Configurando a sua empresa</title>
   
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>?v=6">
-  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=6">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>?v=7">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=7">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -23,9 +23,7 @@
       --bd: #ffffff1f;
       --hint-bg: #1e293b;
       --hint-border: #38bdf844;
-      --node-bg: #151e36;
-      --node-border: #3a86ff;
-      --node-root: #10b981;
+      --canvas-dot: rgba(255, 255, 255, 0.12);
     }
 
     [data-theme="light"] {
@@ -40,14 +38,12 @@
       --bd: #0000001a;
       --hint-bg: #f0f9ff;
       --hint-border: #0284c733;
-      --node-bg: #ffffff;
-      --node-border: #0284c7;
-      --node-root: #059669;
+      --canvas-dot: rgba(0, 0, 0, 0.1);
     }
 
     * { box-sizing: border-box; margin: 0; font-family: 'Inter', sans-serif; transition: background 0.2s, color 0.2s, border-color 0.2s; }
     body { background: var(--bg); color: var(--tx); min-height: 100vh; }
-    .app { display: grid; grid-template-columns: 290px 1fr; min-height: 100vh; }
+    .app { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
     
     aside { background: var(--cd); border-right: 1px solid var(--bd); padding: 20px 16px; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
     aside h1 { color: var(--ac); font-size: 1.1em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
@@ -61,13 +57,13 @@
 
     .theme-toggle { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--bd); }
 
-    main { padding: 28px; min-width: 0; max-width: 1150px; }
-    @media(max-width: 850px) { .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } }
+    main { padding: 24px; min-width: 0; max-width: 1250px; }
+    @media(max-width: 900px) { .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } }
 
-    .cd { background: var(--cd); border: 1px solid var(--bd); border-radius: 14px; padding: 22px; margin-bottom: 20px; }
+    .cd { background: var(--cd); border: 1px solid var(--bd); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
     h2 { font-size: 1.25em; margin-bottom: 6px; color: var(--tx); display: flex; align-items: center; gap: 10px; }
     
-    .hint-box { background: var(--hint-bg); border: 1px solid var(--hint-border); border-left: 4px solid var(--ac); border-radius: 8px; padding: 12px 14px; margin-bottom: 18px; font-size: 0.84em; line-height: 1.5; color: var(--tx); }
+    .hint-box { background: var(--hint-bg); border: 1px solid var(--hint-border); border-left: 4px solid var(--ac); border-radius: 8px; padding: 12px 14px; margin-bottom: 16px; font-size: 0.84em; line-height: 1.5; color: var(--tx); }
     .hint-box b { color: var(--ac); }
     
     label { display: block; font-size: 0.78em; color: var(--mu); margin-bottom: 6px; font-weight: 600; }
@@ -90,101 +86,132 @@
     td { padding: 10px 12px; border-bottom: 1px solid var(--bd); color: var(--tx); word-break: break-word; }
     tr:hover td { background: color-mix(in srgb, var(--in) 50%, transparent); }
 
-    .up-box { border: 2px dashed var(--bd); background: var(--in); border-radius: 10px; padding: 16px; text-align: center; cursor: pointer; margin-bottom: 12px; }
+    .up-box { border: 2px dashed var(--bd); background: var(--in); border-radius: 10px; padding: 14px; text-align: center; cursor: pointer; margin-bottom: 12px; }
     .up-box:hover { border-color: var(--ac); }
 
     /* ========================================================
-       BPMN / MIRO FLOW ENGINE
+       MIRO / FIGJAM STYLE CANVAS
     ======================================================== */
-    .bpmn-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
-    .bpmn-canvas { 
-      position: relative; 
-      width: 100%; 
-      height: 480px; 
-      background: radial-gradient(color-mix(in srgb, var(--tx) 10%, transparent) 1px, transparent 1px); 
-      background-size: 20px 20px; 
-      background-color: var(--in); 
-      border: 1px solid var(--bd); 
-      border-radius: 12px; 
-      overflow: auto; 
-      user-select: none; 
+    .flow-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+    .flow-canvas-wrapper {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      background: radial-gradient(var(--canvas-dot) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+      background-color: var(--in);
+      border: 1px solid var(--bd);
+      border-radius: 12px;
+      overflow: auto;
+      user-select: none;
     }
-    .bpmn-svg { position: absolute; top: 0; left: 0; width: 1800px; height: 1200px; pointer-events: none; z-index: 1; }
-
-    .bpmn-node {
+    .flow-svg {
       position: absolute;
-      width: 210px;
-      background: var(--node-bg);
-      border: 2px solid var(--node-border);
-      border-radius: 10px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-      padding: 10px;
+      top: 0;
+      left: 0;
+      width: 2600px;
+      height: 1600px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* NODES */
+    .flow-node {
+      position: absolute;
+      width: 200px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+      padding: 10px 12px;
       z-index: 2;
       display: flex;
       flex-direction: column;
       gap: 6px;
+      cursor: grab;
+      border: 2px solid transparent;
+      transition: box-shadow 0.15s, border-color 0.15s;
     }
-    .bpmn-node.root { border-color: var(--node-root); }
-    .bpmn-node.sim { border-color: #10b981; }
-    .bpmn-node.nao { border-color: #ef4444; }
+    .flow-node:active { cursor: grabbing; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4); }
 
-    .bpmn-node-header {
+    /* CORES ESTILO FIGJAM / MIRO */
+    .flow-node.color-yellow { background: #fef08a; border-color: #eab308; color: #713f12; }
+    .flow-node.color-orange { background: #fed7aa; border-color: #f97316; color: #7c2d12; }
+    .flow-node.color-green  { background: #bbf7d0; border-color: #22c55e; color: #14532d; }
+    .flow-node.color-blue   { background: #bfdbfe; border-color: #3b82f6; color: #1e3a8a; }
+    .flow-node.color-purple { background: #e9d5ff; border-color: #a855f7; color: #581c87; }
+
+    /* FORMA LOSANGO (DECISÃO) */
+    .flow-node.shape-decision {
+      border-radius: 18px;
+      border-style: dashed;
+    }
+
+    .node-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      cursor: grab;
-      padding-bottom: 4px;
-      border-bottom: 1px solid var(--bd);
+      gap: 4px;
     }
-    .bpmn-node-header:active { cursor: grabbing; }
-    .bpmn-node-header input {
+    .node-header input {
       background: transparent;
       border: 0;
-      color: var(--ac);
-      font-weight: 700;
+      font-weight: 800;
       font-size: 0.85em;
       padding: 0;
       margin: 0;
       outline: none;
-      width: 80%;
+      color: inherit;
+      width: 100%;
     }
-    .bpmn-node.root .bpmn-node-header input { color: var(--node-root); }
-    .bpmn-node.sim .bpmn-node-header input { color: #10b981; }
-    .bpmn-node.nao .bpmn-node-header input { color: #ef4444; }
+    .node-tools { display: flex; gap: 4px; align-items: center; }
+    .node-tool-btn {
+      background: rgba(0,0,0,0.08);
+      border: 0;
+      color: inherit;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-size: 0.72em;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .node-tool-btn:hover { background: rgba(0,0,0,0.18); }
 
-    .bpmn-node-body textarea {
-      background: color-mix(in srgb, var(--in) 60%, transparent);
-      border: 1px solid var(--bd);
+    .node-body textarea {
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(0, 0, 0, 0.12);
       border-radius: 6px;
-      font-size: 0.8em;
+      font-size: 0.82em;
       padding: 6px 8px;
-      color: var(--tx);
+      color: #0f172a;
       resize: vertical;
       min-height: 48px;
       margin: 0;
+      width: 100%;
+      outline: none;
+      font-family: inherit;
     }
 
-    .bpmn-actions {
+    /* CONECTOR DE SAÍDA (+) */
+    .node-port {
+      position: absolute;
+      right: -13px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      background: var(--ac);
+      color: #ffffff;
+      border-radius: 50%;
       display: flex;
-      gap: 4px;
       align-items: center;
-      justify-content: flex-end;
-      margin-top: 2px;
-    }
-    .bpmn-btn-mini {
-      background: var(--in);
-      border: 1px solid var(--bd);
-      color: var(--tx);
-      border-radius: 6px;
-      font-size: 0.72em;
-      padding: 3px 6px;
+      justify-content: center;
+      font-size: 0.8em;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      border: 2px solid var(--cd);
+      transition: transform 0.15s, background 0.15s;
+      z-index: 5;
     }
-    .bpmn-btn-mini:hover { border-color: var(--ac); color: var(--ac); }
-    .bpmn-btn-mini.del:hover { border-color: var(--dg); color: var(--dg); }
+    .node-port:hover { transform: translateY(-50%) scale(1.2); background: var(--ac-hover); }
 
     .f { display: none; }
   </style>
@@ -424,40 +451,41 @@
       <div class="cd"><div class="tb-wrap" id="table-calendario"></div></div>
     </div>
 
-    <!-- 8. FLUXOS & BPMN INTERACTIVE BUILDER -->
+    <!-- 8. FLUXOS & MIRO BOARD BUILDER -->
     <div id="section-fluxos" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-diagram-project"></i> 8. Construtor Visual do Bot (Estilo BPMN)</h2>
+        <h2><i class="fa-solid fa-diagram-project"></i> 8. Construtor Visual do Bot (Estilo Miro / FigJam)</h2>
         <div class="hint-box">
-          <b>Como montar o fluxo?</b> Escolha um segmento abaixo para carregar um modelo pronto ou ramifique clicando no botão <b>+ Ramo</b> ou <b>+ Sim/Não</b> ao lado de qualquer balão! Arraste pela barra superior para organizar.
+          <b>Como montar:</b> Escolha um template abaixo ou use o botão <b>+</b> na lateral de qualquer balão para puxar novos nós. Você pode criar quantas ramificações quiser a partir do mesmo balão[cite: 29]. Arraste os balões livremente pelo quadro[cite: 29]!
         </div>
 
         <!-- TOOLBAR DE TEMPLATES -->
-        <div class="bpmn-toolbar">
+        <div class="flow-toolbar">
           <label style="margin:0; font-weight:700; color:var(--tx); font-size:0.82em;"><i class="fa-solid fa-wand-magic-sparkles"></i> Modelos Prontos:</label>
-          <button type="button" class="btn" onclick="loadBpmnTemplate('sac')"><i class="fa-solid fa-headset"></i> SAC / Geral</button>
-          <button type="button" class="btn" onclick="loadBpmnTemplate('vendas')"><i class="fa-solid fa-cart-shopping"></i> Vendas</button>
-          <button type="button" class="btn" onclick="loadBpmnTemplate('cobranca')"><i class="fa-solid fa-barcode"></i> Cobrança</button>
-          <button type="button" class="btn" onclick="loadBpmnTemplate('clinica')"><i class="fa-solid fa-hospital-user"></i> Clínicas</button>
-          <button type="button" class="btn" onclick="loadBpmnTemplate('juridico')"><i class="fa-solid fa-scale-balanced"></i> Jurídico</button>
+          <button type="button" class="btn" onclick="loadBoardTemplate('sac')"><i class="fa-solid fa-headset"></i> SAC / Geral</button>
+          <button type="button" class="btn" onclick="loadBoardTemplate('vendas')"><i class="fa-solid fa-cart-shopping"></i> Vendas</button>
+          <button type="button" class="btn" onclick="loadBoardTemplate('cobranca')"><i class="fa-solid fa-barcode"></i> Cobrança</button>
+          <button type="button" class="btn" onclick="loadBoardTemplate('clinica')"><i class="fa-solid fa-hospital-user"></i> Clínicas</button>
+          <button type="button" class="btn" onclick="loadBoardTemplate('juridico')"><i class="fa-solid fa-scale-balanced"></i> Jurídico</button>
           
           <div style="margin-left: auto; display: flex; gap: 8px;">
-            <button type="button" class="btn pr" onclick="exportBpmnToAttachment()" style="background:#16a34a; border-color:#16a34a;">
+            <button type="button" class="btn" onclick="addFreeNode()"><i class="fa-solid fa-plus"></i> Novo Balão Livre</button>
+            <button type="button" class="btn pr" onclick="exportBoardToAttachment()" style="background:#16a34a; border-color:#16a34a;">
               <i class="fa-solid fa-camera"></i> 📸 Gerar Imagem do Fluxo e Anexar
             </button>
           </div>
         </div>
 
-        <!-- CANVAS DO FLUXOGRAMA -->
-        <div class="bpmn-canvas" id="bpmnCanvas">
-          <svg class="bpmn-svg" id="bpmnSvg"></svg>
+        <!-- CANVAS DO QUADRO INTERATIVO -->
+        <div class="flow-canvas-wrapper" id="boardCanvasWrapper">
+          <svg class="flow-svg" id="boardSvg"></svg>
           <!-- Balões gerados dinamicamente via JS -->
         </div>
 
         <form onsubmit="addData('fluxos', event)" style="margin-top: 18px;">
           <div class="g2">
             <div>
-              <label>Ou faça o upload manual (opcional, máx 10MB):</label>
+              <label>Ou faça upload de arquivo próprio (opcional, máx 10MB):</label>
               <div class="up-box" onclick="document.getElementById('fluxo-file').click()">
                 <i class="fa-solid fa-cloud-arrow-up"></i>
                 <span id="file-name" style="font-size: 0.8em; color: var(--ac); display: block; margin-top: 4px;">Nenhum arquivo anexado</span>
@@ -466,7 +494,7 @@
             </div>
             <div>
               <label>Instruções / Resumo em Texto do Bot *</label>
-              <textarea id="fluxo-obs" rows="4" placeholder="O texto do fluxo estruturado aparecerá aqui automaticamente..." required></textarea>
+              <textarea id="fluxo-obs" rows="4" placeholder="O resumo estruturado do fluxo aparecerá aqui automaticamente..." required></textarea>
             </div>
           </div>
           <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Salvar Instruções do Bot</button></div>
@@ -556,7 +584,7 @@
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', newTheme);
     document.getElementById('btn-theme').innerHTML = `<span><i class="fa-solid fa-circle-half-stroke"></i> Tema: ${newTheme === 'dark' ? 'Escuro' : 'Claro'}</span>`;
-    renderBpmnLines();
+    renderBoardLines();
   }
 
   function switchTab(tabId) {
@@ -568,7 +596,7 @@
     if(activeBtn) activeBtn.classList.add('on');
 
     if(tabId === 'grupos_agentes') updateSelectsVinculo();
-    if(tabId === 'fluxos') renderBpmnLines();
+    if(tabId === 'fluxos') renderBoardLines();
     if(tabId === 'revisao') renderRevisao();
   }
 
@@ -596,159 +624,153 @@
   }
 
   /* ==========================================================
-     MOTOR BPMN INTERATIVO DE FLUXOGRAMAS (BALÕES COM RAMIFICAÇÃO)
+     MOTOR VISUAL ESTILO MIRO / FIGJAM (MULTI-RAMOS LIVRES)
   ========================================================== */
-  let bpmnNodes = [];
+  let boardNodes = [];
 
-  const bpmnTemplates = {
+  const boardTemplates = {
     sac: [
-      { id: "root", title: "Início / Boas-Vindas", text: "Olá! Bem-vindo ao atendimento. Escolha uma opção:", x: 30, y: 140, isRoot: true },
-      { id: "node_1", title: "Opção 1", text: "1. Dúvidas Frequentes", x: 310, y: 40, parent: "root" },
-      { id: "node_2", title: "Opção 2", text: "2. Suporte Técnico", x: 310, y: 160, parent: "root" },
-      { id: "node_3", title: "Opção 3", text: "3. Falar com Atendente", x: 310, y: 280, parent: "root" }
+      { id: "root", title: "Início / Boas-Vindas", text: "Olá! Bem-vindo ao atendimento. Escolha uma opção:", x: 40, y: 160, color: "green" },
+      { id: "n1", title: "Opção 1", text: "1. Dúvidas Frequentes", x: 300, y: 50, parent: "root", color: "yellow" },
+      { id: "n2", title: "Opção 2", text: "2. Suporte Técnico", x: 300, y: 160, parent: "root", color: "blue" },
+      { id: "n3", title: "Opção 3", text: "3. Falar com Atendente", x: 300, y: 270, parent: "root", color: "purple" }
     ],
     vendas: [
-      { id: "root", title: "Boas-Vindas Vendas", text: "Olá! Queremos te ajudar a encontrar a melhor solução:", x: 30, y: 140, isRoot: true },
-      { id: "node_1", title: "Opção 1", text: "1. Conhecer Produtos e Planos", x: 310, y: 40, parent: "root" },
-      { id: "node_2", title: "Opção 2", text: "2. Solicitar Proposta Comercial", x: 310, y: 160, parent: "root" },
-      { id: "node_3", title: "Opção 3", text: "3. Falar com Vendedor", x: 310, y: 280, parent: "root" }
+      { id: "root", title: "Boas-Vindas Comercial", text: "Olá! Que bom ter você aqui. Como posso te ajudar?", x: 40, y: 160, color: "green" },
+      { id: "n1", title: "Opção 1", text: "1. Conhecer Produtos e Planos", x: 300, y: 50, parent: "root", color: "yellow" },
+      { id: "n2", title: "Opção 2", text: "2. Solicitar Orçamento", x: 300, y: 160, parent: "root", color: "orange" },
+      { id: "n3", title: "Opção 3", text: "3. Falar com Consultor", x: 300, y: 270, parent: "root", color: "blue" }
     ],
     cobranca: [
-      { id: "root", title: "Menu Financeiro", text: "Olá! Você está no setor financeiro. O que deseja?", x: 30, y: 140, isRoot: true },
-      { id: "node_1", title: "Opção 1", text: "1. 2ª Via de Boleto / Código PIX", x: 310, y: 40, parent: "root" },
-      { id: "node_2", title: "Opção 2", text: "2. Negociar Acordo", x: 310, y: 160, parent: "root" },
-      { id: "node_3", title: "Opção 3", text: "3. Enviar Comprovante de Pagamento", x: 310, y: 280, parent: "root" }
+      { id: "root", title: "Menu Financeiro", text: "Olá! Você está no setor de cobrança e finanças:", x: 40, y: 160, color: "green" },
+      { id: "n1", title: "Opção 1", text: "1. 2ª Via de Boleto / Código PIX", x: 300, y: 50, parent: "root", color: "yellow" },
+      { id: "n2", title: "Opção 2", text: "2. Negociação de Acordo", x: 300, y: 160, parent: "root", color: "orange" },
+      { id: "n3", title: "Opção 3", text: "3. Enviar Comprovante de Pagamento", x: 300, y: 270, parent: "root", color: "purple" }
     ],
     clinica: [
-      { id: "root", title: "Recepção Médica", text: "Olá! Bem-vindo à Clínica. Escolha o serviço desejado:", x: 30, y: 140, isRoot: true },
-      { id: "node_1", title: "Opção 1", text: "1. Agendamento de Consulta", x: 310, y: 40, parent: "root" },
-      { id: "node_2", title: "Opção 2", text: "2. Resultados de Exames", x: 310, y: 160, parent: "root" },
-      { id: "node_3", title: "Opção 3", text: "3. Falar com Atendente da Recepção", x: 310, y: 280, parent: "root" }
+      { id: "root", title: "Recepção Médica", text: "Olá! Bem-vindo à Clínica. Selecione o serviço:", x: 40, y: 160, color: "green" },
+      { id: "n1", title: "Opção 1", text: "1. Agendamento de Consulta", x: 300, y: 50, parent: "root", color: "blue" },
+      { id: "n2", title: "Opção 2", text: "2. Resultados de Exames", x: 300, y: 160, parent: "root", color: "yellow" },
+      { id: "n3", title: "Opção 3", text: "3. Falar com Atendente", x: 300, y: 270, parent: "root", color: "purple" }
     ],
     juridico: [
-      { id: "root", title: "Escritório Jurídico", text: "Olá! Bem-vindo. Como nossa equipe jurídica pode te auxiliar?", x: 30, y: 140, isRoot: true },
-      { id: "node_1", title: "Opção 1", text: "1. Consultar Andamento de Processo/Precatório", x: 310, y: 40, parent: "root" },
-      { id: "node_2", title: "Opção 2", text: "2. Enviar Documentos Solicitados", x: 310, y: 160, parent: "root" },
-      { id: "node_3", title: "Opção 3", text: "3. Falar com o Advogado Responsável", x: 310, y: 280, parent: "root" }
+      { id: "root", title: "Escritório Jurídico", text: "Olá! Bem-vindo. Como nossa equipe pode auxiliar?", x: 40, y: 160, color: "green" },
+      { id: "n1", title: "Opção 1", text: "1. Consultar Andamento de Precatório", x: 300, y: 50, parent: "root", color: "yellow" },
+      { id: "n2", title: "Opção 2", text: "2. Enviar Documentos", x: 300, y: 160, parent: "root", color: "orange" },
+      { id: "n3", title: "Opção 3", text: "3. Falar com Advogado", x: 300, y: 270, parent: "root", color: "blue" }
     ]
   };
 
-  function loadBpmnTemplate(key) {
-    bpmnNodes = JSON.parse(JSON.stringify(bpmnTemplates[key]));
-    renderBpmnDOM();
+  const nodeColorList = ["yellow", "orange", "green", "blue", "purple"];
+
+  function loadBoardTemplate(key) {
+    boardNodes = JSON.parse(JSON.stringify(boardTemplates[key]));
+    renderBoardDOM();
     updateObsTextFromNodes();
   }
 
-  // Cria um ramo filho direto a partir de um balão específico
-  function addBranch(parentId) {
-    const parent = bpmnNodes.find(n => n.id === parentId);
+  // Cria um ramo filho a partir de um balão específico (porta +)
+  function branchFromNode(parentId) {
+    const parent = boardNodes.find(n => n.id === parentId);
     if (!parent) return;
 
-    // Calcula quantidade de irmãos para posicionar sem sobrepor
-    const siblings = bpmnNodes.filter(n => n.parent === parentId);
-    const offsetY = siblings.length * 110;
+    const children = boardNodes.filter(n => n.parent === parentId);
+    const count = children.length;
+    const offsetY = (count - 1) * 110;
 
     const newId = "node_" + Date.now();
-    bpmnNodes.push({
+    const parentIdx = nodeColorList.indexOf(parent.color || "blue");
+    const nextColor = nodeColorList[(parentIdx + 1) % nodeColorList.length];
+
+    boardNodes.push({
       id: newId,
-      title: `Ramo ${siblings.length + 1}`,
-      text: "Digite a mensagem ou ação deste passo...",
-      x: parent.x + 280,
-      y: Math.min(800, parent.y + offsetY),
-      parent: parentId
+      title: `Opção ${count + 1}`,
+      text: "Clique e digite o texto ou pergunta...",
+      x: parent.x + 260,
+      y: Math.max(20, parent.y + offsetY),
+      parent: parentId,
+      color: nextColor
     });
 
-    renderBpmnDOM();
+    renderBoardDOM();
     updateObsTextFromNodes();
   }
 
-  // Cria uma bifurcação Sim/Não
-  function addYesNoBranch(parentId) {
-    const parent = bpmnNodes.find(n => n.id === parentId);
-    if (!parent) return;
-
-    const idSim = "node_sim_" + Date.now();
-    const idNao = "node_nao_" + (Date.now() + 1);
-
-    bpmnNodes.push({
-      id: idSim,
-      type: "sim",
-      title: "✅ Se SIM",
-      text: "Direciona para atendimento / confirmação",
-      x: parent.x + 280,
-      y: parent.y - 60,
-      parent: parentId
+  function addFreeNode() {
+    const newId = "node_" + Date.now();
+    boardNodes.push({
+      id: newId,
+      title: "Nova Etapa",
+      text: "Instrução ou mensagem...",
+      x: 300,
+      y: 200,
+      color: "blue"
     });
-
-    bpmnNodes.push({
-      id: idNao,
-      type: "nao",
-      title: "❌ Se NÃO",
-      text: "Encerra ou volta ao menu principal",
-      x: parent.x + 280,
-      y: parent.y + 70,
-      parent: parentId
-    });
-
-    renderBpmnDOM();
+    renderBoardDOM();
     updateObsTextFromNodes();
   }
 
-  // Remove nó e seus filhos recursivamente
-  function deleteBpmnNode(nodeId) {
+  function toggleNodeShape(id) {
+    const node = boardNodes.find(n => n.id === id);
+    if (node) {
+      node.isDecision = !node.isDecision;
+      renderBoardDOM();
+    }
+  }
+
+  function cycleNodeColor(id) {
+    const node = boardNodes.find(n => n.id === id);
+    if (!node) return;
+    const currIdx = nodeColorList.indexOf(node.color || "yellow");
+    node.color = nodeColorList[(currIdx + 1) % nodeColorList.length];
+    renderBoardDOM();
+  }
+
+  function deleteBoardNode(nodeId) {
     if (nodeId === 'root') {
       alert("O balão inicial não pode ser excluído.");
       return;
     }
-    const toDelete = new Set([nodeId]);
-    let added = true;
-    while (added) {
-      added = false;
-      bpmnNodes.forEach(n => {
-        if (n.parent && toDelete.has(n.parent) && !toDelete.has(n.id)) {
-          toDelete.add(n.id);
-          added = true;
-        }
-      });
-    }
-
-    bpmnNodes = bpmnNodes.filter(n => !toDelete.has(n.id));
-    renderBpmnDOM();
+    // Remove o nó e atualiza os filhos para ficarem soltos ou limpos
+    boardNodes = boardNodes.filter(n => n.id !== nodeId);
+    boardNodes.forEach(n => {
+      if (n.parent === nodeId) delete n.parent;
+    });
+    renderBoardDOM();
     updateObsTextFromNodes();
   }
 
-  function renderBpmnDOM() {
-    const container = document.getElementById("bpmnCanvas");
-    container.querySelectorAll('.bpmn-node').forEach(el => el.remove());
+  function renderBoardDOM() {
+    const container = document.getElementById("boardCanvasWrapper");
+    container.querySelectorAll('.flow-node').forEach(el => el.remove());
 
-    bpmnNodes.forEach(node => {
+    boardNodes.forEach(node => {
       const el = document.createElement("div");
-      el.className = `bpmn-node ${node.isRoot ? 'root' : ''} ${node.type ? node.type : ''}`;
+      el.className = `flow-node color-${node.color || 'yellow'} ${node.isDecision ? 'shape-decision' : ''}`;
       el.id = node.id;
       el.style.left = node.x + "px";
       el.style.top = node.y + "px";
 
       el.innerHTML = `
-        <div class="bpmn-node-header">
-          <input type="text" value="${node.title}" oninput="updateNodeTitle('${node.id}', this.value)" placeholder="Título do Passo">
-          <i class="fa-solid fa-arrows-up-down-left-right" style="font-size:0.75em; color:var(--mu);"></i>
+        <div class="node-header">
+          <input type="text" value="${node.title}" oninput="updateNodeTitle('${node.id}', this.value)" placeholder="Título do balão">
+          <div class="node-tools">
+            <button type="button" class="node-tool-btn" onclick="cycleNodeColor('${node.id}')" title="Mudar cor do balão">🎨</button>
+            <button type="button" class="node-tool-btn" onclick="toggleNodeShape('${node.id}')" title="Alternar formato">🔷</button>
+            ${node.id !== 'root' ? `<button type="button" class="node-tool-btn" onclick="deleteBoardNode('${node.id}')" title="Excluir">✕</button>` : ''}
+          </div>
         </div>
-        <div class="bpmn-node-body">
-          <textarea oninput="updateNodeText('${node.id}', this.value)" placeholder="Texto da mensagem">${node.text}</textarea>
+        <div class="node-body">
+          <textarea oninput="updateNodeText('${node.id}', this.value)" placeholder="Digite a mensagem...">${node.text}</textarea>
         </div>
-        <div class="bpmn-actions">
-          <button type="button" class="bpmn-btn-mini" onclick="addBranch('${node.id}')" title="Criar próximo passo">+ Ramo</button>
-          <button type="button" class="bpmn-btn-mini" onclick="addYesNoBranch('${node.id}')" title="Criar ramificação Sim/Não">± Sim/Não</button>
-          ${!node.isRoot ? `<button type="button" class="bpmn-btn-mini del" onclick="deleteBpmnNode('${node.id}')" title="Excluir"><i class="fa-solid fa-trash"></i></button>` : ''}
-        </div>
+        <!-- PORTA LATERAL PARA PUXAR RAMIFICAÇÕES LIVRES (+) -->
+        <div class="node-port" onclick="branchFromNode('${node.id}')" title="Clique para ramificar novo nó">+</div>
       `;
 
-      // Arrastar elemento suavemente
-      const header = el.querySelector('.bpmn-node-header');
+      // Arrasto Suave (Drag & Drop)
       let isDragging = false, startX, startY, origX, origY;
-
-      header.addEventListener('mousedown', (e) => {
-        if (e.target.tagName === 'INPUT') return;
+      el.addEventListener('mousedown', (e) => {
+        if (['INPUT', 'TEXTAREA', 'BUTTON'].includes(e.target.tagName) || e.target.classList.contains('node-port')) return;
         isDragging = true;
         startX = e.clientX;
         startY = e.clientY;
@@ -760,11 +782,11 @@
 
       function onMouseMove(e) {
         if (!isDragging) return;
-        node.x = Math.max(10, Math.min(1500, origX + (e.clientX - startX)));
-        node.y = Math.max(10, Math.min(1000, origY + (e.clientY - startY)));
+        node.x = Math.max(10, Math.min(2350, origX + (e.clientX - startX)));
+        node.y = Math.max(10, Math.min(1450, origY + (e.clientY - startY)));
         el.style.left = node.x + "px";
         el.style.top = node.y + "px";
-        renderBpmnLines();
+        renderBoardLines();
       }
 
       function onMouseUp() {
@@ -776,83 +798,84 @@
       container.appendChild(el);
     });
 
-    renderBpmnLines();
+    renderBoardLines();
   }
 
   function updateNodeTitle(id, val) {
-    const node = bpmnNodes.find(n => n.id === id);
+    const node = boardNodes.find(n => n.id === id);
     if (node) node.title = val;
     updateObsTextFromNodes();
   }
 
   function updateNodeText(id, val) {
-    const node = bpmnNodes.find(n => n.id === id);
+    const node = boardNodes.find(n => n.id === id);
     if (node) node.text = val;
     updateObsTextFromNodes();
   }
 
   function updateObsTextFromNodes() {
-    let summary = "FLUXOGRAMA ESTRUTURADO DO BOT:\n\n";
-    bpmnNodes.forEach(n => {
-      const parentName = n.parent ? (bpmnNodes.find(p => p.id === n.parent)?.title || "Nó Pai") : "Início";
-      summary += `▶ [${n.title}] (Origem: ${parentName}):\n   "${n.text.replace(/\n/g, ' ')}"\n\n`;
+    let summary = "FLUXO VISUAL DO BOT (ESTRUTURA):\n\n";
+    boardNodes.forEach(n => {
+      const parentNode = n.parent ? boardNodes.find(p => p.id === n.parent) : null;
+      const parentName = parentNode ? parentNode.title : "Início";
+      summary += `▶ [${n.title}] (Origem: ${parentName}):\n   "${(n.text || '').replace(/\n/g, ' ')}"\n\n`;
     });
     document.getElementById("fluxo-obs").value = summary.trim();
   }
 
-  function renderBpmnLines() {
-    const svg = document.getElementById("bpmnSvg");
+  function renderBoardLines() {
+    const svg = document.getElementById("boardSvg");
     if (!svg) return;
     svg.innerHTML = "";
 
     const lineColor = document.documentElement.getAttribute('data-theme') === 'light' ? '#0284c7' : '#3a86ff';
 
-    // Definição de marcador de seta
+    // Marcador de seta elegante
     const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
     defs.innerHTML = `
-      <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <marker id="flowArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
         <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="${lineColor}"/>
       </marker>
     `;
     svg.appendChild(defs);
 
-    bpmnNodes.forEach(node => {
+    boardNodes.forEach(node => {
       if (node.parent) {
-        const parentNode = bpmnNodes.find(n => n.id === node.parent);
+        const parentNode = boardNodes.find(n => n.id === node.parent);
         if (parentNode) {
-          const x1 = parentNode.x + 210;
+          const x1 = parentNode.x + 200;
           const y1 = parentNode.y + 45;
           const x2 = node.x;
           const y2 = node.y + 45;
 
-          const dx = Math.max(40, (x2 - x1) / 2);
+          const dx = Math.max(30, (x2 - x1) / 2);
           const d = `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
 
           const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
           path.setAttribute("d", d);
           path.setAttribute("fill", "none");
           path.setAttribute("stroke", lineColor);
-          path.setAttribute("stroke-width", "2.5");
-          path.setAttribute("marker-end", "url(#arrow)");
+          path.setAttribute("stroke-width", "2.2");
+          path.setAttribute("marker-end", "url(#flowArrow)");
           svg.appendChild(path);
         }
       }
     });
   }
 
-  // Gera o print visual de alta resolução em PNG do diagrama montado
-  function exportBpmnToAttachment() {
+  /* GERAÇÃO DA IMAGEM AUTOMÁTICA EM BASE64 DO CANVAS */
+  function exportBoardToAttachment() {
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-    bpmnNodes.forEach(n => {
+    boardNodes.forEach(n => {
       minX = Math.min(minX, n.x);
       minY = Math.min(minY, n.y);
-      maxX = Math.max(maxX, n.x + 230);
-      maxY = Math.max(maxY, n.y + 130);
+      maxX = Math.max(maxX, n.x + 220);
+      maxY = Math.max(maxY, n.y + 120);
     });
 
     const pad = 40;
-    const width = Math.max(800, (maxX - minX) + pad * 2);
-    const height = Math.max(450, (maxY - minY) + pad * 2);
+    const width = Math.max(850, (maxX - minX) + pad * 2);
+    const height = Math.max(480, (maxY - minY) + pad * 2);
 
     const canvas = document.createElement("canvas");
     canvas.width = width;
@@ -866,15 +889,15 @@
     const offX = pad - minX;
     const offY = pad - minY;
 
-    // Desenha as conexões
+    // Linhas conectoras
     ctx.strokeStyle = isLight ? "#0284c7" : "#3a86ff";
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 2.2;
 
-    bpmnNodes.forEach(node => {
+    boardNodes.forEach(node => {
       if (node.parent) {
-        const parentNode = bpmnNodes.find(n => n.id === node.parent);
+        const parentNode = boardNodes.find(n => n.id === node.parent);
         if (parentNode) {
-          const x1 = parentNode.x + 210 + offX;
+          const x1 = parentNode.x + 200 + offX;
           const y1 = parentNode.y + 45 + offY;
           const x2 = node.x + offX;
           const y2 = node.y + 45 + offY;
@@ -885,7 +908,7 @@
           ctx.bezierCurveTo(x1 + dx, y1, x2 - dx, y2, x2, y2);
           ctx.stroke();
 
-          // Seta na ponta
+          // Seta
           ctx.fillStyle = ctx.strokeStyle;
           ctx.beginPath();
           ctx.moveTo(x2, y2);
@@ -896,67 +919,70 @@
       }
     });
 
-    // Desenha os nós
-    bpmnNodes.forEach(node => {
+    // Nós desenhados com suas cores
+    const colorMap = {
+      yellow: { bg: "#fef08a", border: "#eab308", text: "#713f12" },
+      orange: { bg: "#fed7aa", border: "#f97316", text: "#7c2d12" },
+      green:  { bg: "#bbf7d0", border: "#22c55e", text: "#14532d" },
+      blue:   { bg: "#bfdbfe", border: "#3b82f6", text: "#1e3a8a" },
+      purple: { bg: "#e9d5ff", border: "#a855f7", text: "#581c87" }
+    };
+
+    boardNodes.forEach(node => {
       const nx = node.x + offX;
       const ny = node.y + offY;
+      const theme = colorMap[node.color || "yellow"];
 
-      ctx.fillStyle = isLight ? "#ffffff" : "#151e36";
-      let borderCol = isLight ? "#0284c7" : "#3a86ff";
-      if (node.isRoot) borderCol = "#10b981";
-      if (node.type === 'sim') borderCol = "#10b981";
-      if (node.type === 'nao') borderCol = "#ef4444";
-
-      ctx.strokeStyle = borderCol;
+      ctx.fillStyle = theme.bg;
+      ctx.strokeStyle = theme.border;
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.roundRect(nx, ny, 210, 85, 8);
+      ctx.roundRect(nx, ny, 200, 80, node.isDecision ? 16 : 10);
       ctx.fill();
       ctx.stroke();
 
-      // Linha divisória
-      ctx.strokeStyle = isLight ? "#00000015" : "#ffffff15";
-      ctx.beginPath();
-      ctx.moveTo(nx, ny + 24);
-      ctx.lineTo(nx + 210, ny + 24);
-      ctx.stroke();
-
       // Título
-      ctx.fillStyle = borderCol;
+      ctx.fillStyle = theme.text;
       ctx.font = "bold 11px Inter, sans-serif";
-      ctx.fillText(node.title.substring(0, 26), nx + 10, ny + 16);
+      ctx.fillText(node.title.substring(0, 24), nx + 10, ny + 18);
 
-      // Texto
-      ctx.fillStyle = isLight ? "#0f172a" : "#f8fafc";
+      // Caixa de texto interna
+      ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+      ctx.beginPath();
+      ctx.roundRect(nx + 8, ny + 26, 184, 46, 5);
+      ctx.fill();
+
+      // Texto da mensagem
+      ctx.fillStyle = "#0f172a";
       ctx.font = "10px Inter, sans-serif";
       const words = (node.text || "").split(" ");
       let line = "", lineY = ny + 40;
       for (let w of words) {
         const testLine = line + w + " ";
-        if (ctx.measureText(testLine).width > 190) {
-          ctx.fillText(line, nx + 10, lineY);
+        if (ctx.measureText(testLine).width > 170) {
+          ctx.fillText(line, nx + 14, lineY);
           line = w + " ";
-          lineY += 14;
-          if (lineY > ny + 78) break;
+          lineY += 13;
+          if (lineY > ny + 68) break;
         } else {
           line = testLine;
         }
       }
-      if (lineY <= ny + 78) ctx.fillText(line, nx + 10, lineY);
+      if (lineY <= ny + 68) ctx.fillText(line, nx + 14, lineY);
     });
 
     currentBase64File = canvas.toDataURL("image/png");
-    document.getElementById("file-name").innerText = "📸 Fluxo BPMN capturado e anexado com sucesso!";
-    alert("✨ Diagrama do bot exportado com sucesso! Já está vinculado ao seu setup.");
+    document.getElementById("file-name").innerText = "📸 Diagrama capturado e anexado com sucesso!";
+    alert("✨ Diagrama gerado com sucesso! Já está vinculado ao seu envio final.");
   }
 
-  // Carrega template de SAC por padrão ao abrir
+  // Carrega template SAC por padrão
   window.addEventListener('DOMContentLoaded', () => {
-    loadBpmnTemplate('sac');
+    loadBoardTemplate('sac');
   });
 
   /* ==========================================================
-     LÓGICA PADRÃO DE DADOS E FORMULÁRIOS
+     LÓGICA PADRÃO DE ENVIO & DADOS
   ========================================================== */
   function handleFileSelect(e) {
     const file = e.target.files[0];

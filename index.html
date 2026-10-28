@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Setup WeON — Onboarding Inteligente</title>
   
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>?v=16">
-  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=16">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>?v=17">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=17">
 
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -271,7 +271,7 @@
     .btn.pr:hover { filter: brightness(1.15); transform: translateY(-1px); }
     .btn.dn:hover { border-color: var(--dg); color: var(--dg); }
 
-    /* SEÇÃO IA INCREMENTAL */
+    /* SEÇÃO IA INCREMENTAL INTELIGENTE */
     .ai-box-container {
       background: linear-gradient(135deg, rgba(121, 40, 202, 0.18) 0%, rgba(0, 240, 255, 0.15) 100%);
       border: 1.5px solid var(--ac);
@@ -282,8 +282,10 @@
     }
     .ai-box-header {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
       margin-bottom: 12px;
     }
     .ai-box-header h3 {
@@ -321,6 +323,27 @@
       50% { box-shadow: 0 0 0 10px rgba(255, 51, 102, 0); }
     }
 
+    .prompt-row {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+    }
+    @media(max-width: 800px) {
+      .prompt-row { flex-direction: column; }
+    }
+
+    .target-selector-box {
+      min-width: 220px;
+    }
+    .target-selector-box select {
+      background: rgba(8, 14, 30, 0.95);
+      border: 1.5px solid var(--ac);
+      color: #ffffff;
+      font-weight: 700;
+      margin-bottom: 0;
+      height: 100%;
+    }
+
     .prompt-wrapper {
       position: relative;
       display: flex;
@@ -330,6 +353,7 @@
     .prompt-wrapper input {
       padding-right: 36px;
       margin-bottom: 0;
+      font-size: 0.9em;
     }
     .clear-prompt-btn {
       position: absolute;
@@ -337,7 +361,7 @@
       background: transparent;
       border: 0;
       color: var(--mu);
-      font-size: 0.85em;
+      font-size: 0.9em;
       cursor: pointer;
       padding: 4px;
       display: flex;
@@ -346,6 +370,29 @@
       border-radius: 50%;
     }
     .clear-prompt-btn:hover { color: var(--dg); }
+
+    .quick-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+      align-items: center;
+    }
+    .quick-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--bd);
+      color: var(--mu);
+      font-size: 0.74em;
+      padding: 3px 9px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .quick-pill:hover {
+      background: rgba(0, 240, 255, 0.15);
+      color: var(--ac);
+      border-color: var(--ac);
+    }
 
     .tb-wrap { overflow-x: auto; margin-top: 10px; }
     table { width: 100%; border-collapse: collapse; font-size: 0.84em; text-align: left; }
@@ -446,7 +493,7 @@
 
     .flow-node.selected {
       border-color: #00f0ff !important;
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.5) !important;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.7) !important;
     }
 
     .flow-node.color-yellow { background: #fef08a; border-color: #eab308; color: #713f12; }
@@ -821,44 +868,63 @@
       <div class="cd"><div class="tb-wrap" id="table-calendario"></div></div>
     </div>
 
-    <!-- 8. FLUXOS COM IA INCREMENTAL, LIMPEZA RÁPIDA E CAPTURA DE VOZ -->
+    <!-- 8. FLUXOS COM IA INCREMENTAL, SELETOR DE ALVO E RESET DO QUADRO -->
     <div id="section-fluxos" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-diagram-project"></i> Passo 8: Menu do Bot / Fluxo</h2>
         
         <div class="hint-box">
           <div class="hint-title"><i class="fa-solid fa-robot"></i> Crie e Incremente com a IA do Chiwe:</div>
-          Você pode construir o fluxo aos poucos! Dite ou digite o menu inicial e depois vá incrementando (ex: <i>"Agora adicione na opção de dúvidas as opções Software e Hardware"</i>). O botão <b>✕</b> limpa o campo para a sua próxima fala sem perder o diagrama na tela.
+          <b>Como funciona:</b> Clique em qualquer balão no quadro para selecioná-lo (ele ficará destacado em ciano) ou escolha no seletor abaixo. Depois, dite ou digite os ramos que deseja adicionar nele! Se quiser recomeçar, use o botão <b>Limpar Todo o Fluxo</b>.
         </div>
 
         <div class="ai-box-container">
           <div class="ai-box-header">
             <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Assistente IA do Chiwe (Criação & Incremento)</h3>
             <div style="display: flex; gap: 8px;">
-              <button type="button" class="btn dn" onclick="clearAiPrompt()" title="Limpar campo de prompt">
-                <i class="fa-solid fa-trash-can"></i> Limpar Prompt
+              <button type="button" class="btn dn" onclick="resetBoardCompletely()" title="Apagar todo o desenho do quadro">
+                <i class="fa-solid fa-eraser"></i> Limpar Todo o Fluxo
+              </button>
+              <button type="button" class="btn" onclick="clearAiPrompt()" title="Limpar apenas o texto digitado">
+                <i class="fa-solid fa-xmark"></i> Limpar Prompt
               </button>
               <button type="button" class="mic-btn" id="btn-mic" onclick="toggleVoiceRecognition()">
                 <i class="fa-solid fa-microphone" id="mic-icon"></i> <span id="mic-label">Iniciar Gravação</span>
               </button>
             </div>
           </div>
-          <div style="display: flex; gap: 10px; align-items: stretch;">
+
+          <!-- LINHA DE PROMPT COM SELETOR DE ALVO EXPLICITO -->
+          <div class="prompt-row">
+            <div class="target-selector-box">
+              <label style="font-size: 0.72em; margin-bottom: 3px; color: var(--ac);"><i class="fa-solid fa-bullseye"></i> Onde Conectar:</label>
+              <select id="ai-target-select" onchange="handleTargetSelectChange(this.value)">
+                <option value="AUTO">✨ Detecção Automática</option>
+                <!-- Preenchido dinamicamente com os nós da tela -->
+              </select>
+            </div>
+            
             <div class="prompt-wrapper">
-              <input type="text" id="ai-prompt-input" placeholder="Ex: 'Adicione na opção Suporte os ramos Hardware, Software e Periféricos...'">
+              <input type="text" id="ai-prompt-input" placeholder="Ex: 'Adicione as opções Hardware e Software...'">
               <button type="button" class="clear-prompt-btn" onclick="clearAiPrompt()" title="Apagar texto digitado">✕</button>
             </div>
+            
             <button type="button" class="btn pr" id="btn-generate-ai" onclick="generateFlowWithGemini()" style="white-space: nowrap;">
               <i class="fa-solid fa-sparkles"></i> Gerar / Incrementar
             </button>
           </div>
-          <small style="color: var(--mu); font-size: 0.72em; margin-top: 8px; display: block;">
-            💡 <i>Você não precisa apagar o quadro para adicionar novos ramos. A IA aproveita os balões que já estão na tela e conecta os novos filhos!</i>
-          </small>
+
+          <!-- PÍLULAS DE ATALHO RÁPIDO -->
+          <div class="quick-pills">
+            <span style="font-size:0.73em; color:var(--mu); font-weight:700;">Exemplos rápidos:</span>
+            <span class="quick-pill" onclick="setQuickPrompt('Adicionar no Suporte Técnico: Hardware e Software')">+ Hardware e Software no Suporte</span>
+            <span class="quick-pill" onclick="setQuickPrompt('Criar menu de Cobrança com Boleto PIX, Negociar Acordo e Falar com Atendente')">+ Menu Completo de Cobrança</span>
+            <span class="quick-pill" onclick="setQuickPrompt('Adicionar na opção 1: Consulta por CPF e Consulta por CNPJ')">+ CPF e CNPJ na Opção 1</span>
+          </div>
         </div>
 
         <div class="flow-toolbar">
-          <label style="margin:0; font-weight:700; color:var(--tx); font-size:0.8em;"><i class="fa-solid fa-layer-group"></i> Modelos Rápidos:</label>
+          <label style="margin:0; font-weight:700; color:var(--tx); font-size:0.8em;"><i class="fa-solid fa-layer-group"></i> Modelos Prontos:</label>
           <button type="button" class="btn" onclick="loadBoardTemplate('sac')"><i class="fa-solid fa-headset"></i> SAC</button>
           <button type="button" class="btn" onclick="loadBoardTemplate('vendas')"><i class="fa-solid fa-cart-shopping"></i> Vendas</button>
           <button type="button" class="btn" onclick="loadBoardTemplate('cobranca')"><i class="fa-solid fa-barcode"></i> Cobrança</button>
@@ -866,6 +932,7 @@
           <button type="button" class="btn" onclick="loadBoardTemplate('juridico')"><i class="fa-solid fa-scale-balanced"></i> Jurídico</button>
           
           <button type="button" class="btn" onclick="addFreeNode()"><i class="fa-solid fa-plus"></i> Balão Livre</button>
+          <button type="button" class="btn" onclick="reorganizeBoardAutoLayout()"><i class="fa-solid fa-wand-magic-sparkles"></i> Auto-Organizar</button>
 
           <!-- CONTROLE DE ZOOM -->
           <div class="zoom-controls" style="margin-left: auto;">
@@ -968,6 +1035,7 @@
   let currentBase64File = "";
   let currentZoom = 1.0;
   let selectedNodeIds = new Set();
+  let explicitTargetId = "AUTO";
   let isRecording = false;
   let speechRecognizer = null;
 
@@ -979,7 +1047,7 @@
     grupos_agentes: "Agora conecte cada atendente ao seu setor correspondente. É só selecionar quem atende o quê!",
     qualificacoes: "Como cada conversa termina? 'Venda realizada', 'Dúvida tirada' ou 'Sem retorno'? Isso gera as métricas da sua empresa!",
     calendario: "Qual é o expediente do seu escritório? Horário de abertura e fechamento para os clientes saberem quando vocês atendem.",
-    fluxos: "Essa é a minha parte favorita! Use a IA por voz ou texto para criar seu bot, ou monte no quadro arrastando os balões!",
+    fluxos: "Essa é a minha parte favorita! Clique em qualquer balão para conectá-lo e use a IA por voz ou texto para criar novos ramos!",
     templates: "Mensagens pré-definidas para envio rápido! Lembretes de cobrança, confirmação de reunião e saudações ativas.",
     revisao: "Tudo pronto! Dê uma última olhada com calma no resumo do seu setup antes de enviar para a nossa equipe técnica!"
   };
@@ -1012,6 +1080,47 @@
     const input = document.getElementById("ai-prompt-input");
     input.value = "";
     input.focus();
+  }
+
+  function setQuickPrompt(text) {
+    const input = document.getElementById("ai-prompt-input");
+    input.value = text;
+    input.focus();
+  }
+
+  function resetBoardCompletely() {
+    if (confirm("Tem certeza que deseja apagar todo o desenho do quadro e começar um fluxo em branco?")) {
+      boardNodes = [
+        { id: "root", title: "Início / Boas-Vindas", text: "Olá! Bem-vindo ao atendimento. Escolha uma opção:", x: 40, y: 160, color: "green" }
+      ];
+      selectedNodeIds.clear();
+      explicitTargetId = "AUTO";
+      renderBoardDOM();
+      updateObsTextFromNodes();
+      updateTargetDropdown();
+    }
+  }
+
+  function handleTargetSelectChange(val) {
+    explicitTargetId = val;
+    selectedNodeIds.clear();
+    if (val !== "AUTO") {
+      selectedNodeIds.add(val);
+    }
+    renderBoardDOM();
+  }
+
+  function updateTargetDropdown() {
+    const select = document.getElementById("ai-target-select");
+    if (!select) return;
+
+    let html = `<option value="AUTO" ${explicitTargetId === "AUTO" ? "selected" : ""}>✨ Detecção Automática</option>`;
+    boardNodes.forEach(node => {
+      const isSelected = explicitTargetId === node.id ? "selected" : "";
+      const displayTitle = node.title || (node.text ? node.text.substring(0, 20) : node.id);
+      html += `<option value="${node.id}" ${isSelected}>📍 Conectar em: ${displayTitle}</option>`;
+    });
+    select.innerHTML = html;
   }
 
   /* RECONHECIMENTO DE VOZ (TOGGLE MANUAL) */
@@ -1081,7 +1190,7 @@
   }
 
   /* ==========================================================
-     MOTOR IA INCREMENTAL (CRIAR OU AMPLIAR A ÁRVORE ATUAL)
+     MOTOR IA INCREMENTAL COM PRECISÃO DE NÓ ALVO
   ========================================================== */
   async function generateFlowWithGemini() {
     const promptInput = document.getElementById("ai-prompt-input");
@@ -1103,7 +1212,15 @@
     btnGen.disabled = true;
     btnGen.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> O Chiwe está atualizando...';
 
-    // Passamos a árvore atual para a IA como contexto
+    // Se o usuário selecionou um nó explicitamente no dropdown ou clicando no quadro
+    let targetNode = null;
+    if (explicitTargetId !== "AUTO") {
+      targetNode = boardNodes.find(n => n.id === explicitTargetId);
+    } else if (selectedNodeIds.size === 1) {
+      const selId = Array.from(selectedNodeIds)[0];
+      targetNode = boardNodes.find(n => n.id === selId);
+    }
+
     const currentNodesSummary = boardNodes.map(n => ({
       id: n.id,
       title: n.title,
@@ -1112,17 +1229,18 @@
     }));
 
     const systemPrompt = `
-Você é o Chiwe, assistente e mascote oficial da plataforma WeON.
-O usuário vai pedir uma alteração ou criação de fluxo de bot para WhatsApp.
-Você tem acesso à lista ATUAL de nós do fluxograma:
+Você é o Chiwe, assistente oficial da plataforma WeON.
+O usuário vai pedir uma alteração ou criação de opções em um fluxo de bot.
+Lista ATUAL de nós do fluxograma:
 ${JSON.stringify(currentNodesSummary)}
+Nó Alvo Pré-selecionado: ${targetNode ? JSON.stringify(targetNode) : "Nenhum (detecte pelo texto da pergunta)"}
 
 Sua tarefa:
-1. Se a lista atual estiver vazia ou o usuário pedir um fluxo do zero, crie uma estrutura nova completa.
-2. Se o usuário pedir para ADICIONAR, EXPANDIR ou INCREMENTAR opções a um nó existente (ex: "adicione opções de hardware e software em suporte"), MANTENHA os nós existentes e ADICIONE os novos nós conectando com parent apontando para o id do nó existente correto.
-3. Calcule posições (x, y) de modo que novos nós fiquem à direita do pai (x: pai.x + 260) com espaçamento vertical de 110px.
+1. Se o usuário pedir um fluxo novo completo, recrie a árvore a partir do nó root.
+2. Se pedir para adicionar ramos em uma opção específica (ex: "suporte", "dúvidas"), encontre o nó EXATO correspondente pelo título/contexto (se houver Nó Alvo pré-selecionado, priorize ele obrigatoriamente).
+3. MANTENHA todos os nós existentes intactos e conecte os novos nós com parent apontando para o id do nó pai correto.
 4. Cores disponíveis: "yellow", "orange", "green", "blue", "purple".
-Retorne ESTRITAMENTE o array JSON completo atualizado com todos os nós. Sem markdown extra.
+Retorne ESTRITAMENTE o array JSON completo atualizado. Sem markdown extra.
 `;
 
     const targetModels = ["gemini-3.8-flash", "gemini-3.6-flash"];
@@ -1157,88 +1275,93 @@ Retorne ESTRITAMENTE o array JSON completo atualizado com todos os nós. Sem mar
       }
     }
 
-    // FALLBACK HEURÍSTICO INCREMENTAL DO CHIWE
+    // FALLBACK HEURÍSTICO REFINADO
     if (!parsedNodes) {
-      parsedNodes = processLocalIncrementalFlow(promptText);
+      parsedNodes = processLocalIncrementalFlowRefined(promptText, targetNode);
     }
 
     if (parsedNodes) {
       boardNodes = parsedNodes;
+      reorganizeBoardAutoLayout(); // Organiza layout em árvore para evitar nós sobrepostos
       selectedNodeIds.clear();
       renderBoardDOM();
       updateObsTextFromNodes();
+      updateTargetDropdown();
       
-      // Limpa o campo para a próxima instrução sem o usuário precisar apagar na mão
       promptInput.value = "";
-      alert("✨ Fluxo atualizado com sucesso! O campo de texto foi limpo para a sua próxima instrução.");
+      alert("✨ Fluxo atualizado com sucesso! Os novos ramos foram conectados ao nó correto.");
     } else {
-      alert("Não foi possível processar a instrução. Tente reformular o pedido.");
+      alert("Não foi possível processar a instrução. Tente selecionar o balão desejado antes de enviar.");
     }
 
     btnGen.disabled = false;
     btnGen.innerHTML = '<i class="fa-solid fa-sparkles"></i> Gerar / Incrementar';
   }
 
-  // PROCESSADOR HEURÍSTICO LOCAL: MANTÉM OS NÓS E ADICIONA RAMOS
-  function processLocalIncrementalFlow(prompt) {
+  /* RESOLUÇÃO HEURÍSTICA DE CONFLITOS DE NOME */
+  function processLocalIncrementalFlowRefined(prompt, preferredTarget) {
     const p = prompt.toLowerCase();
     
-    // Se o quadro estiver vazio, cria o nó inicial
     if (boardNodes.length === 0) {
       boardNodes = [
         { id: "root", title: "Início / Atendimento", text: "Olá! Bem-vindo ao canal oficial. Como podemos te ajudar?", x: 40, y: 160, color: "green" }
       ];
     }
 
-    // Tenta encontrar um nó correspondente ao termo falado
-    let targetParent = null;
-    for (let node of boardNodes) {
-      const nodeText = (node.title + " " + node.text).toLowerCase();
-      if (
-        (p.includes("suporte") && nodeText.includes("suporte")) ||
-        (p.includes("dúvida") && nodeText.includes("dúvida")) ||
-        (p.includes("duvida") && nodeText.includes("duvida")) ||
-        (p.includes("venda") && nodeText.includes("venda")) ||
-        (p.includes("cobr") && nodeText.includes("cobr")) ||
-        (p.includes("financeiro") && nodeText.includes("financeiro")) ||
-        (p.includes("jurídico") && nodeText.includes("jurídico")) ||
-        (p.includes("opção 1") && node.id === "n1") ||
-        (p.includes("opção 2") && node.id === "n2") ||
-        (p.includes("opção 3") && node.id === "n3")
-      ) {
-        targetParent = node;
-        break;
-      }
-    }
+    // Se o usuário selecionou ou clicou em um nó, ele tem prioridade absoluta
+    let targetParent = preferredTarget;
 
-    // Se não encontrou um nó específico ou o usuário pediu um fluxo novo completo
-    if (!targetParent && (p.includes("criar") || p.includes("novo") || p.includes("fluxo de"))) {
-      if (p.includes("cobr") || p.includes("inadimpl")) {
-        return [
-          { id: "root", title: "Início / Cobrança", text: "Olá! Bem-vindo ao setor de regularização e finanças. Digite seu CPF/CNPJ:", x: 40, y: 160, color: "green" },
-          { id: "n1", title: "Opção 1", text: "1. 2ª Via de Boleto / Código PIX", x: 300, y: 50, parent: "root", color: "yellow" },
-          { id: "n2", title: "Opção 2", text: "2. Renegociação de Dívida / Acordo", x: 300, y: 160, parent: "root", color: "orange" },
-          { id: "n3", title: "Opção 3", text: "3. Enviar Comprovante de Pagamento", x: 300, y: 270, parent: "root", color: "blue" },
-          { id: "n4", title: "Opção 4", text: "4. Falar com Especialista", x: 300, y: 380, parent: "root", color: "purple" }
-        ];
-      }
-      targetParent = boardNodes.find(n => n.id === "root") || boardNodes[0];
+    // Se estiver em modo automático, encontra o nó mais específico usando pontuação por proximidade
+    if (!targetParent) {
+      let bestScore = -1;
+      boardNodes.forEach(node => {
+        let score = 0;
+        const titleL = (node.title || "").toLowerCase();
+        const textL = (node.text || "").toLowerCase();
+
+        // Frases como "na opção suporte", "em suporte" têm pontuação máxima
+        if (p.includes(`em ${titleL}`) || p.includes(`na ${titleL}`) || p.includes(`no ${titleL}`)) score += 10;
+        if (p.includes("suporte") && (titleL.includes("suporte") || textL.includes("suporte"))) score += 5;
+        if (p.includes("financeiro") && (titleL.includes("financeiro") || textL.includes("financeiro"))) score += 5;
+        if (p.includes("venda") && (titleL.includes("venda") || textL.includes("venda"))) score += 5;
+        if (p.includes("dúvida") && (titleL.includes("dúvida") || textL.includes("dúvida"))) score += 2;
+        if (p.includes("cobr") && (titleL.includes("cobr") || textL.includes("cobr"))) score += 5;
+
+        if (score > bestScore) {
+          bestScore = score;
+          targetParent = node;
+        }
+      });
     }
 
     if (!targetParent) {
       targetParent = boardNodes.find(n => n.id === "root") || boardNodes[0];
     }
 
-    // Extrai ramos mencionados na fala (ex: "software e hardware", "placas e periféricos")
+    // Extrai itens separados por vírgula, "e" ou palavras-chave
     let newBranches = [];
-    if (p.includes("software") || p.includes("hardware") || p.includes("periférico") || p.includes("placa")) {
-      if (p.includes("software")) newBranches.push("Dúvidas sobre Software e Sistemas");
-      if (p.includes("hardware")) newBranches.push("Dúvidas sobre Hardware e Equipamentos");
+    if (p.includes("hardware") || p.includes("software") || p.includes("periférico") || p.includes("placa")) {
+      if (p.includes("software")) newBranches.push("Suporte a Software e Sistemas");
+      if (p.includes("hardware")) newBranches.push("Suporte a Hardware e Equipamentos");
       if (p.includes("periférico") || p.includes("periferico")) newBranches.push("Periféricos e Acessórios");
-      if (p.includes("placa")) newBranches.push("Placas-mãe e Componentes");
+      if (p.includes("placa")) newBranches.push("Placas e Componentes Internos");
     } else {
-      // Se não houver palavras específicas, cria ramos genéricos com o texto do usuário
-      newBranches.push(prompt.substring(0, 40));
+      // Limpa verbos de comando para extrair o conteúdo real
+      let cleaned = prompt
+        .replace(/coloque ali na opção [^,]+/i, "")
+        .replace(/adicione na opção [^,]+/i, "")
+        .replace(/adicione/i, "")
+        .replace(/coloque/i, "")
+        .replace(/crie/i, "")
+        .trim();
+        
+      if (cleaned.includes(" e ")) {
+        newBranches = cleaned.split(" e ").map(s => s.trim());
+      } else if (cleaned.includes(",")) {
+        newBranches = cleaned.split(",").map(s => s.trim());
+      } else {
+        newBranches = [cleaned || "Novo Ramo"];
+      }
     }
 
     const currentChildren = boardNodes.filter(n => n.parent === targetParent.id);
@@ -1258,6 +1381,32 @@ Retorne ESTRITAMENTE o array JSON completo atualizado com todos os nós. Sem mar
     });
 
     return [...boardNodes];
+  }
+
+  /* AUTO-ORGANIZADOR DE LAYOUT EM ÁRVORE */
+  function reorganizeBoardAutoLayout() {
+    const root = boardNodes.find(n => n.id === "root") || boardNodes[0];
+    if (!root) return;
+
+    let currentY = 50;
+
+    function layoutSubtree(node, depth) {
+      node.x = 40 + (depth * 260);
+      const children = boardNodes.filter(n => n.parent === node.id);
+
+      if (children.length === 0) {
+        node.y = currentY;
+        currentY += 105;
+      } else {
+        children.forEach(child => layoutSubtree(child, depth + 1));
+        const firstChild = children[0];
+        const lastChild = children[children.length - 1];
+        node.y = Math.round((firstChild.y + lastChild.y) / 2);
+      }
+    }
+
+    layoutSubtree(root, 0);
+    renderBoardLines();
   }
 
   function toggleTheme() {
@@ -1282,7 +1431,10 @@ Retorne ESTRITAMENTE o array JSON completo atualizado com todos os nós. Sem mar
     }
 
     if(tabId === 'grupos_agentes') updateSelectsVinculo();
-    if(tabId === 'fluxos') renderBoardLines();
+    if(tabId === 'fluxos') {
+      updateTargetDropdown();
+      renderBoardLines();
+    }
     if(tabId === 'revisao') renderRevisao();
   }
 
@@ -1350,8 +1502,10 @@ Retorne ESTRITAMENTE o array JSON completo atualizado com todos os nós. Sem mar
   function loadBoardTemplate(key) {
     boardNodes = JSON.parse(JSON.stringify(boardTemplates[key]));
     selectedNodeIds.clear();
+    explicitTargetId = "AUTO";
     renderBoardDOM();
     updateObsTextFromNodes();
+    updateTargetDropdown();
   }
 
   function adjustZoom(delta) {
@@ -1394,6 +1548,7 @@ Retorne ESTRITAMENTE o array JSON completo atualizado com todos os nós. Sem mar
 
     renderBoardDOM();
     updateObsTextFromNodes();
+    updateTargetDropdown();
   }
 
   function addFreeNode() {
@@ -1408,6 +1563,7 @@ Retorne ESTRITAMENTE o array JSON completo atualizado com todos os nós. Sem mar
     });
     renderBoardDOM();
     updateObsTextFromNodes();
+    updateTargetDropdown();
   }
 
   function toggleNodeShape(id) {
@@ -1438,6 +1594,7 @@ Retorne ESTRITAMENTE o array JSON completo atualizado com todos os nós. Sem mar
     });
     renderBoardDOM();
     updateObsTextFromNodes();
+    updateTargetDropdown();
   }
 
   function renderBoardDOM() {
@@ -1446,7 +1603,7 @@ Retorne ESTRITAMENTE o array JSON completo atualizado com todos os nós. Sem mar
 
     boardNodes.forEach(node => {
       const el = document.createElement("div");
-      const isSel = selectedNodeIds.has(node.id);
+      const isSel = selectedNodeIds.has(node.id) || explicitTargetId === node.id;
       el.className = `flow-node color-${node.color || 'yellow'} ${node.isDecision ? 'shape-decision' : ''} ${isSel ? 'selected' : ''}`;
       el.id = node.id;
       el.style.left = node.x + "px";
@@ -1473,6 +1630,11 @@ Retorne ESTRITAMENTE o array JSON completo atualizado com todos os nós. Sem mar
       el.addEventListener('mousedown', (e) => {
         if (['INPUT', 'TEXTAREA', 'BUTTON'].includes(e.target.tagName) || e.target.classList.contains('node-port')) return;
         
+        // Clique define este nó como o alvo ativo da IA
+        explicitTargetId = node.id;
+        const targetSelect = document.getElementById("ai-target-select");
+        if (targetSelect) targetSelect.value = node.id;
+
         if (e.ctrlKey || e.metaKey) {
           if (selectedNodeIds.has(node.id)) {
             selectedNodeIds.delete(node.id);
@@ -1548,6 +1710,9 @@ Retorne ESTRITAMENTE o array JSON completo atualizado com todos os nós. Sem mar
     if (e.target.id === 'boardViewport' || e.target.id === 'boardContent' || e.target.id === 'boardSvg') {
       if (!e.ctrlKey && !e.metaKey) {
         selectedNodeIds.clear();
+        explicitTargetId = "AUTO";
+        const targetSelect = document.getElementById("ai-target-select");
+        if (targetSelect) targetSelect.value = "AUTO";
         document.querySelectorAll('.flow-node.selected').forEach(n => n.classList.remove('selected'));
       }
       isSelecting = true;
@@ -1603,6 +1768,7 @@ Retorne ESTRITAMENTE o array JSON completo atualizado com todos os nós. Sem mar
     const node = boardNodes.find(n => n.id === id);
     if (node) node.title = val;
     updateObsTextFromNodes();
+    updateTargetDropdown();
   }
 
   function updateNodeText(id, val) {

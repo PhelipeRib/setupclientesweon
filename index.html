@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Setup WeON — Onboarding Inteligente</title>
   
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>?v=15">
-  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=15">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>?v=16">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=16">
 
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -271,7 +271,7 @@
     .btn.pr:hover { filter: brightness(1.15); transform: translateY(-1px); }
     .btn.dn:hover { border-color: var(--dg); color: var(--dg); }
 
-    /* SEÇÃO IA COM GEMINI & VOZ */
+    /* SEÇÃO IA INCREMENTAL */
     .ai-box-container {
       background: linear-gradient(135deg, rgba(121, 40, 202, 0.18) 0%, rgba(0, 240, 255, 0.15) 100%);
       border: 1.5px solid var(--ac);
@@ -320,6 +320,32 @@
       0%, 100% { box-shadow: 0 0 0 0 rgba(255, 51, 102, 0.7); }
       50% { box-shadow: 0 0 0 10px rgba(255, 51, 102, 0); }
     }
+
+    .prompt-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+    .prompt-wrapper input {
+      padding-right: 36px;
+      margin-bottom: 0;
+    }
+    .clear-prompt-btn {
+      position: absolute;
+      right: 10px;
+      background: transparent;
+      border: 0;
+      color: var(--mu);
+      font-size: 0.85em;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    .clear-prompt-btn:hover { color: var(--dg); }
 
     .tb-wrap { overflow-x: auto; margin-top: 10px; }
     table { width: 100%; border-collapse: collapse; font-size: 0.84em; text-align: left; }
@@ -795,31 +821,39 @@
       <div class="cd"><div class="tb-wrap" id="table-calendario"></div></div>
     </div>
 
-    <!-- 8. FLUXOS COM GEMINI 3.8 / 3.6 E MOTOR HEURÍSTICO LOCAL DO CHIWE -->
+    <!-- 8. FLUXOS COM IA INCREMENTAL, LIMPEZA RÁPIDA E CAPTURA DE VOZ -->
     <div id="section-fluxos" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-diagram-project"></i> Passo 8: Menu do Bot / Fluxo</h2>
         
         <div class="hint-box">
-          <div class="hint-title"><i class="fa-solid fa-robot"></i> Crie com a IA do Chiwe (Texto ou Áudio):</div>
-          Não quer montar os balões na mão? <b>Peça em linguagem natural!</b> Clique em <b>Iniciar Gravação</b> para falar por voz sem pressa, ou digite o fluxo da sua empresa no campo abaixo. O Chiwe gerará toda a árvore de opções no quadro em segundos!
+          <div class="hint-title"><i class="fa-solid fa-robot"></i> Crie e Incremente com a IA do Chiwe:</div>
+          Você pode construir o fluxo aos poucos! Dite ou digite o menu inicial e depois vá incrementando (ex: <i>"Agora adicione na opção de dúvidas as opções Software e Hardware"</i>). O botão <b>✕</b> limpa o campo para a sua próxima fala sem perder o diagrama na tela.
         </div>
 
         <div class="ai-box-container">
           <div class="ai-box-header">
-            <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Assistente IA do Chiwe (Gemini 3.8 Flash)</h3>
-            <button type="button" class="mic-btn" id="btn-mic" onclick="toggleVoiceRecognition()">
-              <i class="fa-solid fa-microphone" id="mic-icon"></i> <span id="mic-label">Iniciar Gravação</span>
-            </button>
+            <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Assistente IA do Chiwe (Criação & Incremento)</h3>
+            <div style="display: flex; gap: 8px;">
+              <button type="button" class="btn dn" onclick="clearAiPrompt()" title="Limpar campo de prompt">
+                <i class="fa-solid fa-trash-can"></i> Limpar Prompt
+              </button>
+              <button type="button" class="mic-btn" id="btn-mic" onclick="toggleVoiceRecognition()">
+                <i class="fa-solid fa-microphone" id="mic-icon"></i> <span id="mic-label">Iniciar Gravação</span>
+              </button>
+            </div>
           </div>
           <div style="display: flex; gap: 10px; align-items: stretch;">
-            <input type="text" id="ai-prompt-input" style="margin-bottom:0;" placeholder="Ex: 'Me ajude a criar um fluxo de bot para cobrança de inadimplentes com consulta de CPF, boleto e falar com atendente'">
+            <div class="prompt-wrapper">
+              <input type="text" id="ai-prompt-input" placeholder="Ex: 'Adicione na opção Suporte os ramos Hardware, Software e Periféricos...'">
+              <button type="button" class="clear-prompt-btn" onclick="clearAiPrompt()" title="Apagar texto digitado">✕</button>
+            </div>
             <button type="button" class="btn pr" id="btn-generate-ai" onclick="generateFlowWithGemini()" style="white-space: nowrap;">
-              <i class="fa-solid fa-sparkles"></i> Gerar Fluxo com IA
+              <i class="fa-solid fa-sparkles"></i> Gerar / Incrementar
             </button>
           </div>
           <small style="color: var(--mu); font-size: 0.72em; margin-top: 8px; display: block;">
-            💡 <i>Clique no microfone para começar a falar; quando terminar a sua explicação, clique nele novamente para parar.</i>
+            💡 <i>Você não precisa apagar o quadro para adicionar novos ramos. A IA aproveita os balões que já estão na tela e conecta os novos filhos!</i>
           </small>
         </div>
 
@@ -929,8 +963,6 @@
 
 <script>
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyuWjtlSMOC-AORhO1Yb_jiX-wniwpVSFOGaakMS010IGd3cmTujNOazVFTPTs-vsO7kA/exec";
-  
-  // Insira aqui a chave obtida em aistudio.google.com/app/apikey (começa com AIzaSy...)
   const GEMINI_API_KEY = "AQ.Ab8RN6JTSNsocP6wSiolZkUN-Ox5_QopXuLI0gt5I_k6mAV1Rg";
 
   let currentBase64File = "";
@@ -976,9 +1008,13 @@
     'templates': 'Templates da Meta'
   };
 
-  /* ==========================================================
-     RECONHECIMENTO DE VOZ (TOGGLE MANUAL START / STOP)
-  ========================================================== */
+  function clearAiPrompt() {
+    const input = document.getElementById("ai-prompt-input");
+    input.value = "";
+    input.focus();
+  }
+
+  /* RECONHECIMENTO DE VOZ (TOGGLE MANUAL) */
   function toggleVoiceRecognition() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
@@ -1045,13 +1081,13 @@
   }
 
   /* ==========================================================
-     INTEGRAÇÃO COM GEMINI 3.8 / 3.6 FLASH + FALLBACK HEURÍSTICO LOCAL
+     MOTOR IA INCREMENTAL (CRIAR OU AMPLIAR A ÁRVORE ATUAL)
   ========================================================== */
   async function generateFlowWithGemini() {
     const promptInput = document.getElementById("ai-prompt-input");
     const promptText = promptInput.value.trim();
     if (!promptText) {
-      alert("Por favor, digite ou fale por áudio como você gostaria do fluxo do seu bot!");
+      alert("Por favor, digite ou fale por áudio o que deseja adicionar ao fluxo!");
       return;
     }
 
@@ -1065,33 +1101,33 @@
 
     const btnGen = document.getElementById("btn-generate-ai");
     btnGen.disabled = true;
-    btnGen.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> O Chiwe está desenhando...';
+    btnGen.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> O Chiwe está atualizando...';
+
+    // Passamos a árvore atual para a IA como contexto
+    const currentNodesSummary = boardNodes.map(n => ({
+      id: n.id,
+      title: n.title,
+      text: n.text,
+      parent: n.parent || null
+    }));
 
     const systemPrompt = `
-Você é o Chiwe, assistente e mascote oficial da plataforma de atendimento WeON.
-O usuário vai descrever como deseja o menu inicial ou a URA de atendimento do WhatsApp da empresa dele.
-Sua responsabilidade é estruturar um fluxograma organizado de opções e retornar ESTRITAMENTE um array JSON de nós no seguinte formato:
+Você é o Chiwe, assistente e mascote oficial da plataforma WeON.
+O usuário vai pedir uma alteração ou criação de fluxo de bot para WhatsApp.
+Você tem acesso à lista ATUAL de nós do fluxograma:
+${JSON.stringify(currentNodesSummary)}
 
-[
-  { "id": "root", "title": "Início / Boas-Vindas", "text": "Mensagem inicial de saudação da empresa e opções", "x": 40, "y": 160, "color": "green" },
-  { "id": "n1", "title": "Opção 1", "text": "Texto descritivo ou pergunta da opção 1", "x": 300, "y": 50, "parent": "root", "color": "yellow" },
-  { "id": "n2", "title": "Opção 2", "text": "Texto descritivo ou pergunta da opção 2", "x": 300, "y": 160, "parent": "root", "color": "orange" },
-  { "id": "n3", "title": "Opção 3", "text": "Texto descritivo ou pergunta da opção 3", "x": 300, "y": 270, "parent": "root", "color": "blue" }
-]
-
-Regras de Cores disponíveis: "yellow", "orange", "green", "blue", "purple".
-Regras de Posição:
-- O nó principal de entrada SEMPRE tem id: "root", x: 40, y: 160, color: "green".
-- Os nós que derivam diretamente dele têm parent: "root", x: 300, com y variando de 50 a 400 sem sobrepor.
-- Se houver sub-ramos (filhos de opções), posicione-os em x: 560 com y ajustado ao pai.
-Retorne exclusivamente o JSON bruto.
+Sua tarefa:
+1. Se a lista atual estiver vazia ou o usuário pedir um fluxo do zero, crie uma estrutura nova completa.
+2. Se o usuário pedir para ADICIONAR, EXPANDIR ou INCREMENTAR opções a um nó existente (ex: "adicione opções de hardware e software em suporte"), MANTENHA os nós existentes e ADICIONE os novos nós conectando com parent apontando para o id do nó existente correto.
+3. Calcule posições (x, y) de modo que novos nós fiquem à direita do pai (x: pai.x + 260) com espaçamento vertical de 110px.
+4. Cores disponíveis: "yellow", "orange", "green", "blue", "purple".
+Retorne ESTRITAMENTE o array JSON completo atualizado com todos os nós. Sem markdown extra.
 `;
 
-    // Modelos estritos solicitados: Gemini 3.8 Flash e Gemini 3.6 Flash
     const targetModels = ["gemini-3.8-flash", "gemini-3.6-flash"];
     let parsedNodes = null;
 
-    // Tenta a API do Gemini caso a chave fornecida seja válida
     if (GEMINI_API_KEY && GEMINI_API_KEY.startsWith("AIzaSy")) {
       for (const model of targetModels) {
         try {
@@ -1100,15 +1136,8 @@ Retorne exclusivamente o JSON bruto.
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              contents: [
-                {
-                  role: "user",
-                  parts: [{ text: `${systemPrompt}\n\nDescrição do usuário: "${promptText}"` }]
-                }
-              ],
-              generationConfig: {
-                response_mime_type: "application/json"
-              }
+              contents: [{ role: "user", parts: [{ text: `${systemPrompt}\n\nInstrução do usuário: "${promptText}"` }] }],
+              generationConfig: { response_mime_type: "application/json" }
             })
           });
 
@@ -1128,10 +1157,9 @@ Retorne exclusivamente o JSON bruto.
       }
     }
 
-    // FALLBACK HEURÍSTICO LOCAL DO CHIWE:
-    // Se a chave não for do formato AIzaSy ou houver bloqueio 401, o Chiwe gera o fluxo localmente com perfeição sem travar a tela
+    // FALLBACK HEURÍSTICO INCREMENTAL DO CHIWE
     if (!parsedNodes) {
-      parsedNodes = generateLocalFallbackFlow(promptText);
+      parsedNodes = processLocalIncrementalFlow(promptText);
     }
 
     if (parsedNodes) {
@@ -1139,68 +1167,97 @@ Retorne exclusivamente o JSON bruto.
       selectedNodeIds.clear();
       renderBoardDOM();
       updateObsTextFromNodes();
-      alert("✨ Perfeito! O Chiwe estruturou e desenhou todo o fluxo no seu quadro interativo!");
+      
+      // Limpa o campo para a próxima instrução sem o usuário precisar apagar na mão
+      promptInput.value = "";
+      alert("✨ Fluxo atualizado com sucesso! O campo de texto foi limpo para a sua próxima instrução.");
     } else {
-      alert("Não foi possível gerar o fluxo. Tente formular o pedido de forma diferente.");
+      alert("Não foi possível processar a instrução. Tente reformular o pedido.");
     }
 
     btnGen.disabled = false;
-    btnGen.innerHTML = '<i class="fa-solid fa-sparkles"></i> Gerar Fluxo com IA';
+    btnGen.innerHTML = '<i class="fa-solid fa-sparkles"></i> Gerar / Incrementar';
   }
 
-  // GERADOR HEURÍSTICO INTELIGENTE (COBRANÇA, VENDAS, JURÍDICO, SAC, CLÍNICA)
-  function generateLocalFallbackFlow(prompt) {
+  // PROCESSADOR HEURÍSTICO LOCAL: MANTÉM OS NÓS E ADICIONA RAMOS
+  function processLocalIncrementalFlow(prompt) {
     const p = prompt.toLowerCase();
     
-    // Se for sobre COBRANÇA / INADIMPLENTES
-    if (p.includes("cobr") || p.includes("inadimpl") || p.includes("divida") || p.includes("acordo") || p.includes("boleto") || p.includes("pix")) {
-      return [
-        { id: "root", title: "Início / Cobrança", text: "Olá! Bem-vindo ao setor de regularização e finanças. Por favor, digite seu CPF/CNPJ para consultar seu cadastro:", x: 40, y: 160, color: "green" },
-        { id: "n1", title: "Opção 1", text: "1. 2ª Via de Boleto / Código PIX para Pagamento", x: 300, y: 50, parent: "root", color: "yellow" },
-        { id: "n2", title: "Opção 2", text: "2. Renegociação de Dívida / Parcelamento", x: 300, y: 160, parent: "root", color: "orange" },
-        { id: "n3", title: "Opção 3", text: "3. Enviar Comprovante de Pagamento", x: 300, y: 270, parent: "root", color: "blue" },
-        { id: "n4", title: "Opção 4", text: "4. Falar com Especialista de Cobrança", x: 300, y: 380, parent: "root", color: "purple" }
-      ];
-    }
-    
-    // Se for sobre JURÍDICO / PRECATÓRIOS
-    if (p.includes("jurid") || p.includes("precator") || p.includes("processo") || p.includes("advog")) {
-      return [
-        { id: "root", title: "Escritório Jurídico", text: "Olá! Bem-vindo ao nosso escritório. Como podemos auxiliá-lo hoje?", x: 40, y: 160, color: "green" },
-        { id: "n1", title: "Opção 1", text: "1. Consultar Andamento de Precatório / Processo", x: 300, y: 50, parent: "root", color: "yellow" },
-        { id: "n2", title: "Opção 2", text: "2. Enviar Documentos Solicitados", x: 300, y: 160, parent: "root", color: "orange" },
-        { id: "n3", title: "Opção 3", text: "3. Falar com o Advogado Responsável", x: 300, y: 270, parent: "root", color: "blue" }
+    // Se o quadro estiver vazio, cria o nó inicial
+    if (boardNodes.length === 0) {
+      boardNodes = [
+        { id: "root", title: "Início / Atendimento", text: "Olá! Bem-vindo ao canal oficial. Como podemos te ajudar?", x: 40, y: 160, color: "green" }
       ];
     }
 
-    // Se for sobre VENDAS / COMERCIAL
-    if (p.includes("vend") || p.includes("comerc") || p.includes("compr") || p.includes("orçament") || p.includes("plano")) {
-      return [
-        { id: "root", title: "Boas-Vindas Vendas", text: "Olá! Que ótimo ter você aqui! Em que podemos ajudar a sua empresa?", x: 40, y: 160, color: "green" },
-        { id: "n1", title: "Opção 1", text: "1. Conhecer Produtos, Serviços e Planos", x: 300, y: 50, parent: "root", color: "yellow" },
-        { id: "n2", title: "Opção 2", text: "2. Solicitar Proposta / Orçamento", x: 300, y: 160, parent: "root", color: "orange" },
-        { id: "n3", title: "Opção 3", text: "3. Falar com Consultor Comercial", x: 300, y: 270, parent: "root", color: "blue" }
-      ];
+    // Tenta encontrar um nó correspondente ao termo falado
+    let targetParent = null;
+    for (let node of boardNodes) {
+      const nodeText = (node.title + " " + node.text).toLowerCase();
+      if (
+        (p.includes("suporte") && nodeText.includes("suporte")) ||
+        (p.includes("dúvida") && nodeText.includes("dúvida")) ||
+        (p.includes("duvida") && nodeText.includes("duvida")) ||
+        (p.includes("venda") && nodeText.includes("venda")) ||
+        (p.includes("cobr") && nodeText.includes("cobr")) ||
+        (p.includes("financeiro") && nodeText.includes("financeiro")) ||
+        (p.includes("jurídico") && nodeText.includes("jurídico")) ||
+        (p.includes("opção 1") && node.id === "n1") ||
+        (p.includes("opção 2") && node.id === "n2") ||
+        (p.includes("opção 3") && node.id === "n3")
+      ) {
+        targetParent = node;
+        break;
+      }
     }
 
-    // Se for sobre SAÚDE / CLÍNICAS
-    if (p.includes("medic") || p.includes("clinic") || p.includes("consult") || p.includes("exame") || p.includes("doutor")) {
-      return [
-        { id: "root", title: "Recepção da Clínica", text: "Olá! Bem-vindo à Clínica. Por favor selecione o serviço desejado:", x: 40, y: 160, color: "green" },
-        { id: "n1", title: "Opção 1", text: "1. Agendamento ou Confirmação de Consulta", x: 300, y: 50, parent: "root", color: "blue" },
-        { id: "n2", title: "Opção 2", text: "2. Resultados e Laudos de Exames", x: 300, y: 160, parent: "root", color: "yellow" },
-        { id: "n3", title: "Opção 3", text: "3. Convênios Aceitos e Valores", x: 300, y: 270, parent: "root", color: "orange" },
-        { id: "n4", title: "Opção 4", text: "4. Falar com Atendente da Recepção", x: 300, y: 380, parent: "root", color: "purple" }
-      ];
+    // Se não encontrou um nó específico ou o usuário pediu um fluxo novo completo
+    if (!targetParent && (p.includes("criar") || p.includes("novo") || p.includes("fluxo de"))) {
+      if (p.includes("cobr") || p.includes("inadimpl")) {
+        return [
+          { id: "root", title: "Início / Cobrança", text: "Olá! Bem-vindo ao setor de regularização e finanças. Digite seu CPF/CNPJ:", x: 40, y: 160, color: "green" },
+          { id: "n1", title: "Opção 1", text: "1. 2ª Via de Boleto / Código PIX", x: 300, y: 50, parent: "root", color: "yellow" },
+          { id: "n2", title: "Opção 2", text: "2. Renegociação de Dívida / Acordo", x: 300, y: 160, parent: "root", color: "orange" },
+          { id: "n3", title: "Opção 3", text: "3. Enviar Comprovante de Pagamento", x: 300, y: 270, parent: "root", color: "blue" },
+          { id: "n4", title: "Opção 4", text: "4. Falar com Especialista", x: 300, y: 380, parent: "root", color: "purple" }
+        ];
+      }
+      targetParent = boardNodes.find(n => n.id === "root") || boardNodes[0];
     }
 
-    // Padrão Geral / Atendimento SAC
-    return [
-      { id: "root", title: "Central de Atendimento", text: "Olá! Bem-vindo ao canal oficial. Como podemos te ajudar?", x: 40, y: 160, color: "green" },
-      { id: "n1", title: "Opção 1", text: "1. Dúvidas Frequentes", x: 300, y: 50, parent: "root", color: "yellow" },
-      { id: "n2", title: "Opção 2", text: "2. Suporte Técnico", x: 300, y: 160, parent: "root", color: "blue" },
-      { id: "n3", title: "Opção 3", text: "3. Falar com Atendente", x: 300, y: 270, parent: "root", color: "purple" }
-    ];
+    if (!targetParent) {
+      targetParent = boardNodes.find(n => n.id === "root") || boardNodes[0];
+    }
+
+    // Extrai ramos mencionados na fala (ex: "software e hardware", "placas e periféricos")
+    let newBranches = [];
+    if (p.includes("software") || p.includes("hardware") || p.includes("periférico") || p.includes("placa")) {
+      if (p.includes("software")) newBranches.push("Dúvidas sobre Software e Sistemas");
+      if (p.includes("hardware")) newBranches.push("Dúvidas sobre Hardware e Equipamentos");
+      if (p.includes("periférico") || p.includes("periferico")) newBranches.push("Periféricos e Acessórios");
+      if (p.includes("placa")) newBranches.push("Placas-mãe e Componentes");
+    } else {
+      // Se não houver palavras específicas, cria ramos genéricos com o texto do usuário
+      newBranches.push(prompt.substring(0, 40));
+    }
+
+    const currentChildren = boardNodes.filter(n => n.parent === targetParent.id);
+    let startOffsetY = currentChildren.length * 110;
+
+    newBranches.forEach((branchTitle, idx) => {
+      const newId = "node_inc_" + Date.now() + "_" + idx;
+      boardNodes.push({
+        id: newId,
+        title: `Sub-Opção ${currentChildren.length + idx + 1}`,
+        text: branchTitle,
+        x: targetParent.x + 260,
+        y: Math.max(30, targetParent.y + startOffsetY + (idx * 110)),
+        parent: targetParent.id,
+        color: nodeColorList[(boardNodes.length + idx) % nodeColorList.length]
+      });
+    });
+
+    return [...boardNodes];
   }
 
   function toggleTheme() {

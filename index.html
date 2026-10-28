@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Configurando a sua empresa</title>
   
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>?v=9">
-  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=9">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>?v=10">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=10">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -21,23 +21,25 @@
       --tx: #f8fafc;
       --mu: #94a3b8;
       --bd: #ffffff1f;
-      --hint-bg: #1e293b;
-      --hint-border: #38bdf844;
+      --hint-bg: linear-gradient(135deg, #1e293b 0%, #172554 100%);
+      --hint-border: #38bdf8;
+      --hint-title: #38bdf8;
       --canvas-dot: rgba(255, 255, 255, 0.15);
     }
 
     [data-theme="light"] {
-      --bg: #f1f5f9;
+      --bg: #f8fafc;
       --cd: #ffffff;
-      --in: #f8fafc;
+      --in: #f1f5f9;
       --ac: #0284c7;
       --ac-hover: #0369a1;
       --dg: #dc2626;
       --tx: #0f172a;
       --mu: #64748b;
       --bd: #0000001a;
-      --hint-bg: #f0f9ff;
-      --hint-border: #0284c733;
+      --hint-bg: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+      --hint-border: #0284c7;
+      --hint-title: #0369a1;
       --canvas-dot: rgba(0, 0, 0, 0.12);
     }
 
@@ -61,13 +63,35 @@
     main { padding: 20px 24px; min-width: 0; width: 100%; max-width: 1400px; margin: 0 auto; }
     @media(max-width: 900px) { .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } }
 
-    .cd { background: var(--cd); border: 1px solid var(--bd); border-radius: 12px; padding: 20px; margin-bottom: 18px; width: 100%; }
-    h2 { font-size: 1.2em; margin-bottom: 6px; color: var(--tx); display: flex; align-items: center; gap: 8px; }
+    .cd { background: var(--cd); border: 1px solid var(--bd); border-radius: 12px; padding: 22px; margin-bottom: 18px; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+    h2 { font-size: 1.2em; margin-bottom: 10px; color: var(--tx); display: flex; align-items: center; gap: 8px; }
     
-    .hint-box { background: var(--hint-bg); border: 1px solid var(--hint-border); border-left: 4px solid var(--ac); border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.82em; line-height: 1.5; color: var(--tx); }
-    .hint-box b { color: var(--ac); }
+    /* TOOLTIP / HINT-BOX REFORÇADA E CHAMATIVA */
+    .hint-box { 
+      background: var(--hint-bg); 
+      border: 1px solid var(--hint-border); 
+      border-left: 5px solid var(--hint-border); 
+      border-radius: 10px; 
+      padding: 12px 16px; 
+      margin-bottom: 18px; 
+      font-size: 0.84em; 
+      line-height: 1.55; 
+      color: var(--tx); 
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    }
+    .hint-box .hint-title {
+      font-weight: 800;
+      color: var(--hint-title);
+      font-size: 0.9em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
     
-    label { display: block; font-size: 0.76em; color: var(--mu); margin-bottom: 5px; font-weight: 600; }
+    label { display: block; font-size: 0.78em; color: var(--mu); margin-bottom: 5px; font-weight: 600; }
     input, select, textarea { background: var(--in); border: 1px solid var(--bd); color: var(--tx); border-radius: 8px; padding: 9px 12px; width: 100%; font-size: 0.85em; margin-bottom: 10px; outline: none; }
     input:focus, select:focus, textarea:focus { border-color: var(--ac); box-shadow: 0 0 0 2px color-mix(in srgb, var(--ac) 25%, transparent); }
     
@@ -90,9 +114,7 @@
     .up-box { border: 2px dashed var(--bd); background: var(--in); border-radius: 8px; padding: 12px; text-align: center; cursor: pointer; margin-bottom: 10px; }
     .up-box:hover { border-color: var(--ac); }
 
-    /* ========================================================
-       MIRO BOARD / CANVAS COM ZOOM & MULTI-SELEÇÃO
-    ======================================================== */
+    /* MIRO BOARD / CANVAS */
     .flow-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
     
     .zoom-controls {
@@ -147,7 +169,6 @@
       z-index: 1;
     }
 
-    /* CAIXA DE MULTI-SELEÇÃO DO MOUSE */
     .selection-box {
       position: absolute;
       border: 1.5px dashed var(--ac);
@@ -173,7 +194,6 @@
     }
     .flow-node:active { cursor: grabbing; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45); }
 
-    /* ESTADO MULTI-SELECIONADO (CTRL + CLICK OU MARQUEE) */
     .flow-node.selected {
       border-color: #38bdf8 !important;
       box-shadow: 0 0 0 3px #38bdf8, 0 10px 25px rgba(0,0,0,0.4) !important;
@@ -246,7 +266,6 @@
     }
     .node-port:hover { transform: translateY(-50%) scale(1.2); background: var(--ac-hover); }
 
-    /* CARD DE PREVIEW VISUAL NA REVISÃO */
     .fluxo-preview-card {
       background: var(--in);
       border: 1px solid var(--bd);
@@ -266,9 +285,7 @@
       cursor: pointer;
       transition: transform 0.2s;
     }
-    .fluxo-preview-img:hover {
-      transform: scale(1.01);
-    }
+    .fluxo-preview-img:hover { transform: scale(1.01); }
 
     .f { display: none; }
   </style>
@@ -313,7 +330,7 @@
       <span class="badge" id="count-fluxos">0</span>
     </button>
     <button class="nv" onclick="switchTab('templates')" id="btn-templates">
-      <span><i class="fa-brands fa-whatsapp"></i> 9. Mensagens Prontas (Ativas)</span>
+      <span><i class="fa-brands fa-whatsapp"></i> 9. Modelos de Mensagens</span>
       <span class="badge" id="count-templates">0</span>
     </button>
 
@@ -335,12 +352,15 @@
     <div id="section-numeros" class="tab-content">
       <div class="cd">
         <h2><i class="fa-solid fa-phone"></i> 1. Números de WhatsApp e Telefone</h2>
-        <div class="hint-box">Cadastre os números de contato da sua empresa (WhatsApp geral, comercial ou suporte).</div>
+        <div class="hint-box">
+          <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Como preencher esta etapa:</div>
+          Cadastre os números de telefone ou WhatsApp que sua empresa utilizará para se comunicar com clientes. Você pode cadastrar uma linha principal, números por filial ou ramais fixos.
+        </div>
         <form onsubmit="addData('numeros', event)">
           <div class="g2">
             <div>
               <label>Nome / Identificação da Linha *</label>
-              <input type="text" id="num-nome" placeholder="Ex: WhatsApp Oficial, Central Geral" required>
+              <input type="text" id="num-nome" placeholder="Ex: WhatsApp Oficial, Central Geral, Vendas" required>
             </div>
             <div>
               <label>Número completo com DDD *</label>
@@ -358,8 +378,9 @@
       <div class="cd">
         <h2><i class="fa-solid fa-layer-group"></i> 2. Setores e Filas de Atendimento</h2>
         <div class="hint-box">
-          <b>O que é isso?</b> Departamentos para onde os chamados são direcionados.<br>
-          <i>Exemplos:</i> <b>Comercial</b>, <b>Financeiro/Cobrança</b>, <b>Suporte Técnico</b>, <b>Agendamento</b>.
+          <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> O que são setores / filas?</div>
+          São os departamentos da sua empresa para onde as conversas e ligações serão distribuídas.<br>
+          <b>Exemplos comuns:</b> <i>Comercial / Vendas, Financeiro, Cobrança, Suporte Técnico, Agendamento de Consultas</i>.
         </div>
         <form onsubmit="addData('grupos', event)">
           <div class="g2">
@@ -368,8 +389,8 @@
               <input type="text" id="grupo-nome" placeholder="Ex: Financeiro" required>
             </div>
             <div>
-              <label>Descrição do que este setor resolve</label>
-              <input type="text" id="grupo-desc" placeholder="Ex: 2ª via de boleto e dúvidas de pagamento">
+              <label>Descrição das atividades deste setor</label>
+              <input type="text" id="grupo-desc" placeholder="Ex: 2ª via de boleto, comprovantes e faturamento">
             </div>
           </div>
           <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Setor</button></div>
@@ -382,11 +403,14 @@
     <div id="section-supervisores" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-user-tie"></i> 3. Gestores e Supervisores</h2>
-        <div class="hint-box">Usuários que terão acesso aos relatórios gerenciais e monitoramento em tempo real.</div>
+        <div class="hint-box">
+          <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Quem deve ser cadastrado aqui?</div>
+          Pessoas com cargo de liderança, gerência ou coordenação que precisam de acesso aos relatórios completos de atendimento, gravações de chamadas e painel em tempo real da equipe.
+        </div>
         <form onsubmit="addData('supervisores', event)">
           <div class="g2">
             <div>
-              <label>Nome Completo do Supervisor *</label>
+              <label>Nome Completo do Gestor *</label>
               <input type="text" id="sup-nome" placeholder="Ex: Alice Martins" required>
             </div>
             <div>
@@ -404,7 +428,10 @@
     <div id="section-agentes" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-headset"></i> 4. Atendentes (Equipe Operacional)</h2>
-        <div class="hint-box">Colaboradores que atendem os chamados e conversas no dia a dia.</div>
+        <div class="hint-box">
+          <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Como funciona o cadastro de atendentes?</div>
+          Cadastre os membros da equipe que conversarão diretamente com os clientes no dia a dia. Você já pode definir se o colaborador atenderá via WhatsApp, por telefone ou ambos.
+        </div>
         <form onsubmit="addData('agentes', event)">
           <div class="g2">
             <div>
@@ -418,16 +445,16 @@
           </div>
           <div class="g2">
             <div>
-              <label>Irá atender mensagens de WhatsApp? *</label>
+              <label>Irá responder WhatsApp? *</label>
               <select id="agente-whats">
                 <option value="SIM">SIM (Atende mensagens)</option>
                 <option value="NÃO">NÃO</option>
               </select>
             </div>
             <div>
-              <label>Irá receber ligações telefônicas? *</label>
+              <label>Irá atender chamadas de voz? *</label>
               <select id="agente-fone">
-                <option value="SIM">SIM (Atende voz)</option>
+                <option value="SIM">SIM (Atende ligações)</option>
                 <option value="NÃO">NÃO</option>
               </select>
             </div>
@@ -442,7 +469,10 @@
     <div id="section-grupos_agentes" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-sitemap"></i> 5. Quem atende qual setor?</h2>
-        <div class="hint-box">Vincule cada atendente aos setores em que ele irá atuar.</div>
+        <div class="hint-box">
+          <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Como vincular?</div>
+          Selecione um atendente e o setor em que ele atua. Um mesmo atendente pode ser vinculado a mais de um setor se a sua empresa tiver equipes flexíveis.
+        </div>
         <form onsubmit="addData('grupos_agentes', event)">
           <div class="g2">
             <div>
@@ -464,16 +494,20 @@
     <div id="section-qualificacoes" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-tags"></i> 6. Motivos de Finalização (Tabulações)</h2>
-        <div class="hint-box">Motivos que os atendentes escolhem ao encerrar uma conversa (ex: <i>Venda Concluída, Dúvida Sanada, Inadimplente, Sem Resposta</i>).</div>
+        <div class="hint-box">
+          <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Para que servem os motivos de finalização?</div>
+          São os desfechos que os atendentes selecionam ao encerrar cada chamado para alimentar os relatórios da diretoria.<br>
+          <b>Exemplos:</b> <i>Venda Concluída, Dúvida Sanada, Cliente Inadimplente, Sem Resposta do Cliente, Reunião Agendada</i>.
+        </div>
         <form onsubmit="addData('qualificacoes', event)">
           <div class="g2">
             <div>
-              <label>Nome do Motivo / Desfecho *</label>
-              <input type="text" id="qual-nome" placeholder="Ex: Entrevista Agendada, Venda Fechada" required>
+              <label>Nome do Desfecho / Motivo *</label>
+              <input type="text" id="qual-nome" placeholder="Ex: Reunião Agendada, Venda Fechada" required>
             </div>
             <div>
-              <label>Categoria do Motivo (Opcional)</label>
-              <input type="text" id="qual-cat" placeholder="Ex: Sucesso, Pendência, Retorno">
+              <label>Categoria (Opcional)</label>
+              <input type="text" id="qual-cat" placeholder="Ex: Sucesso, Pendência, Desistência">
             </div>
           </div>
           <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Motivo</button></div>
@@ -482,16 +516,19 @@
       <div class="cd"><div class="tb-wrap" id="table-qualificacoes"></div></div>
     </div>
 
-    <!-- 7. CALENDÁRIO -->
+    <!-- 7. CALENDÁRIO / HORÁRIO DE EXPEDIENTE -->
     <div id="section-calendario" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-clock"></i> 7. Horários de Expediente da Empresa</h2>
-        <div class="hint-box">Define os dias e horários de funcionamento para que o bot saiba quando responder fora de expediente.</div>
+        <h2><i class="fa-solid fa-clock"></i> 7. Horário de Atendimento da Empresa</h2>
+        <div class="hint-box">
+          <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Expediente de funcionamento:</div>
+          Informe os dias da semana e os horários em que a sua empresa funciona para atendimento aos clientes.
+        </div>
         <form onsubmit="addData('calendario', event)">
           <div class="g3">
             <div>
               <label>Dias da Semana *</label>
-              <input type="text" id="cal-dias" placeholder="Ex: Segunda a Sexta" required>
+              <input type="text" id="cal-dias" placeholder="Ex: Segunda a Sexta, Sábados" required>
             </div>
             <div>
               <label>Horário de Abertura *</label>
@@ -508,12 +545,13 @@
       <div class="cd"><div class="tb-wrap" id="table-calendario"></div></div>
     </div>
 
-    <!-- 8. FLUXOS & MIRO BOARD COM MULTI-SELEÇÃO E ZOOM -->
+    <!-- 8. FLUXOS & MIRO BOARD -->
     <div id="section-fluxos" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-solid fa-diagram-project"></i> 8. Construtor Visual do Bot (Estilo Miro)</h2>
+        <h2><i class="fa-solid fa-diagram-project"></i> 8. Menu do Bot / Fluxo</h2>
         <div class="hint-box">
-          <b>Dicas Rápidas:</b> Use o botão <b>+</b> nos balões para derivar ramos. Segure <b>Ctrl + Clique</b> ou <b>clique e arraste no fundo</b> para selecionar e mover vários nós ao mesmo tempo! Use os botões de zoom para afastar ou aproximar a visão.
+          <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Como montar seu fluxo visual:</div>
+          Escolha um modelo pronto ou clique no botão <b>+</b> na lateral dos balões para puxar novos caminhos. Segure <b>Ctrl + Clique</b> ou <b>arraste no fundo</b> para selecionar vários nós ao mesmo tempo. Ao terminar, clique no botão verde para salvar e anexar a imagem automaticamente.
         </div>
 
         <div class="flow-toolbar">
@@ -526,7 +564,7 @@
           
           <button type="button" class="btn" onclick="addFreeNode()"><i class="fa-solid fa-plus"></i> Balão Livre</button>
 
-          <!-- ZOOM -->
+          <!-- CONTROLE DE ZOOM -->
           <div class="zoom-controls" style="margin-left: auto;">
             <button type="button" class="zoom-btn" onclick="adjustZoom(-0.1)" title="Zoom Out"><i class="fa-solid fa-minus"></i></button>
             <button type="button" class="zoom-btn" onclick="resetZoom()" title="Resetar Zoom" id="zoom-label">100%</button>
@@ -567,19 +605,22 @@
       <div class="cd"><div class="tb-wrap" id="table-fluxos"></div></div>
     </div>
 
-    <!-- 9. TEMPLATES META -->
+    <!-- 9. MODELOS DE MENSAGENS -->
     <div id="section-templates" class="tab-content f">
       <div class="cd">
-        <h2><i class="fa-brands fa-whatsapp"></i> 9. Modelos de Notificação Ativa (Templates)</h2>
-        <div class="hint-box">Mensagens que sua empresa dispara primeiro para os clientes (ex: lembretes de fatura ou confirmações).</div>
+        <h2><i class="fa-brands fa-whatsapp"></i> 9. Modelos de Mensagens</h2>
+        <div class="hint-box">
+          <div class="hint-title"><i class="fa-solid fa-lightbulb"></i> Para que servem os modelos de mensagens?</div>
+          Cadastre mensagens padrão que a sua equipe costuma enviar com frequência (ex: confirmações de agendamento, avisos de cobrança, boas-vindas). Use chaves como <code>{{1}}</code> onde for entrar o nome do cliente.
+        </div>
         <form onsubmit="addData('templates', event)">
           <div class="g2">
             <div>
-              <label>Nome do Modelo *</label>
-              <input type="text" id="tpl-nome" placeholder="Ex: confirmacao_agendamento" required>
+              <label>Identificação / Nome do Modelo *</label>
+              <input type="text" id="tpl-nome" placeholder="Ex: confirmacao_agendamento, lembrete_fatura" required>
             </div>
             <div>
-              <label>Idioma *</label>
+              <label>Idioma da Mensagem *</label>
               <select id="tpl-idioma">
                 <option value="pt_BR">Português (Brasil)</option>
                 <option value="en_US">Inglês</option>
@@ -588,18 +629,19 @@
             </div>
           </div>
           <label>Texto da Mensagem *</label>
-          <textarea id="tpl-texto" rows="3" placeholder="Olá {{1}}, confirmamos o seu agendamento..." required></textarea>
+          <textarea id="tpl-texto" rows="3" placeholder="Ex: Olá {{1}}, confirmamos o seu agendamento para amanhã às {{2}}." required></textarea>
           <div style="text-align: right;"><button type="submit" class="btn pr"><i class="fa-solid fa-plus"></i> Adicionar Mensagem</button></div>
         </form>
       </div>
       <div class="cd"><div class="tb-wrap" id="table-templates"></div></div>
     </div>
 
-    <!-- REVISÃO & ENVIO COM CARD VISUAL -->
+    <!-- REVISÃO & ENVIO -->
     <div id="section-revisao" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-paper-plane"></i> Revisão Final</h2>
         <div class="hint-box">
+          <div class="hint-title"><i class="fa-solid fa-check-double"></i> Quase pronto!</div>
           Confira o resumo de todos os itens cadastrados antes de enviar para a equipe de implantação da WeON.
         </div>
         <div id="reumo-container" style="display: grid; gap: 14px;" class="g2"></div>
@@ -691,9 +733,7 @@
     }
   }
 
-  /* ==========================================================
-     MOTOR VISUAL ESTILO MIRO: ZOOM, MULTI-SELEÇÃO & DRAG
-  ========================================================== */
+  /* MOTOR VISUAL MIRO */
   let boardNodes = [];
 
   const boardTemplates = {
@@ -851,14 +891,12 @@
         <div class="node-port" onclick="branchFromNode('${node.id}')" title="Clique para ramificar novo nó">+</div>
       `;
 
-      // Evento de Seleção (Ctrl + Click) & Drag em Grupo
       let isDragging = false, startX, startY;
       const initialPositions = new Map();
 
       el.addEventListener('mousedown', (e) => {
         if (['INPUT', 'TEXTAREA', 'BUTTON'].includes(e.target.tagName) || e.target.classList.contains('node-port')) return;
         
-        // Se Ctrl/Cmd pressionado: alterna seleção deste nó
         if (e.ctrlKey || e.metaKey) {
           if (selectedNodeIds.has(node.id)) {
             selectedNodeIds.delete(node.id);
@@ -870,7 +908,6 @@
           return;
         }
 
-        // Se clicar sem Ctrl e o nó não pertencia ao grupo selecionado, foca apenas nele
         if (!selectedNodeIds.has(node.id)) {
           selectedNodeIds.clear();
           container.querySelectorAll('.flow-node.selected').forEach(n => n.classList.remove('selected'));
@@ -882,7 +919,6 @@
         startX = e.clientX;
         startY = e.clientY;
 
-        // Guarda as posições originais de todos os nós selecionados
         initialPositions.clear();
         selectedNodeIds.forEach(selId => {
           const n = boardNodes.find(item => item.id === selId);
@@ -927,15 +963,12 @@
     renderBoardLines();
   }
 
-  /* ==========================================================
-     MARQUEE SELECTION (ARRASTAR NO FUNDO PARA SELECIONAR VÁRIOS)
-  ========================================================== */
+  /* MARQUEE SELECTION */
   const viewport = document.getElementById("boardViewport");
   const marquee = document.getElementById("selectionMarquee");
   let isSelecting = false, selStartX, selStartY;
 
   viewport.addEventListener('mousedown', (e) => {
-    // Se clicou direto no fundo do viewport (não em nó nem botão)
     if (e.target.id === 'boardViewport' || e.target.id === 'boardContent' || e.target.id === 'boardSvg') {
       if (!e.ctrlKey && !e.metaKey) {
         selectedNodeIds.clear();
@@ -973,7 +1006,6 @@
     marquee.style.width = w + "px";
     marquee.style.height = h + "px";
 
-    // Detecta interseção com cada balão
     boardNodes.forEach(node => {
       const nodeEl = document.getElementById(node.id);
       const inBox = (node.x < x + w && node.x + 210 > x && node.y < y + h && node.y + 85 > y);
@@ -1052,7 +1084,6 @@
     });
   }
 
-  /* GERA O PNG DO DIAGRAMA DIRETAMENTE EM MEMÓRIA */
   function generateBoardImageBase64() {
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
     boardNodes.forEach(n => {
@@ -1157,7 +1188,6 @@
     return canvas.toDataURL("image/png");
   }
 
-  /* SALVA O FLUXO E JÁ ANEXA A IMAGEM EM 1 CLIQUE */
   function handleSalvarFluxoComImagem(event) {
     event.preventDefault();
     const btn = document.getElementById("btn-salvar-fluxo");
@@ -1196,9 +1226,7 @@
     loadBoardTemplate('sac');
   });
 
-  /* ==========================================================
-     LÓGICA PADRÃO DE DADOS
-  ========================================================== */
+  /* LÓGICA PADRÃO DE DADOS */
   function handleFileSelect(e) {
     const file = e.target.files[0];
     if(!file) return;
@@ -1302,9 +1330,6 @@
     container.innerHTML = html;
   }
 
-  /* ==========================================================
-     REVISÃO VISUAL MODERNA COM MINIATURA DO FLUXOGRAMA
-  ========================================================== */
   function renderRevisao() {
     const container = document.getElementById('reumo-container');
     let html = '';
@@ -1317,7 +1342,6 @@
         </div>`;
 
       if (items.length > 0) {
-        // TRATAMENTO EXCLUSIVO E VISUAL PARA O FLUXO DO BOT
         if (sheet === "Fluxos x Atendimento") {
           items.forEach(item => {
             const anexo = item["Anexo/Imagem"] || "";

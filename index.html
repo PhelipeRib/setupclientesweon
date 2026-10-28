@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Setup WeON — Onboarding Inteligente</title>
   
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>?v=19">
-  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=19">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐵</text></svg>?v=20">
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABMSURBVHgB7dIxDQAgDATBhz94YwADCEABAtiLgwC20AJuAnfSl8y6m1x6m4mISkYlIhK3iEg8ISLxA4n4h0QU1IjI5/N5e3t7v4C8AZuUD22L1mCFAAAAAElFTkSuQmCC?v=20">
 
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -271,7 +271,7 @@
     .btn.pr:hover { filter: brightness(1.15); transform: translateY(-1px); }
     .btn.dn:hover { border-color: var(--dg); color: var(--dg); }
 
-    /* SEÇÃO IA COM PROMPT LIMPO */
+    /* SEÇÃO IA COM PROMPT */
     .ai-box-container {
       background: linear-gradient(135deg, rgba(121, 40, 202, 0.18) 0%, rgba(0, 240, 255, 0.15) 100%);
       border: 1.5px solid var(--ac);
@@ -376,7 +376,7 @@
     }
     .up-box:hover { border-color: var(--ac); }
 
-    /* MIRO CANVAS - NAVEGAÇÃO FLUIDA & PAN INFINITO */
+    /* MIRO CANVAS - NAVEGAÇÃO FLUIDA & MULTI-SELEÇÃO */
     .flow-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
     
     .zoom-controls {
@@ -409,7 +409,7 @@
       border-radius: 14px;
       overflow: hidden;
       user-select: none;
-      cursor: grab;
+      cursor: default;
     }
     .flow-canvas-viewport.panning {
       cursor: grabbing !important;
@@ -435,13 +435,15 @@
       z-index: 1;
     }
 
+    /* CAIXA DE MULTI-SELEÇÃO MARQUEE */
     .selection-box {
       position: absolute;
       border: 1.5px dashed var(--ac);
       background: rgba(0, 240, 255, 0.15);
       pointer-events: none;
-      z-index: 10;
+      z-index: 20;
       border-radius: 4px;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
     }
 
     .flow-node {
@@ -540,7 +542,7 @@
       background: rgba(8, 14, 30, 0.8);
       border: 1px solid var(--bd);
       border-radius: 8px;
-      padding: 4px 10px;
+      padding: 5px 12px;
       font-size: 0.72em;
       color: var(--mu);
       pointer-events: none;
@@ -651,13 +653,25 @@
       <div class="chiwe-speech">
         <div class="chiwe-speech-name">Dica do Chiwe</div>
         <div class="chiwe-speech-text" id="chiwe-message">
-          E aí! Eu sou o Chiwe, mascote da WeON! Vou te acompanhar em cada passo para deixar o atendimento da sua empresa voando. Comece cadastrando as suas linhas de WhatsApp!
+          E aí! Eu sou o Chiwe, mascote da WeON! Vou te acompanhar em cada passo para deixar o atendimento da sua empresa voando. Comece cadastrando o nome da empresa e as suas linhas de WhatsApp!
         </div>
       </div>
     </div>
 
-    <!-- 1. NÚMEROS -->
+    <!-- 1. IDENTIFICAÇÃO DA EMPRESA & NÚMEROS -->
     <div id="section-numeros" class="tab-content">
+      <div class="cd" style="border-color: var(--ac); box-shadow: 0 0 20px var(--ac-glow);">
+        <h2><i class="fa-solid fa-building"></i> Identificação da Empresa</h2>
+        <div class="hint-box">
+          <div class="hint-title"><i class="fa-solid fa-id-card"></i> Como sua empresa deve ser identificada?</div>
+          Informe a Razão Social ou Nome Fantasia da sua empresa. Este nome constará no relatório que a equipe de implantação da WeON receberá.
+        </div>
+        <div>
+          <label>Nome Fantasia ou Razão Social da Empresa *</label>
+          <input type="text" id="empresa-nome" placeholder="Ex: KaBuM!, Escritório Neiva de Lima, Prestar Benefícios..." required style="font-size: 1.05em; font-weight: 700; color: var(--ac);">
+        </div>
+      </div>
+
       <div class="cd">
         <h2><i class="fa-solid fa-phone"></i> Passo 1: Números de WhatsApp e Telefone</h2>
         <div class="hint-box">
@@ -853,14 +867,14 @@
       <div class="cd"><div class="tb-wrap" id="table-calendario"></div></div>
     </div>
 
-    <!-- 8. FLUXOS COM CANVAS PAN & ZOOM INFINITO -->
+    <!-- 8. FLUXOS COM CANVAS PAN & MARQUEE MULTI-SELEÇÃO -->
     <div id="section-fluxos" class="tab-content f">
       <div class="cd">
         <h2><i class="fa-solid fa-diagram-project"></i> Passo 8: Menu do Bot / Fluxo</h2>
         
         <div class="hint-box">
-          <div class="hint-title"><i class="fa-solid fa-robot"></i> Navegação Estilo Miro:</div>
-          <b>Como navegar:</b> Clique no fundo vazio e arraste para movimentar o quadro para qualquer lado. Use a rodinha do rato para dar zoom. Dite ou digite o que precisa e o Chiwe desenhará o fluxo completo!
+          <div class="hint-title"><i class="fa-solid fa-robot"></i> Navegação & Multi-Seleção:</div>
+          <b>Como selecionar vários blocos:</b> Clique no fundo vazio com o botão esquerdo e arraste para desenhar o retângulo azul tracejado. Para <b>mover a tela</b>, use a rodinha do rato (scroll), arraste segurando a <b>Barra de Espaço</b> ou o <b>botão do meio</b> do rato!
         </div>
 
         <div class="ai-box-container">
@@ -915,7 +929,7 @@
             <div id="selectionMarquee" class="selection-box f"></div>
           </div>
           <div class="canvas-hint-overlay">
-            <span>✋ <b>Arrastar:</b> clique e puxe no fundo | 🔍 <b>Zoom:</b> rodinha do rato</span>
+            <span>🔲 <b>Arrastar p/ Selecionar</b> | ✋ <b>Mover Tela:</b> Espaço + Arrastar ou Botão do Meio | 🔍 <b>Zoom:</b> Rodinha do Rato</span>
           </div>
         </div>
 
@@ -983,6 +997,12 @@
           <div class="hint-title"><i class="fa-solid fa-check-double"></i> Quase pronto!</div>
           Confira o resumo de todos os itens cadastrados antes de enviar para a equipe de implantação da WeON.
         </div>
+        
+        <div style="margin-bottom: 20px; background: var(--in); padding: 14px 18px; border-radius: 10px; border: 1.5px solid var(--ac);">
+          <label style="color: var(--ac); font-weight: 800; font-size: 0.8em; margin-bottom: 2px;">Empresa Identificada:</label>
+          <div id="empresa-preview-text" style="font-size: 1.1em; font-weight: 700; color: #ffffff;">(Pendente de preenchimento)</div>
+        </div>
+
         <div id="reumo-container" style="display: grid; gap: 14px;" class="g2"></div>
       </div>
 
@@ -1009,11 +1029,12 @@
   let currentZoom = 0.9;
   
   let selectedNodeIds = new Set();
+  let isSpacePressed = false;
   let isRecording = false;
   let speechRecognizer = null;
 
   const chiweTips = {
-    numeros: "E aí! Comece cadastrando os números de WhatsApp e telefone que a sua empresa vai usar. Quanto mais organizado, melhor!",
+    numeros: "E aí! Comece cadastrando o nome da sua empresa e os números de WhatsApp que vai usar!",
     grupos: "Esses são os setores do seu atendimento. Exemplo: Vendas, Suporte ou Financeiro. É para cá que os clientes serão distribuídos!",
     supervisores: "Aqui entram os chefes e líderes! Quem estiver cadastrado aqui poderá ver relatórios e dashboards em tempo real.",
     agentes: "Cadastre a sua tropa de atendimento! São os operadores que vão trocar mensagens e atender as ligações.",
@@ -1216,11 +1237,9 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
     btnGen.innerHTML = '<i class="fa-solid fa-sparkles"></i> Gerar Fluxo';
   }
 
-  /* GERADOR SINTÉTICO COM TÍTULOS CURTOS */
   function synthesizeBotStructure(rawPrompt) {
     const p = rawPrompt.toLowerCase();
 
-    // 1. Detecta se é um INCREMENTO em nó existente
     let targetParent = null;
     if (boardNodes.length > 1) {
       if (selectedNodeIds.size === 1) {
@@ -1273,7 +1292,6 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
       return [...boardNodes];
     }
 
-    // 2. Criação completa
     if (p.includes("kabum") || p.includes("eletrônic") || p.includes("loja") || p.includes("computador") || p.includes("e-commerce")) {
       return [
         { id: "root", title: "Início / Boas-Vindas", text: "Olá! Bem-vindo à nossa central de atendimento. Escolha o setor desejado:", x: 60, y: 160, color: "green" },
@@ -1302,7 +1320,6 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
     ];
   }
 
-  /* AUTO-ORGANIZADOR EM ÁRVORE */
   function reorganizeBoardAutoLayout() {
     const root = boardNodes.find(n => n.id === "root") || boardNodes[0];
     if (!root) return;
@@ -1329,11 +1346,14 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
   }
 
   /* ==========================================================
-     SISTEMA DE NAVEGAÇÃO MIRO: PAN (DRAG NO FUNDO) & ZOOM COM WHEEL
+     SISTEMA DE NAVEGAÇÃO & MARQUEE MULTI-SELEÇÃO
   ========================================================== */
   const viewport = document.getElementById("boardViewport");
   const content = document.getElementById("boardContent");
+  const marquee = document.getElementById("selectionMarquee");
+
   let isPanning = false, panStartX, panStartY, initialPanX, initialPanY;
+  let isMarquee = false, marqueeStartX, marqueeStartY;
 
   function updateTransform() {
     content.style.transform = `translate(${panX}px, ${panY}px) scale(${currentZoom})`;
@@ -1344,7 +1364,6 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
     const oldZoom = currentZoom;
     currentZoom = Math.max(0.2, Math.min(2.0, currentZoom + delta));
     
-    // Zoom a partir do centro do viewport
     const vRect = viewport.getBoundingClientRect();
     const cx = vRect.width / 2;
     const cy = vRect.height / 2;
@@ -1362,7 +1381,6 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
     updateTransform();
   }
 
-  // ENQUADRA TODOS OS NÓS NA TELA AUTOMATICAMENTE
   function fitViewToNodes() {
     if (boardNodes.length === 0) return;
 
@@ -1389,7 +1407,22 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
     updateTransform();
   }
 
-  // Zoom suave com a rodinha do rato focalizado no ponteiro
+  // Monitora barra de espaço para Pan rápido
+  window.addEventListener("keydown", (e) => {
+    if (e.code === "Space" && e.target.tagName !== "INPUT" && e.target.tagName !== "TEXTAREA") {
+      isSpacePressed = true;
+      viewport.style.cursor = "grab";
+    }
+  });
+
+  window.addEventListener("keyup", (e) => {
+    if (e.code === "Space") {
+      isSpacePressed = false;
+      viewport.style.cursor = "default";
+    }
+  });
+
+  // Zoom suave com a rodinha
   viewport.addEventListener("wheel", (e) => {
     e.preventDefault();
     const vRect = viewport.getBoundingClientRect();
@@ -1400,30 +1433,52 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
     const zoomFactor = e.deltaY < 0 ? 1.08 : 0.92;
     currentZoom = Math.max(0.2, Math.min(2.0, currentZoom * zoomFactor));
 
-    // Ajusta o pan para que o ponto sob o rato permaneça no mesmo local
     panX = mouseX - (mouseX - panX) * (currentZoom / oldZoom);
     panY = mouseY - (mouseY - panY) * (currentZoom / oldZoom);
 
     updateTransform();
   }, { passive: false });
 
-  // Pan ao arrastar no fundo do viewport
+  // MOUSE DOWN NO VIEWPORT (DISTINGUE PAN DE MARQUEE)
   viewport.addEventListener("mousedown", (e) => {
     if (e.target.id === 'boardViewport' || e.target.id === 'boardContent' || e.target.id === 'boardSvg') {
-      isPanning = true;
-      viewport.classList.add("panning");
-      panStartX = e.clientX;
-      panStartY = e.clientY;
-      initialPanX = panX;
-      initialPanY = panY;
+      
+      // CASO 1: PAN (Botão do meio, ou Espaço pressionado)
+      if (e.button === 1 || isSpacePressed) {
+        isPanning = true;
+        viewport.classList.add("panning");
+        panStartX = e.clientX;
+        panStartY = e.clientY;
+        initialPanX = panX;
+        initialPanY = panY;
 
-      if (!e.ctrlKey && !e.metaKey) {
-        selectedNodeIds.clear();
-        document.querySelectorAll('.flow-node.selected').forEach(n => n.classList.remove('selected'));
+        document.addEventListener("mousemove", onPanMove);
+        document.addEventListener("mouseup", onPanUp);
+        return;
       }
 
-      document.addEventListener("mousemove", onPanMove);
-      document.addEventListener("mouseup", onPanUp);
+      // CASO 2: MARQUEE SELECTION (Botão esquerdo normal)
+      if (e.button === 0) {
+        isMarquee = true;
+        
+        if (!e.ctrlKey && !e.metaKey) {
+          selectedNodeIds.clear();
+          document.querySelectorAll('.flow-node.selected').forEach(n => n.classList.remove('selected'));
+        }
+
+        const rect = content.getBoundingClientRect();
+        marqueeStartX = (e.clientX - rect.left) / currentZoom;
+        marqueeStartY = (e.clientY - rect.top) / currentZoom;
+
+        marquee.style.left = marqueeStartX + "px";
+        marquee.style.top = marqueeStartY + "px";
+        marquee.style.width = "0px";
+        marquee.style.height = "0px";
+        marquee.classList.remove("f");
+
+        document.addEventListener("mousemove", onMarqueeMove);
+        document.addEventListener("mouseup", onMarqueeUp);
+      }
     }
   });
 
@@ -1439,6 +1494,39 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
     viewport.classList.remove("panning");
     document.removeEventListener("mousemove", onPanMove);
     document.removeEventListener("mouseup", onPanUp);
+  }
+
+  function onMarqueeMove(e) {
+    if (!isMarquee) return;
+    const rect = content.getBoundingClientRect();
+    const currX = (e.clientX - rect.left) / currentZoom;
+    const currY = (e.clientY - rect.top) / currentZoom;
+
+    const x = Math.min(marqueeStartX, currX);
+    const y = Math.min(marqueeStartY, currY);
+    const w = Math.abs(currX - marqueeStartX);
+    const h = Math.abs(currY - marqueeStartY);
+
+    marquee.style.left = x + "px";
+    marquee.style.top = y + "px";
+    marquee.style.width = w + "px";
+    marquee.style.height = h + "px";
+
+    boardNodes.forEach(node => {
+      const nodeEl = document.getElementById(node.id);
+      const inBox = (node.x < x + w && node.x + 210 > x && node.y < y + h && node.y + 85 > y);
+      if (inBox) {
+        selectedNodeIds.add(node.id);
+        if (nodeEl) nodeEl.classList.add("selected");
+      }
+    });
+  }
+
+  function onMarqueeUp() {
+    isMarquee = false;
+    marquee.classList.add("f");
+    document.removeEventListener("mousemove", onMarqueeMove);
+    document.removeEventListener("mouseup", onMarqueeUp);
   }
 
   function toggleTheme() {
@@ -1467,7 +1555,9 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
       updateTransform();
       renderBoardLines();
     }
-    if(tabId === 'revisao') renderRevisao();
+    if(tabId === 'revisao') {
+      renderRevisao();
+    }
   }
 
   function updateSelectsVinculo() {
@@ -2019,6 +2109,18 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
 
   function renderRevisao() {
     const container = document.getElementById('reumo-container');
+    const empresaInput = document.getElementById('empresa-nome');
+    const previewEmpresa = document.getElementById('empresa-preview-text');
+    
+    if (empresaInput && previewEmpresa) {
+      previewEmpresa.innerText = empresaInput.value.trim() || "(⚠️ Nome da Empresa não preenchido no Passo 1)";
+      if (!empresaInput.value.trim()) {
+        previewEmpresa.style.color = "var(--dg)";
+      } else {
+        previewEmpresa.style.color = "var(--ac)";
+      }
+    }
+
     let html = '';
 
     for (const [sheet, items] of Object.entries(setupData)) {
@@ -2072,19 +2174,35 @@ Retorne ESTRITAMENTE o array JSON completo de nós.
   }
 
   async function enviarDadosGoogleSheets() {
+    const nomeEmpresaInput = document.getElementById('empresa-nome');
+    const nomeEmpresa = nomeEmpresaInput ? nomeEmpresaInput.value.trim() : "";
+
+    if (!nomeEmpresa) {
+      alert("⚠️ Atenção: Por favor, preencha o Nome da Empresa no Passo 1 antes de finalizar!");
+      switchTab('numeros');
+      nomeEmpresaInput.focus();
+      return;
+    }
+
     const btn = document.getElementById('btn-enviar-final');
     btn.disabled = true;
     btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando dados para a WeON...';
+
+    // Insere o nome da empresa no payload enviado para o Apps Script
+    const finalPayload = {
+      ...setupData,
+      "_NomeEmpresa": nomeEmpresa
+    };
 
     try {
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(setupData)
+        body: JSON.stringify(finalPayload)
       });
 
-      alert("✨ Parabéns! Suas configurações foram enviadas com sucesso para a equipe de implantação!");
+      alert(`✨ Parabéns! As configurações da empresa "${nomeEmpresa}" foram enviadas com sucesso!`);
       btn.innerHTML = '<i class="fa-solid fa-check"></i> Enviado com Sucesso!';
       btn.style.background = '#16a34a';
     } catch (error) {
